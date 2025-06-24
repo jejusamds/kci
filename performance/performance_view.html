@@ -19,7 +19,7 @@ if (!$row) {
 
 // 2. 첨부파일 목록 조회
 $files = $db->query(
-    "SELECT * FROM df_site_sigong_files WHERE bbsidx = :idx ORDER BY idx ASC",
+    "SELECT * FROM df_site_sigong_files WHERE bbsidx = :idx ORDER BY prior ASC, idx ASC",
     ['idx' => $idx],
     PDO::FETCH_OBJ
 );
