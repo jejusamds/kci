@@ -102,10 +102,13 @@ switch ($mode) {
 
                     if (move_uploaded_file($_FILES['upfile']['tmp_name'][$i], $save_path)) {
                         // 파일 정보 df_site_sigong_files에 저장
+                        $prior_files = $i + 1;
                         $sql_file = "INSERT INTO df_site_{$table}_files SET 
                                         bbsidx = '{$bbsidx}',
                                         upfile = '{$uniq_name}',
-                                        upfile_name = '{$orig_name}'";
+                                        upfile_name = '{$orig_name}',
+                                        prior = '{$prior_files}'
+                                        ";
                         $db->query($sql_file);
                     }
                 }
@@ -244,15 +247,15 @@ switch ($mode) {
         break;
 
     case 'prior':
-        $idx  = isset($_GET['idx']) ? (int) $_GET['idx'] : 0;
+        $idx = isset($_GET['idx']) ? (int) $_GET['idx'] : 0;
         $prior = isset($_GET['prior']) ? $_GET['prior'] : '';
-        $posi  = isset($_GET['posi']) ? $_GET['posi'] : '';
+        $posi = isset($_GET['posi']) ? $_GET['posi'] : '';
         if ($idx <= 0) {
             error("잘못된 IDX입니다.");
             exit;
         }
 
-        $sql  = "Select wp.* From df_site_{$table} wp Where 1 = 1";
+        $sql = "Select wp.* From df_site_{$table} wp Where 1 = 1";
 
         if ($posi == 'up') {
             $sql .= " And wp.prior >= '{$prior}' And wp.idx != '{$idx}' Order by wp.prior Asc Limit 1 ";
@@ -263,7 +266,7 @@ switch ($mode) {
             }
         } elseif ($posi == 'upup') {
             $sql .= " And wp.prior >= '{$prior}' And wp.idx != '{$idx}' Order by wp.prior Asc Limit 10 ";
-            $row  = $db->query($sql);
+            $row = $db->query($sql);
             $total = count($row);
             for ($i = 0; $i < count($row); $i++) {
                 $prior = $row[$i]['prior'];
@@ -281,7 +284,7 @@ switch ($mode) {
             }
         } elseif ($posi == 'downdown') {
             $sql .= " And wp.prior <= '{$prior}' And wp.idx != '{$idx}' Order by wp.prior Desc Limit 10 ";
-            $row  = $db->query($sql);
+            $row = $db->query($sql);
             $total = count($row);
             for ($i = 0; $i < count($row); $i++) {
                 $prior = $row[$i]['prior'];
