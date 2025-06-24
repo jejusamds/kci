@@ -1,0 +1,1198 @@
+<?
+$sMenu = "03-1";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+?>
+	
+	<div id="container">
+		<div id="sub_con">
+			<? include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="performance_sub01_con">
+					<div class="contents_con">
+						<div class="ss_con">
+							<div class="category_con">
+								<ul>
+									<li>
+										<div class="list_div">
+											<div class="title_con">
+												<span>
+													용도별
+												</span>
+											</div>
+
+											<div class="list_con">
+												<ul>
+													<li>
+														<a href="javascript:;" class="on">
+															전체
+														</a>
+													</li>
+													<li>
+														<a href="javascript:;">
+															업무/근생
+														</a>
+													</li>
+													<li>
+														<a href="javascript:;">
+															물류시설
+														</a>
+													</li>
+													<li>
+														<a href="javascript:;">
+															주거시설
+														</a>
+													</li>
+													<li>
+														<a href="javascript:;">
+															리모델링
+														</a>
+													</li>
+													<li>
+														<a href="javascript:;">
+															기타
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="list_div">
+											<div class="title_con">
+												<span>
+													지역별
+												</span>
+											</div>
+
+											<div class="list_con">
+												<ul>
+													<li>
+														<a href="javascript:;" class="on">
+															전체
+														</a>
+													</li>
+													<li>
+														<a href="javascript:;">
+															서울
+														</a>
+													</li>
+													<li>
+														<a href="javascript:;">
+															경기
+														</a>
+													</li>
+													<li>
+														<a href="javascript:;">
+															기타
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+
+							<div class="st_con">
+								<div class="search_con">
+									<div class="input_con">
+										<input type="" name="" placeholder="검색어를 입력해주세요">
+									</div>
+
+									<a href="#">
+										<img src="/img/sub/search_icon_bk.svg" alt="검색하기" class="fx">
+									</a>
+								</div>
+
+								<div class="tab_list">
+									<ul>
+										<li class="on" val="gallery_list_tab">
+											<img src="/img/sub/gallery_list_icon.svg" alt="갤러리형 게시판" class="fx">
+										</li>
+										<li val="normal_list_tab">
+											<img src="/img/sub/normal_list_icon.svg" alt="일반형 게시판" class="fx">
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="tab_contents">
+							<!--gallery_list_tab-->
+							<div class="list_con gallery_list_tab">
+								<div class="contents_con">
+									<!--li 보여지는 갯수 pc 12개, mobile 8개-->
+									<div class="list_con">
+										<ul>
+											<li>
+												<a href="/performance/performance_view.html">
+													<div class="list_div">
+														<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+															<img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+														</div>
+
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	서울
+																</span>
+															</div>
+
+															<div class="text02_con">
+																<span>
+																	서초구 서초동 1621-17 번지 근생 신축공사
+																</span>
+															</div>
+
+															<div class="text03_con">
+																<span>
+																	근린생활시설
+																</span>
+
+																<div class="over_con w_con">
+																	<div class="bar"></div>
+
+																	<span>
+																		VIEW MORE
+																	</span>
+																</div>
+															</div>
+
+															<div class="text04_con">
+																<span>
+																	공정률 <span class="color_text">100</span> %
+																</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_noimage_img.png');">
+															<img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+														</div>
+
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	서울
+																</span>
+															</div>
+
+															<div class="text02_con">
+																<span>
+																	서초구 서초동 1621-17 번지 근생 신축공사
+																</span>
+															</div>
+
+															<div class="text03_con">
+																<span>
+																	근린생활시설
+																</span>
+
+																<div class="over_con w_con">
+																	<div class="bar"></div>
+
+																	<span>
+																		VIEW MORE
+																	</span>
+																</div>
+															</div>
+
+															<div class="text04_con">
+																<span>
+																	공정률 <span class="color_text">100</span> %
+																</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="/performance/performance_view.html">
+													<div class="list_div">
+														<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+															<img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+														</div>
+
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	서울
+																</span>
+															</div>
+
+															<div class="text02_con">
+																<span>
+																	서초구 서초동 1621-17 번지 근생 신축공사
+																</span>
+															</div>
+
+															<div class="text03_con">
+																<span>
+																	근린생활시설
+																</span>
+
+																<div class="over_con w_con">
+																	<div class="bar"></div>
+
+																	<span>
+																		VIEW MORE
+																	</span>
+																</div>
+															</div>
+
+															<div class="text04_con">
+																<span>
+																	공정률 <span class="color_text">100</span> %
+																</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_noimage_img.png');">
+															<img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+														</div>
+
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	서울
+																</span>
+															</div>
+
+															<div class="text02_con">
+																<span>
+																	서초구 서초동 1621-17 번지 근생 신축공사
+																</span>
+															</div>
+
+															<div class="text03_con">
+																<span>
+																	근린생활시설
+																</span>
+
+																<div class="over_con w_con">
+																	<div class="bar"></div>
+
+																	<span>
+																		VIEW MORE
+																	</span>
+																</div>
+															</div>
+
+															<div class="text04_con">
+																<span>
+																	공정률 <span class="color_text">100</span> %
+																</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="/performance/performance_view.html">
+													<div class="list_div">
+														<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+															<img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+														</div>
+
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	서울
+																</span>
+															</div>
+
+															<div class="text02_con">
+																<span>
+																	서초구 서초동 1621-17 번지 근생 신축공사
+																</span>
+															</div>
+
+															<div class="text03_con">
+																<span>
+																	근린생활시설
+																</span>
+
+																<div class="over_con w_con">
+																	<div class="bar"></div>
+
+																	<span>
+																		VIEW MORE
+																	</span>
+																</div>
+															</div>
+
+															<div class="text04_con">
+																<span>
+																	공정률 <span class="color_text">100</span> %
+																</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_noimage_img.png');">
+															<img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+														</div>
+
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	서울
+																</span>
+															</div>
+
+															<div class="text02_con">
+																<span>
+																	서초구 서초동 1621-17 번지 근생 신축공사
+																</span>
+															</div>
+
+															<div class="text03_con">
+																<span>
+																	근린생활시설
+																</span>
+
+																<div class="over_con w_con">
+																	<div class="bar"></div>
+
+																	<span>
+																		VIEW MORE
+																	</span>
+																</div>
+															</div>
+
+															<div class="text04_con">
+																<span>
+																	공정률 <span class="color_text">100</span> %
+																</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="/performance/performance_view.html">
+													<div class="list_div">
+														<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+															<img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+														</div>
+
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	서울
+																</span>
+															</div>
+
+															<div class="text02_con">
+																<span>
+																	서초구 서초동 1621-17 번지 근생 신축공사
+																</span>
+															</div>
+
+															<div class="text03_con">
+																<span>
+																	근린생활시설
+																</span>
+
+																<div class="over_con w_con">
+																	<div class="bar"></div>
+
+																	<span>
+																		VIEW MORE
+																	</span>
+																</div>
+															</div>
+
+															<div class="text04_con">
+																<span>
+																	공정률 <span class="color_text">100</span> %
+																</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_noimage_img.png');">
+															<img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+														</div>
+
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	서울
+																</span>
+															</div>
+
+															<div class="text02_con">
+																<span>
+																	서초구 서초동 1621-17 번지 근생 신축공사
+																</span>
+															</div>
+
+															<div class="text03_con">
+																<span>
+																	근린생활시설
+																</span>
+
+																<div class="over_con w_con">
+																	<div class="bar"></div>
+
+																	<span>
+																		VIEW MORE
+																	</span>
+																</div>
+															</div>
+
+															<div class="text04_con">
+																<span>
+																	공정률 <span class="color_text">100</span> %
+																</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="/performance/performance_view.html">
+													<div class="list_div">
+														<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+															<img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+														</div>
+
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	서울
+																</span>
+															</div>
+
+															<div class="text02_con">
+																<span>
+																	서초구 서초동 1621-17 번지 근생 신축공사
+																</span>
+															</div>
+
+															<div class="text03_con">
+																<span>
+																	근린생활시설
+																</span>
+
+																<div class="over_con w_con">
+																	<div class="bar"></div>
+
+																	<span>
+																		VIEW MORE
+																	</span>
+																</div>
+															</div>
+
+															<div class="text04_con">
+																<span>
+																	공정률 <span class="color_text">100</span> %
+																</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_noimage_img.png');">
+															<img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+														</div>
+
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	서울
+																</span>
+															</div>
+
+															<div class="text02_con">
+																<span>
+																	서초구 서초동 1621-17 번지 근생 신축공사
+																</span>
+															</div>
+
+															<div class="text03_con">
+																<span>
+																	근린생활시설
+																</span>
+
+																<div class="over_con w_con">
+																	<div class="bar"></div>
+
+																	<span>
+																		VIEW MORE
+																	</span>
+																</div>
+															</div>
+
+															<div class="text04_con">
+																<span>
+																	공정률 <span class="color_text">100</span> %
+																</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="/performance/performance_view.html">
+													<div class="list_div">
+														<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+															<img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+														</div>
+
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	서울
+																</span>
+															</div>
+
+															<div class="text02_con">
+																<span>
+																	서초구 서초동 1621-17 번지 근생 신축공사
+																</span>
+															</div>
+
+															<div class="text03_con">
+																<span>
+																	근린생활시설
+																</span>
+
+																<div class="over_con w_con">
+																	<div class="bar"></div>
+
+																	<span>
+																		VIEW MORE
+																	</span>
+																</div>
+															</div>
+
+															<div class="text04_con">
+																<span>
+																	공정률 <span class="color_text">100</span> %
+																</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_noimage_img.png');">
+															<img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+														</div>
+
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	서울
+																</span>
+															</div>
+
+															<div class="text02_con">
+																<span>
+																	서초구 서초동 1621-17 번지 근생 신축공사
+																</span>
+															</div>
+
+															<div class="text03_con">
+																<span>
+																	근린생활시설
+																</span>
+
+																<div class="over_con w_con">
+																	<div class="bar"></div>
+
+																	<span>
+																		VIEW MORE
+																	</span>
+																</div>
+															</div>
+
+															<div class="text04_con">
+																<span>
+																	공정률 <span class="color_text">100</span> %
+																</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</li>
+											<!--li class="none_li">
+												<span>
+													등록된 게시글이 없습니다.
+												</span>
+											</li-->
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<!--normal_list_tab-->
+							<div class="list_con normal_list_tab">
+								<div class="scroll_con">
+									<div class="title_con">
+										<table cellpadding="0" cellspacing="0">
+											<tbody>
+												<tr>
+													<td align="center" class="num_td">
+														<span>
+															번호
+														</span>
+													</td>
+													<td align="center" class="location_td">
+														<span>
+															위치
+														</span>
+													</td>
+													<td align="center" class="type_td">
+														<span>
+															용도
+														</span>
+													</td>
+													<td align="center" class="date_td">
+														<span>
+															공사기간
+														</span>
+													</td>
+													<td align="center" class="scale_td">
+														<span>
+															규모
+														</span>
+													</td>
+													<td align="center" class="process_td">
+														<span>
+															공정률
+														</span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									
+									<div class="list_con">
+										<ul>
+											<li>
+												<a href="/performance/performance_view.html">
+													<div class="list_div">
+														<table cellpadding="0" cellspacing="0">
+															<tbody>
+																<tr>
+																	<td align="center" class="num_td">
+																		<span>
+																			1
+																		</span>
+																	</td>
+																	<td align="left" class="location_td">
+																		<div class="text_con">
+																			<span>
+																				서울특별시 서초구 서초동 1621-17 번지
+																			</span>
+																		</div>
+																	</td>
+																	<td align="center" class="type_td">
+																		<span>
+																			근린생활시설
+																		</span>
+																	</td>
+																	<td align="center" class="date_td">
+																		<span>
+																			2023. 10 ~ 2024. 09
+																		</span>
+																	</td>
+																	<td align="center" class="scale_td">
+																		<span>
+																			지하1층, 지상5층
+																		</span>
+																	</td>
+																	<td align="center" class="process_td">
+																		<span>
+																			30%
+																		</span>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<table cellpadding="0" cellspacing="0">
+															<tbody>
+																<tr>
+																	<td align="center" class="num_td">
+																		<span>
+																			2
+																		</span>
+																	</td>
+																	<td align="left" class="location_td">
+																		<div class="text_con">
+																			<span>
+																				서울특별시 서초구 서초동 1621-17 번지 서울특별시 서초구 서초동 1621-17 번지 서울특별시 서초구 서초동 1621-17 번지
+																			</span>
+																		</div>
+																	</td>
+																	<td align="center" class="type_td">
+																		<span>
+																			근린생활시설
+																		</span>
+																	</td>
+																	<td align="center" class="date_td">
+																		<span>
+																			2023. 10 ~ 2024. 09
+																		</span>
+																	</td>
+																	<td align="center" class="scale_td">
+																		<span>
+																			지하1층, 지상5층
+																		</span>
+																	</td>
+																	<td align="center" class="process_td">
+																		<span>
+																			30%
+																		</span>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<table cellpadding="0" cellspacing="0">
+															<tbody>
+																<tr>
+																	<td align="center" class="num_td">
+																		<span>
+																			3
+																		</span>
+																	</td>
+																	<td align="left" class="location_td">
+																		<div class="text_con">
+																			<span>
+																				서울특별시 서초구 서초동 1621-17 번지
+																			</span>
+																		</div>
+																	</td>
+																	<td align="center" class="type_td">
+																		<span>
+																			근린생활시설
+																		</span>
+																	</td>
+																	<td align="center" class="date_td">
+																		<span>
+																			2023. 10 ~ 2024. 09
+																		</span>
+																	</td>
+																	<td align="center" class="scale_td">
+																		<span>
+																			지하1층, 지상5층
+																		</span>
+																	</td>
+																	<td align="center" class="process_td">
+																		<span>
+																			30%
+																		</span>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<table cellpadding="0" cellspacing="0">
+															<tbody>
+																<tr>
+																	<td align="center" class="num_td">
+																		<span>
+																			4
+																		</span>
+																	</td>
+																	<td align="left" class="location_td">
+																		<div class="text_con">
+																			<span>
+																				서울특별시 서초구 서초동 1621-17 번지
+																			</span>
+																		</div>
+																	</td>
+																	<td align="center" class="type_td">
+																		<span>
+																			근린생활시설
+																		</span>
+																	</td>
+																	<td align="center" class="date_td">
+																		<span>
+																			2023. 10 ~ 2024. 09
+																		</span>
+																	</td>
+																	<td align="center" class="scale_td">
+																		<span>
+																			지하1층, 지상5층
+																		</span>
+																	</td>
+																	<td align="center" class="process_td">
+																		<span>
+																			30%
+																		</span>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<table cellpadding="0" cellspacing="0">
+															<tbody>
+																<tr>
+																	<td align="center" class="num_td">
+																		<span>
+																			5
+																		</span>
+																	</td>
+																	<td align="left" class="location_td">
+																		<div class="text_con">
+																			<span>
+																				서울특별시 서초구 서초동 1621-17 번지
+																			</span>
+																		</div>
+																	</td>
+																	<td align="center" class="type_td">
+																		<span>
+																			근린생활시설
+																		</span>
+																	</td>
+																	<td align="center" class="date_td">
+																		<span>
+																			2023. 10 ~ 2024. 09
+																		</span>
+																	</td>
+																	<td align="center" class="scale_td">
+																		<span>
+																			지하1층, 지상5층
+																		</span>
+																	</td>
+																	<td align="center" class="process_td">
+																		<span>
+																			30%
+																		</span>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<table cellpadding="0" cellspacing="0">
+															<tbody>
+																<tr>
+																	<td align="center" class="num_td">
+																		<span>
+																			6
+																		</span>
+																	</td>
+																	<td align="left" class="location_td">
+																		<div class="text_con">
+																			<span>
+																				서울특별시 서초구 서초동 1621-17 번지
+																			</span>
+																		</div>
+																	</td>
+																	<td align="center" class="type_td">
+																		<span>
+																			근린생활시설
+																		</span>
+																	</td>
+																	<td align="center" class="date_td">
+																		<span>
+																			2023. 10 ~ 2024. 09
+																		</span>
+																	</td>
+																	<td align="center" class="scale_td">
+																		<span>
+																			지하1층, 지상5층
+																		</span>
+																	</td>
+																	<td align="center" class="process_td">
+																		<span>
+																			30%
+																		</span>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<table cellpadding="0" cellspacing="0">
+															<tbody>
+																<tr>
+																	<td align="center" class="num_td">
+																		<span>
+																			7
+																		</span>
+																	</td>
+																	<td align="left" class="location_td">
+																		<div class="text_con">
+																			<span>
+																				서울특별시 서초구 서초동 1621-17 번지
+																			</span>
+																		</div>
+																	</td>
+																	<td align="center" class="type_td">
+																		<span>
+																			근린생활시설
+																		</span>
+																	</td>
+																	<td align="center" class="date_td">
+																		<span>
+																			2023. 10 ~ 2024. 09
+																		</span>
+																	</td>
+																	<td align="center" class="scale_td">
+																		<span>
+																			지하1층, 지상5층
+																		</span>
+																	</td>
+																	<td align="center" class="process_td">
+																		<span>
+																			30%
+																		</span>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<table cellpadding="0" cellspacing="0">
+															<tbody>
+																<tr>
+																	<td align="center" class="num_td">
+																		<span>
+																			8
+																		</span>
+																	</td>
+																	<td align="left" class="location_td">
+																		<div class="text_con">
+																			<span>
+																				서울특별시 서초구 서초동 1621-17 번지
+																			</span>
+																		</div>
+																	</td>
+																	<td align="center" class="type_td">
+																		<span>
+																			근린생활시설
+																		</span>
+																	</td>
+																	<td align="center" class="date_td">
+																		<span>
+																			2023. 10 ~ 2024. 09
+																		</span>
+																	</td>
+																	<td align="center" class="scale_td">
+																		<span>
+																			지하1층, 지상5층
+																		</span>
+																	</td>
+																	<td align="center" class="process_td">
+																		<span>
+																			30%
+																		</span>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<table cellpadding="0" cellspacing="0">
+															<tbody>
+																<tr>
+																	<td align="center" class="num_td">
+																		<span>
+																			9
+																		</span>
+																	</td>
+																	<td align="left" class="location_td">
+																		<div class="text_con">
+																			<span>
+																				서울특별시 서초구 서초동 1621-17 번지
+																			</span>
+																		</div>
+																	</td>
+																	<td align="center" class="type_td">
+																		<span>
+																			근린생활시설
+																		</span>
+																	</td>
+																	<td align="center" class="date_td">
+																		<span>
+																			2023. 10 ~ 2024. 09
+																		</span>
+																	</td>
+																	<td align="center" class="scale_td">
+																		<span>
+																			지하1층, 지상5층
+																		</span>
+																	</td>
+																	<td align="center" class="process_td">
+																		<span>
+																			30%
+																		</span>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<div class="list_div">
+														<table cellpadding="0" cellspacing="0">
+															<tbody>
+																<tr>
+																	<td align="center" class="num_td">
+																		<span>
+																			10
+																		</span>
+																	</td>
+																	<td align="left" class="location_td">
+																		<div class="text_con">
+																			<span>
+																				서울특별시 서초구 서초동 1621-17 번지
+																			</span>
+																		</div>
+																	</td>
+																	<td align="center" class="type_td">
+																		<span>
+																			근린생활시설
+																		</span>
+																	</td>
+																	<td align="center" class="date_td">
+																		<span>
+																			2023. 10 ~ 2024. 09
+																		</span>
+																	</td>
+																	<td align="center" class="scale_td">
+																		<span>
+																			지하1층, 지상5층
+																		</span>
+																	</td>
+																	<td align="center" class="process_td">
+																		<span>
+																			30%
+																		</span>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</a>
+											</li>
+											<!--li class="none_li">
+												<span>
+													등록된 게시글이 없습니다.
+												</span>
+											</li-->
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="number_list_con">
+							<div class="contents_con">
+								<div class="btn_con">
+									<a href="#">
+										<img src="/img/sub/number_list_con_prev_btn.svg" alt="번호목록 이전 버튼" class="fx">
+									</a>
+								</div>
+
+								<div class="list_con">
+									<a href="#" class="on">
+										1
+									</a>
+									<a href="#">
+										2
+									</a>
+									<a href="#">
+										3
+									</a>
+								</div>
+
+								<div class="btn_con">
+									<a href="#">
+										<img src="/img/sub/number_list_con_next_btn.svg" alt="번호목록 다음 버튼" class="fx">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		$(document).ready(function(){
+			// 게시판 형식 선택
+			$(".performance_sub01_con > .contents_con > .ss_con > .st_con > .tab_list > ul > li").bind("click",function(){
+				$(".performance_sub01_con > .contents_con > .ss_con > .st_con > .tab_list > ul > li").each(function(){
+					$(this).removeClass("on");
+				});
+				$(this).addClass("on");
+				$(".performance_sub01_con > .contents_con > .tab_contents > .list_con").hide();
+				$("."+$(this).attr("val")).show();
+			});
+		});
+	</script>
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

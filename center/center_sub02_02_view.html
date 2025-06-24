@@ -1,0 +1,156 @@
+<?php
+$sMenu = "05-2";
+$ssMenu = "05-2-2";
+include $_SERVER['DOCUMENT_ROOT'] . '/include/header.html';
+
+// 1) 파라미터 처리
+$idx = isset($_GET['idx']) ? intval($_GET['idx']) : 0;
+$grp = isset($_GET['grp']) && $_GET['grp'] !== '' ? trim($_GET['grp']) : '';
+$current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+
+// 2) 게시글 조회
+$sql = "SELECT * FROM df_site_bbs WHERE idx = :idx AND code = 'job'";
+$job_row = $db->row($sql, ['idx' => $idx]);
+if (!$job_row) {
+    echo "<script>alert('존재하지 않는 공고입니다.'); location.href='/center/center_sub02_02.html';</script>";
+    exit;
+}
+
+// 3) 뒤로가기 QS 구성 (grp, page)
+$qs = [];
+if ($grp !== '') {
+    $qs[] = 'grp=' . urlencode($grp);
+}
+$qs[] = 'page=' . $current_page;
+$qs_str = implode('&', $qs);
+
+// 4) 이전/다음 공고
+$prev = $db->row(
+    "SELECT idx FROM df_site_bbs WHERE code='job' AND idx < :idx" .
+    ($grp ? " AND grp = :grp" : "") .
+    " ORDER BY idx DESC LIMIT 1",
+    $grp ? ['idx' => $idx, 'grp' => $grp] : ['idx' => $idx]
+);
+$next = $db->row(
+    "SELECT idx FROM df_site_bbs WHERE code='job' AND idx > :idx" .
+    ($grp ? " AND grp = :grp" : "") .
+    " ORDER BY idx ASC LIMIT 1",
+    $grp ? ['idx' => $idx, 'grp' => $grp] : ['idx' => $idx]
+);
+
+// 5) 상태/기간
+$status = htmlspecialchars($job_row['grp_2']);
+$career = htmlspecialchars($job_row['grp_3']);
+$start = date('Y. m. d', strtotime($job_row['event_sdate']));
+$end = date('Y. m. d', strtotime($job_row['event_edate']));
+
+// 6) 첨부파일 조회
+$sql = " SELECT idx, upfile_name FROM df_site_bbs_files WHERE bbsidx=:idx ORDER BY idx ASC ";
+$db->bind("idx", $idx);
+$f_rows = $db->query($sql);
+?>
+<div id="container">
+    <div id="sub_con">
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/include/sub_banner.html'; ?>
+        <div class="contents_con">
+            <div class="center_sub02_02_view_con">
+                <div class="contents_con">
+                    <div class="normal_view_con center_sub02_02">
+                        <div class="contents_con">
+
+                            <!-- 상태 -->
+                            <div class="txt_con">
+                                <div class="state_con">
+                                    <ul>
+                                        <li><span class="<?= $status == '진행중' ? 'ing' : 'end' ?>"><?= $status ?></span></li>
+                                        <li><span class="<?= $career == '신입' ? 'new' : 'career'  ?>"><?= $career ?></span></li>
+                                    </ul>
+                                </div>
+
+                                <!-- 제목 -->
+                                <div class="title_con"><span><?= htmlspecialchars($job_row['subject']) ?></span></div>
+
+                                <!-- 기간 -->
+                                <div class="info_con">
+                                    <ul>
+                                        <li>
+                                            <div class="list_div">
+                                                <div class="text01"><span>기간</span></div>
+                                                <div class="text02"><span><?= $start ?> ~ <?= $end ?></span></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+							<?php if (count($f_rows) > 0) { ?>
+							<div class="file_con">
+								<div class="title_con">
+									<span>
+										첨부파일
+									</span>
+								</div>
+
+								<ul>
+									<?php foreach ($f_rows As $f_row) { ?>
+									<li>
+										<a href="/controller/file_process.php?code=job&idx=<?= $f_row['idx'] ?>">
+											<img src="/img/sub/view_con_file_icon.svg" alt="아이콘" class="fx">
+											<span>
+												<?= $f_row['upfile_name'] ?>
+											</span>
+										</a>
+									</li>
+									<?php } ?>
+								</ul>
+							</div>
+							<?php } ?>
+
+                            <!-- 본문 -->
+                            <div class="posts_con">
+                                <?= $job_row['content'] ?>
+                            </div>
+
+                            <!-- 네비게이션 -->
+                            <div class="article_con">
+                                <div class="back_con">
+                                    <a href="/center/center_sub02_02.html?<?= $qs_str ?>">
+                                        <span>LIST</span>
+                                        <img src="/img/sub/view_con_back_btn_icon.svg" alt="아이콘" class="fx">
+                                    </a>
+                                </div>
+                                <div class="list_con">
+                                    <ul>
+                                        <li>
+                                            <?php if ($prev): ?>
+                                                <a
+                                                    href="/center/center_sub02_02_view.html?idx=<?= $prev['idx'] ?>&<?= $qs_str ?>">
+                                                    <span>PREV</span>
+                                                    <img src="/img/sub/view_con_article_con_prev_btn.svg" alt="이전글"
+                                                        class="fx">
+                                                </a>
+                                            <?php endif; ?>
+                                        </li>
+                                        <li>
+                                            <?php if ($next): ?>
+                                                <a
+                                                    href="/center/center_sub02_02_view.html?idx=<?= $next['idx'] ?>&<?= $qs_str ?>">
+                                                    <img src="/img/sub/view_con_article_con_next_btn.svg" alt="다음글"
+                                                        class="fx">
+                                                    <span>NEXT</span>
+                                                </a>
+                                            <?php endif; ?>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/include/footer.html'; ?>

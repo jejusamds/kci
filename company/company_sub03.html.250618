@@ -1,0 +1,433 @@
+<?
+$sMenu = "01-3";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+?>
+	
+	<div id="container">
+		<div id="sub_con">
+			<? include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="company_sub03_con">
+					<div class="contents_con">
+						<div class="bg_con">
+							<div class="img_con">
+								<img src="/img/company/company_sub03_img_con_img01.png" alt="컨텐츠 이미지" class="fx w_img">
+								<img src="/img/company/m_company_sub03_img_con_img01.png" alt="컨텐츠 이미지" class="fx m_img">
+							</div>
+
+							<div class="txt_con">
+								<div class="text01_con">
+									<span>
+										HISTORY
+									</span>
+								</div>
+
+								<div class="text02_con">
+									<span>
+										당신의 꿈이 멋진 현실로 실현될 <br>
+										그 날까지 한국건설산업은 <br>
+										끝까지 함께합니다.
+									</span>
+								</div>
+
+								<div class="text03_con">
+									<img src="/img/company/company_sub03_txt_text03_con_img.png" alt="since 2020" class="fx w_img">
+									<img src="/img/company/m_company_sub03_txt_text03_con_img.png" alt="since 2020" class="fx m_img">
+								</div>
+							</div>
+						</div>
+
+						<div class="history_con">
+							<ul>
+								<li>
+									<div class="list_div">
+										<div class="box_con left">
+											<div class="year_con">
+												<span>
+													2025
+												</span>
+											</div>
+										</div>
+
+										<div class="box_con right">
+											<div class="info_con">
+												<ul>
+													<li>
+														<div class="list_div">
+															<div class="month_con">
+																<span>
+																	02
+																</span>
+															</div>
+
+															<div class="text_con">
+																<span>
+																	계열사 공장 설립[(주)케이티엠]
+																</span>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="box_con left">
+											<div class="info_con">
+												<ul>
+													<li>
+														<div class="list_div">
+															<div class="month_con">
+																<span>
+																	04
+																</span>
+															</div>
+
+															<div class="text_con">
+																<span>
+																	업장 소재지 변경 <br class="m_br">
+																	[경기도 시흥시 은계남길 55, 2층]
+																</span>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+
+										<div class="box_con right">
+											<div class="year_con">
+												<span>
+													2024
+												</span>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="box_con left">
+											<div class="year_con">
+												<span>
+													2023
+												</span>
+											</div>
+										</div>
+
+										<div class="box_con right">
+											<div class="info_con">
+												<ul>
+													<li>
+														<div class="list_div">
+															<div class="month_con">
+																<span>
+																	07
+																</span>
+															</div>
+
+															<div class="text_con">
+																<span>
+																	대한건설협회 가입
+																</span>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="box_con left">
+											<div class="info_con">
+												<ul>
+													<li>
+														<div class="list_div">
+															<div class="month_con">
+																<span>
+																	10
+																</span>
+															</div>
+
+															<div class="text_con">
+																<span>
+																	사업장 소재지 변경 [경기도 시흥시]
+																</span>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+
+										<div class="box_con right">
+											<div class="year_con">
+												<span>
+													2021
+												</span>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="box_con left">
+											<div class="year_con">
+												<span>
+													2020
+												</span>
+											</div>
+										</div>
+
+										<div class="box_con right">
+											<div class="info_con">
+												<ul>
+													<li>
+														<div class="list_div">
+															<div class="month_con">
+																<span>
+																	12
+																</span>
+															</div>
+
+															<div class="text_con">
+																<span>
+																	계열사 설립 [(주)케이티엠]
+																</span>
+															</div>
+														</div>
+													</li>
+													<li>
+														<div class="list_div">
+															<div class="month_con">
+																<span>
+																	09
+																</span>
+															</div>
+
+															<div class="text_con">
+																<span>
+																	부동산 개발업 면허 취득 [경기200071]
+																</span>
+															</div>
+														</div>
+													</li>
+													<li>
+														<div class="list_div">
+															<div class="month_con">
+																<span>
+																	09
+																</span>
+															</div>
+
+															<div class="text_con">
+																<span>
+																	계열사 설립 [㈜케이에이치글로벌]
+																</span>
+															</div>
+														</div>
+													</li>
+													<li>
+														<div class="list_div">
+															<div class="month_con">
+																<span>
+																	07
+																</span>
+															</div>
+
+															<div class="text_con">
+																<span>
+																	상호명 변경 [변경 : (주)한국건설산업]
+																</span>
+															</div>
+														</div>
+													</li>
+													<li>
+														<div class="list_div">
+															<div class="month_con">
+																<span>
+																	07
+																</span>
+															</div>
+
+															<div class="text_con">
+																<span>
+																	소재지 변경 [변경 : 경기도 시흥시]
+																</span>
+															</div>
+														</div>
+													</li>
+													<li>
+														<div class="list_div">
+															<div class="month_con">
+																<span>
+																	03
+																</span>
+															</div>
+
+															<div class="text_con">
+																<span>
+																	조달청업체등록
+																</span>
+															</div>
+														</div>
+													</li>
+													<li>
+														<div class="list_div">
+															<div class="month_con">
+																<span>
+																	02
+																</span>
+															</div>
+
+															<div class="text_con">
+																<span>
+																	건축공사업 취득 [건축공사업 05-0954]
+																</span>
+															</div>
+														</div>
+													</li>
+													<li>
+														<div class="list_div">
+															<div class="month_con">
+																<span>
+																	01
+																</span>
+															</div>
+
+															<div class="text_con">
+																<span>
+																	법인설립 [자본금 : 500,000,000]
+																</span>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		ScrollTrigger.create({
+			trigger: ".company_sub03_con > .contents_con > .bg_con > .img_con",
+			start: "top 55%",
+			delay:0.3,
+			onEnter: () => {
+				document.querySelector(".company_sub03_con > .contents_con > .bg_con > .img_con").classList.add("on");
+			},
+		//	markers:true,
+		});
+		
+		function pc_ani() {
+			// 연혁 애니메이션
+			const tl = gsap.timeline();
+			const section = document.querySelector(".company_sub03_con > .contents_con")
+			const txt_box = document.querySelector(".company_sub03_con > .contents_con > .bg_con > .txt_con")
+			const list_con = document.querySelectorAll(".company_sub03_con > .contents_con > .history_con > ul > li")
+
+			tl.from(txt_box, {
+				y:100,
+				autoAlpha:0,
+				duration:0.8,
+				ease:"circ.out",
+			})
+
+			list_con.forEach((item, index) => {
+				gsap.from(item, {
+					autoAlpha:0,
+					y:50,
+					scrollTrigger: {
+						trigger: item,
+						start: "top 70%",
+						end: "bottom 70%",
+					//	markers: true,
+					//	toggleActions:"play none none reset"
+					},
+				});
+			});
+
+			ScrollTrigger.create({
+				trigger:section,
+				start: "top 40%",
+				end: "bottom 40%",
+			//	markers:true,
+				animation:tl,
+			//	toggleActions:"play reverse play reset"
+			})
+		}
+
+		function mo_ani() {
+			// 연혁 애니메이션
+			const tl = gsap.timeline();
+			const section = document.querySelector(".company_sub03_con > .contents_con")
+			const txt_box = document.querySelector(".company_sub03_con > .contents_con > .bg_con > .txt_con")
+			const list_con = document.querySelectorAll(".company_sub03_con > .contents_con > .history_con > ul > li")
+
+			tl.from(txt_box, {
+				y:100,
+				autoAlpha:0,
+				duration:1.2,
+				ease:"circ.out",
+			})
+
+			list_con.forEach((item, index) => {
+				gsap.from(item, {
+					autoAlpha:0,
+					y:50,
+					scrollTrigger: {
+						trigger: item,
+						start: "top 70%",
+						end: "bottom 70%",
+					//	markers: true,
+					//	toggleActions:"play none none reset"
+					},
+				});
+			});
+
+			ScrollTrigger.create({
+				trigger:section,
+				start: "top 25%",
+				end: "bottom 25%",
+			//	markers:true,
+				animation:tl,
+			//	toggleActions:"play reverse play reset"
+			})
+		}
+		
+
+		gsap.registerPlugin(ScrollTrigger, CustomEase)
+
+		ScrollTrigger.matchMedia({
+			// pc
+			"(min-width: 1025px)": function () {	
+				pc_ani();
+			},
+
+			// mobile
+			"(max-width: 1024px)": function () {	
+				mo_ani();
+			},
+			
+			// all
+			"all": function () {
+				
+			}  
+		});
+	</script>
+
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

@@ -1,0 +1,316 @@
+<?php
+$sMenu = "03-1";
+
+include $_SERVER['DOCUMENT_ROOT'] . '/include/header.html'; // header에서 DB 포함됨
+
+// 1. idx 파라미터 검증 및 데이터 조회
+$idx = isset($_GET['idx']) ? intval($_GET['idx']) : 0;
+if ($idx < 1) {
+    die('잘못된 접근입니다.');
+}
+$row = $db->row(
+    "SELECT * FROM df_site_sigong WHERE idx = :idx",
+    ['idx' => $idx],
+    PDO::FETCH_OBJ
+);
+if (!$row) {
+    die('존재하지 않는 시공사업입니다.');
+}
+
+// 2. 첨부파일 목록 조회
+$files = $db->query(
+    "SELECT * FROM df_site_sigong_files WHERE bbsidx = :idx ORDER BY idx ASC",
+    ['idx' => $idx],
+    PDO::FETCH_OBJ
+);
+
+// 3. 이전/다음글 조회
+$prev = $db->row(
+    "SELECT idx FROM df_site_sigong WHERE idx < :idx ORDER BY idx DESC LIMIT 1",
+    ['idx' => $idx],
+    PDO::FETCH_OBJ
+);
+$next = $db->row(
+    "SELECT idx FROM df_site_sigong WHERE idx > :idx ORDER BY idx ASC LIMIT 1",
+    ['idx' => $idx],
+    PDO::FETCH_OBJ
+);
+
+$current_page = isset($_GET['page']) && $_GET['page'] != '' ? intval($_GET['page']) : 1;
+$usage        = isset($_GET['usage']) ? $_GET['usage'] : '';
+$region       = isset($_GET['region']) ? $_GET['region'] : '';
+$search       = isset($_GET['search']) ? trim($_GET['search']) : '';
+$qs_str       = "&page={$current_page}&usage=" . urlencode($usage) . "&region=" . urlencode($region) . "&search=" . urlencode($search);
+?>
+
+<div id="container">
+    <div id="sub_con">
+        <div class="contents_con">
+            <div class="performance_view_con">
+                <div class="contents_con">
+                    <!-- 제목 -->
+                    <div class="title_con">
+                        <span><?= htmlspecialchars($row->f_project_name) ?></span>
+                    </div>
+
+                    <!-- 뷰 컨텐츠 -->
+                    <div class="view_con">
+                        <!-- 슬라이드 -->
+                        <div class="slide_con">
+                            <div class="swiper view_con_slide">
+                                <div class="swiper-wrapper">
+                                    <?php if ($files && count($files) > 0): ?>
+                                        <?php foreach ($files as $f): ?>
+                                            <div class="swiper-slide view_con_slide_div">
+                                                <div class="contents_con">
+                                                    <div class="img_con"
+                                                        style="background-image:url('/userfiles/sigong/<?= htmlspecialchars($f->upfile) ?>');">
+                                                        <img src="/img/performance/performance_sub01_gallery_blank_img.png"
+                                                            alt="첨부 이미지" class="fx">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <div class="swiper-slide view_con_slide_div">
+                                            <div class="contents_con">
+                                                <div class="img_con"
+                                                    style="background-image:url('/img/performance/performance_sub01_gallery_noimage_img.png');">
+                                                    <img src="/img/performance/performance_sub01_gallery_blank_img.png"
+                                                        alt="컨텐츠 없음" class="fx">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="btn_con">
+                                <div class="slide_btn view_con_slide_btn prev">
+                                    <img src="/img/sub/slide_prev_btn_off.svg" alt="이전 버튼" class="fx off">
+                                    <img src="/img/sub/slide_prev_btn_on.svg" alt="이전 버튼" class="fx on">
+                                </div>
+                                <div class="slide_btn view_con_slide_btn next">
+                                    <img src="/img/sub/slide_next_btn_off.svg" alt="다음 버튼" class="fx off">
+                                    <img src="/img/sub/slide_next_btn_on.svg" alt="다음 버튼" class="fx on">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 상세 정보 -->
+                        <div class="info_con">
+                            <ul>
+                                <li>
+                                    <div class="list_div">
+                                        <div class="title_con"><span>위치</span></div>
+                                        <div class="text_con"><span><?= htmlspecialchars($row->f_address) ?></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="list_div">
+                                        <div class="title_con"><span>공사기간</span></div>
+                                        <div class="text_con"><span><?= htmlspecialchars($row->f_period) ?></span></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="list_div">
+                                        <div class="title_con"><span>공정률</span></div>
+                                        <div class="progress_con">
+                                            <div class="text_con">
+												<span>
+													<span class="color_text" data-end-value="<?= (int) $row->f_progress ?>"></span>%
+												</span>
+                                            </div>
+                                            <div class="progress_bar">
+                                                <div class="progress_inner"
+                                                    style="width:<?= (int) $row->f_progress ?>%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="list_div">
+                                        <div class="title_con"><span>용도</span></div>
+                                        <div class="text_con"><span><?= htmlspecialchars($row->f_usage) ?></span></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="list_div">
+                                        <div class="title_con"><span>규모</span></div>
+                                        <div class="text_con"><span><?= htmlspecialchars($row->f_scale) ?></span></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 네비게이션: 리스트/이전/다음 -->
+                    <div class="article_con">
+                        <div class="back_con">
+                            <a
+                                href="/performance/performance_sub01.html?<?= ltrim($qs_str,'&') ?>">
+                                <span>LIST</span>
+                                <img src="/img/sub/view_con_back_btn_icon.svg" alt="아이콘" class="fx">
+                            </a>
+                        </div>
+                        <div class="list_con">
+                            <ul>
+                                <li>
+                                    <?php if ($prev): ?>
+                                        <a
+                                            href="/performance/performance_view.html?idx=<?= $prev->idx ?>&page=<?= urlencode($_GET['page'] ?? 1) ?>&usage=<?= urlencode($_GET['usage'] ?? '') ?>&region=<?= urlencode($_GET['region'] ?? '') ?>&search=<?= urlencode($_GET['search'] ?? '') ?>">
+                                            <span>PREV</span>
+                                            <img src="/img/sub/view_con_article_con_prev_btn.svg" alt="이전글" class="fx">
+                                        </a>
+                                    <?php endif; ?>
+                                </li>
+                                <li>
+                                    <?php if ($next): ?>
+                                        <a
+                                            href="/performance/performance_view.html?idx=<?= $next->idx ?>&page=<?= urlencode($_GET['page'] ?? 1) ?>&usage=<?= urlencode($_GET['usage'] ?? '') ?>&region=<?= urlencode($_GET['region'] ?? '') ?>&search=<?= urlencode($_GET['search'] ?? '') ?>">
+                                            <img src="/img/sub/view_con_article_con_next_btn.svg" alt="다음글" class="fx">
+                                            <span>NEXT</span>
+                                        </a>
+                                    <?php endif; ?>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 뷰페이지 슬라이드
+    if ($(".view_con_slide_div").length > 1) {
+        var view_con_slide = new Swiper(".view_con_slide", {
+            slidesPerView: "auto",
+            autoplay: { delay: 3000, disableOnInteraction: false },
+            loop: true,
+            speed: 1500,
+            navigation: { prevEl: ".view_con_slide_btn.prev", nextEl: ".view_con_slide_btn.next" }
+        });
+        $(".performance_view_con > .contents_con > .view_con > .slide_con > .btn_con").show();
+    } else {
+        var view_con_slide = new Swiper(".view_con_slide", { slidesPerView: "auto", loop: false, simulateTouch: false, allowTouchMove: false });
+        $(".performance_view_con > .contents_con > .view_con > .slide_con > .btn_con").hide();
+    }
+
+	// 카운터
+	$(document).ready(function () {
+		let counterExecuted = false;
+		
+		function animateCounter(element, start, end, duration) {
+			const startTime = performance.now();
+			const startValue = start;
+			const endValue = end;
+			
+			function updateCounter(currentTime) {
+				const elapsed = currentTime - startTime;
+				const progress = Math.min(elapsed / duration, 1);
+				
+				// easeOut 효과
+				const easeProgress = 1 - Math.pow(1 - progress, 3);
+				const currentValue = Math.floor(startValue + (endValue - startValue) * easeProgress);
+				
+				element.text(currentValue);
+				
+				if (progress < 1) {
+					requestAnimationFrame(updateCounter);
+				} else {
+					element.text(endValue); // 최종값 보장
+				}
+			}
+			
+			requestAnimationFrame(updateCounter);
+		}
+		
+		function checkAndExecuteCounter() {
+			if (counterExecuted) return;
+			
+			const $counter = $('.color_text[data-end-value]');
+			if ($counter.length === 0) return;
+			
+			// 요소가 화면에 보이는지 체크
+			const elementTop = $counter.offset().top;
+			const viewportTop = $(window).scrollTop();
+			const viewportBottom = viewportTop + $(window).height();
+			
+			// 75% 정도 보이면 실행
+			if (elementTop < viewportBottom - 100) {
+				$counter.each(function() {
+					const $this = $(this);
+					const endValue = parseInt($this.data('end-value')) || 0;
+					
+					// 0부터 목표값까지 1200ms 동안 애니메이션
+					animateCounter($this, 0, endValue, 1200);
+				});
+				
+				counterExecuted = true;
+				$(window).off('scroll.counter'); // 스크롤 이벤트 제거
+				console.log('Counter executed once');
+			}
+		}
+		
+		// 스크롤 이벤트 바인딩
+		$(window).on('scroll.counter', checkAndExecuteCounter);
+		
+		// 초기 체크
+		checkAndExecuteCounter();
+	});
+
+	// GSAP ScrollTrigger 등록
+	gsap.registerPlugin(ScrollTrigger);
+
+	function animateProgressBars() {
+		document.querySelectorAll('.progress_inner').forEach((progressBar) => {
+			// PHP에서 설정한 인라인 스타일 width 값 추출
+			const inlineStyle = progressBar.style.width;
+			const targetProgress = parseInt(inlineStyle.replace('%', ''));
+			
+			// 해당 요소의 counter 찾기
+			const parentListDiv = progressBar.closest('.list_div');
+			const counter = parentListDiv.querySelector('.counter');
+			
+			// 초기 상태 설정 (중요!)
+			gsap.set(progressBar, { width: "0%" });
+			gsap.set(counter, { innerHTML: 0 });
+
+			// 애니메이션 실행
+			gsap.to(progressBar, {
+				width: targetProgress + "%",
+				duration: 2,
+				ease: "power2.out",
+				scrollTrigger: {
+					trigger: parentListDiv,
+					start: "top 80%",
+				//	toggleActions: "play none none reverse",
+					onEnter: () => {
+						// 숫자 카운터도 함께 애니메이션
+						gsap.to(counter, {
+							innerHTML: targetProgress,
+							duration: 2,
+							ease: "power2.out",
+							snap: { innerHTML: 1 }
+						});
+					},
+					onLeaveBack: () => {
+						// 역방향 스크롤 시 리셋
+						gsap.to(counter, {
+							innerHTML: 0,
+							duration: 0.5,
+							snap: { innerHTML: 1 }
+						});
+					}
+				}
+			});
+		});
+	}
+
+	// 초기화
+	window.addEventListener('load', animateProgressBars);
+</script>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/include/footer.html'; ?>

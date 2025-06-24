@@ -1,0 +1,101 @@
+<?
+$sMenu = "01-1";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+?>
+	
+	<div id="container">
+		<div id="sub_con">
+			<? include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="company_sub01_con">
+					<div class="contents_con">
+						<div class="bg_con"></div>
+
+						<div class="txt_con">
+							<div class="title_con">
+								<div class="text01_con">
+									<span>
+										차별화된 기술력으로 신뢰를 쌓아가는 <span class="color_text">KCI</span>
+									</span>
+								</div>
+
+								<div class="text02_con">
+									<span>
+										안녕하십니까 <br>
+										<span class="color_text">(주)한국건설산업</span> 홈페이지를 <br>
+										방문해주신 고객 여러분 감사합니다.
+									</span>
+								</div>
+							</div>
+
+							<div class="text_con">
+								<div class="text01_con">
+									<span>
+										(주)한국건설산업은 다년간 시공경험을 가진 기술자들이 하나로 뭉쳐 <br class="w_br">
+										그동안 쌓아온 경험과 신뢰를 바탕으로 관급공사,민간공사, 개발사업 등 <br class="w_br">
+										모든 사업영역에 있어서 최선을 다하여 시공하며 기술개발과 완벽한 <br class="w_br">
+										품질관리를 통해 고객의 만족을 위해 최선을 다하고 있습니다.
+									</span>
+									<span>
+										항상 고객의 입장에서 생각하고 꾸준히 쌓아온 기술력을 바탕으로 고객의 <br class="w_br">
+										요구를 만족시키는 기업으로 거듭날 것이며, 고객의 삶의 질을 높이기 위해 <br class="w_br">
+										한자리에 머무르지 않고 발전하는 (주)한국건설산업이 될 것을 약속드립니다.
+									</span>
+								</div>
+
+								<div class="text02_con">
+									<ul>
+										<li>
+											<div class="list_div">
+												<div class="text01_con">
+													<span>
+														(주)한국건설산업	
+													</span>
+												</div>
+
+												<div class="text02_con">
+													<div class="text01">
+														<span>
+															대표이사
+														</span>
+													</div>
+
+													<div class="text02">
+														<span>
+															전민규
+														</span>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="list_div">
+												<img src="/img/company/company_sub01_txt_con_sign.svg" alt="컨텐츠 이미지" class="fx">
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		ScrollTrigger.create({
+			trigger: ".company_sub01_con .bg_con",
+			start: "top 55%",
+			delay:0.6,
+			onEnter: () => {
+				document.querySelector(".company_sub01_con .bg_con").classList.add("on");
+			},
+		//	markers:true,
+		});
+	</script>
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

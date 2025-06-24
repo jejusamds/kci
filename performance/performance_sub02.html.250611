@@ -1,0 +1,334 @@
+<?
+$sMenu = "03-2";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+?>
+	<style type="text/css">
+		#sub_con > .banner_con {padding:120px 0 0;}
+		
+		@media all and (max-width: 1024px) { 
+			#sub_con > .banner_con {padding:11.11vw 0 13.89vw;}
+		}
+	</style>
+
+	<div id="container">
+		
+		<div id="sub_con">
+			<? include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="performance_sub02_con">
+					<div class="contents_con">
+						<div class="ss_con">
+							<div class="st_con">
+								<div class="search_con">
+									<div class="input_con">
+										<input type="" name="" placeholder="검색어를 입력해주세요">
+									</div>
+
+									<a href="#">
+										<img src="/img/sub/search_icon_bk.svg" alt="검색하기" class="fx">
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<!--li 보여지는 갯수 pc 9개, mobile 6개-->
+						<div class="gallery_list_con">
+							<ul>
+								<li>
+									<a href="/performance/performance_view.html">
+										<div class="list_div">
+											<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+												<img src="/img/performance/performance_sub02_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+											</div>
+
+											<div class="txt_con">
+												<div class="text01_con">
+													<span>
+														업무시설
+													</span>
+												</div>
+
+												<div class="text02_con">
+													<span>
+														동대문구 장안동 인경어패럴 증축공사
+													</span>
+
+													<div class="img_con">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_off.svg" alt="아이콘" class="fx off">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_on.svg" alt="아이콘" class="fx on">
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="list_div">
+											<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+												<img src="/img/performance/performance_sub02_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+											</div>
+
+											<div class="txt_con">
+												<div class="text01_con">
+													<span>
+														업무시설
+													</span>
+												</div>
+
+												<div class="text02_con">
+													<span>
+														동대문구 장안동 인경어패럴 증축공사
+													</span>
+
+													<div class="img_con">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_off.svg" alt="아이콘" class="fx off">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_on.svg" alt="아이콘" class="fx on">
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="list_div">
+											<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+												<img src="/img/performance/performance_sub02_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+											</div>
+
+											<div class="txt_con">
+												<div class="text01_con">
+													<span>
+														업무시설
+													</span>
+												</div>
+
+												<div class="text02_con">
+													<span>
+														동대문구 장안동 인경어패럴 증축공사
+													</span>
+
+													<div class="img_con">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_off.svg" alt="아이콘" class="fx off">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_on.svg" alt="아이콘" class="fx on">
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="list_div">
+											<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+												<img src="/img/performance/performance_sub02_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+											</div>
+
+											<div class="txt_con">
+												<div class="text01_con">
+													<span>
+														업무시설
+													</span>
+												</div>
+
+												<div class="text02_con">
+													<span>
+														동대문구 장안동 인경어패럴 증축공사
+													</span>
+
+													<div class="img_con">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_off.svg" alt="아이콘" class="fx off">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_on.svg" alt="아이콘" class="fx on">
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="list_div">
+											<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+												<img src="/img/performance/performance_sub02_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+											</div>
+
+											<div class="txt_con">
+												<div class="text01_con">
+													<span>
+														업무시설
+													</span>
+												</div>
+
+												<div class="text02_con">
+													<span>
+														동대문구 장안동 인경어패럴 증축공사
+													</span>
+
+													<div class="img_con">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_off.svg" alt="아이콘" class="fx off">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_on.svg" alt="아이콘" class="fx on">
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="list_div">
+											<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+												<img src="/img/performance/performance_sub02_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+											</div>
+
+											<div class="txt_con">
+												<div class="text01_con">
+													<span>
+														업무시설
+													</span>
+												</div>
+
+												<div class="text02_con">
+													<span>
+														동대문구 장안동 인경어패럴 증축공사
+													</span>
+
+													<div class="img_con">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_off.svg" alt="아이콘" class="fx off">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_on.svg" alt="아이콘" class="fx on">
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="list_div">
+											<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+												<img src="/img/performance/performance_sub02_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+											</div>
+
+											<div class="txt_con">
+												<div class="text01_con">
+													<span>
+														업무시설
+													</span>
+												</div>
+
+												<div class="text02_con">
+													<span>
+														동대문구 장안동 인경어패럴 증축공사
+													</span>
+
+													<div class="img_con">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_off.svg" alt="아이콘" class="fx off">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_on.svg" alt="아이콘" class="fx on">
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="list_div">
+											<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+												<img src="/img/performance/performance_sub02_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+											</div>
+
+											<div class="txt_con">
+												<div class="text01_con">
+													<span>
+														업무시설
+													</span>
+												</div>
+
+												<div class="text02_con">
+													<span>
+														동대문구 장안동 인경어패럴 증축공사
+													</span>
+
+													<div class="img_con">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_off.svg" alt="아이콘" class="fx off">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_on.svg" alt="아이콘" class="fx on">
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="list_div">
+											<div class="img_con" style="background-image:url('/img/performance/performance_sub01_gallery_test_img.png');">
+												<img src="/img/performance/performance_sub02_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+											</div>
+
+											<div class="txt_con">
+												<div class="text01_con">
+													<span>
+														업무시설
+													</span>
+												</div>
+
+												<div class="text02_con">
+													<span>
+														동대문구 장안동 인경어패럴 증축공사
+													</span>
+
+													<div class="img_con">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_off.svg" alt="아이콘" class="fx off">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_on.svg" alt="아이콘" class="fx on">
+													</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<!--li class="none_li">
+									<span>
+										등록된 게시글이 없습니다.
+									</span>
+								</li-->
+							</ul>
+						</div>
+
+						<div class="number_list_con">
+							<div class="contents_con">
+								<div class="btn_con">
+									<a href="#">
+										<img src="/img/sub/number_list_con_prev_btn.svg" alt="번호목록 이전 버튼" class="fx">
+									</a>
+								</div>
+
+								<div class="list_con">
+									<a href="#" class="on">
+										1
+									</a>
+									<a href="#">
+										2
+									</a>
+									<a href="#">
+										3
+									</a>
+								</div>
+
+								<div class="btn_con">
+									<a href="#">
+										<img src="/img/sub/number_list_con_next_btn.svg" alt="번호목록 다음 버튼" class="fx">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

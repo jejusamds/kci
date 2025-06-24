@@ -1,0 +1,164 @@
+<?
+$sMenu = "01-4";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+?>
+	
+	<div id="container">
+		<div id="sub_con">
+			<? include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="company_sub04_con">
+					<div class="contents_con">
+						<div class="img_con">
+							<img src="/img/company/company_sub04_img_con_img01.png" alt="조직도 이미지" class="fx w_img">
+							<img src="/img/company/m_company_sub04_img_con_img01.png" alt="조직도 이미지" class="fx m_img">
+						</div>
+
+						<div class="family_site">
+							<div class="title_con">
+								<span>
+									계열사
+								</span>
+							</div>
+
+							<div class="list_con">
+								<ul>
+									<li>
+										<div class="list_div">
+											<div class="img_con">
+												<img src="/img/company/company_sub04_familysite_list_con_img01.svg" alt="(주)한국건설산업" class="fx">
+											</div>
+
+											<div class="info_con">
+												<div class="txt_con">
+													<ul>
+														<li>
+															<span>
+																건설업
+															</span>
+														</li>
+														<li>
+															<span>
+																건축공사
+															</span>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="list_div">
+											<div class="img_con">
+												<img src="/img/company/company_sub04_familysite_list_con_img02.svg" alt="(주)케이에이치글로벌" class="fx">
+											</div>
+
+											<div class="info_con">
+												<div class="txt_con">
+													<ul>
+														<li>
+															<span>
+																부동산업
+															</span>
+														</li>
+														<li>
+															<span>
+																부동산개발
+															</span>
+														</li>
+														<li>
+															<span>
+																시행 및 분양
+															</span>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="list_div">
+											<div class="img_con">
+												<img src="/img/company/company_sub04_familysite_list_con_img03.svg" alt="주식회사 케이티엠" class="fx">
+											</div>
+
+											<div class="info_con">
+												<div class="txt_con">
+													<ul>
+														<li>
+															<span>
+																제조업
+															</span>
+														</li>
+														<li>
+															<span>
+																유통업
+															</span>
+														</li>
+													</ul>
+												</div>
+
+												<div class="link_con">
+													<a href="https://tramon.co.kr/" target="_blank">
+														<img src="/img/sub/link_icon.svg" alt="아이콘" class="fx">
+													</a>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// 조직도 애니메이션
+		const tl = gsap.timeline();
+		const tl2 = gsap.timeline();
+		const section = document.querySelector(".company_sub04_con > .contents_con")
+		const img_con = document.querySelector(".company_sub04_con > .contents_con > .img_con")
+		const list_con = document.querySelectorAll(".company_sub04_con > .contents_con > .family_site > .list_con > ul > li")
+
+		tl.from(img_con, {
+			y:350,
+			autoAlpha:0,
+			duration:1,
+			delay:0.4,
+			ease:"circ.out",
+		})
+
+		ScrollTrigger.create({
+			trigger:section,
+			start: "top 60%",
+			end: "bottom 60%",
+		//	markers:true,
+			animation:tl,
+		//	toggleActions:"play reverse play reset"
+		})
+
+		tl2.from(list_con, {
+			y:100,
+			autoAlpha:0,
+			stagger:0.2,
+			ease:"power1.out",
+		})
+
+		ScrollTrigger.create({
+			trigger:list_con,
+			start: "top 90%",
+			end: "bottom 90%",
+		//	markers:true,
+			animation:tl2,
+		//	toggleActions:"play reverse play reset"
+		})
+	</script>
+
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

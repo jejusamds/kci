@@ -1,0 +1,239 @@
+<?php
+$sMenu = "03-2";
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; // header에서 DB 포함됨
+
+// 검색 및 페이징 파라미터
+$current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$search       = isset($_GET['search']) ? trim($_GET['search']) : '';
+$page_size    = 6;
+$offset       = ($current_page - 1) * $page_size;
+
+// WHERE 조건
+$where = [];
+$params = [];
+if ($search !== '') {
+    $where[]      = "(f_type LIKE :kw OR f_name LIKE :kw)";
+    $params['kw'] = "%{$search}%";
+}
+$where_sql = $where ? 'WHERE ' . implode(' AND ', $where) : '';
+
+// 전체 개수 조회
+$count_sql   = "SELECT COUNT(*) AS cnt FROM df_site_sihang {$where_sql}";
+$total_count = $db->row($count_sql, $params);
+$total_count = $total_count['cnt'];
+$total_page  = max(1, ceil($total_count / $page_size));
+
+// 이전/다음 페이지
+$prev_page = max(1, $current_page - 1);
+$next_page = min($total_page, $current_page + 1);
+
+// 데이터 조회
+$list_sql         = "SELECT * FROM df_site_sihang {$where_sql} ORDER BY idx DESC LIMIT :offset, :limit";
+$params['offset'] = $offset;
+$params['limit']  = $page_size;
+$rows             = $db->query($list_sql, $params, PDO::FETCH_OBJ);
+
+// QS 문자열 (검색어 유지)
+$qs_search = $search !== '' ? '&search=' . urlencode($search) : '';
+?>
+<style type="text/css">
+	#sub_con > .banner_con {padding:120px 0 0;}
+	
+	@media all and (max-width: 1024px) { 
+		#sub_con > .banner_con {padding:11.11vw 0 13.89vw;}
+	}
+</style>
+
+
+<div id="container">
+    <div id="sub_con">
+        <?php include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>
+        <div class="contents_con">
+            <div class="performance_sub02_con">
+                <div class="contents_con">
+                    <div class="ss_con">
+                        <div class="st_con">
+                            <div class="search_con">
+                                <div class="input_con">
+                                    <input type="text" id="searchInput" placeholder="검색어를 입력해주세요" value="<?= htmlspecialchars($search) ?>">
+                                </div>
+                                <a href="#" id="searchBtn">
+                                    <img src="/img/sub/search_icon_bk.svg" alt="검색하기" class="fx">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery_list_con">
+                        <ul>
+                            <?php if ($rows && count($rows) > 0): ?>
+                                <?php foreach ($rows as $row): ?>
+                                <li>
+                                    <a href="<?= htmlspecialchars($row->f_url) ?>" target="_blank">
+                                        <div class="list_div">
+                                            <div class="img_con" style="background-image:url('/userfiles/sihang/<?= htmlspecialchars($row->f_thumbnail) ?>');">
+                                                <img src="/img/performance/performance_sub02_gallery_blank_img.png" alt="썸네일" class="fx">
+                                            </div>
+                                            <div class="txt_con">
+                                                <div class="text01_con"><span><?= htmlspecialchars($row->f_type) ?></span></div>
+                                                <div class="text02_con">
+                                                    <span><?= htmlspecialchars($row->f_name) ?></span>
+                                                    <div class="img_con">
+                                                        <img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_off.svg" alt="아이콘" class="fx off">
+                                                        <img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_on.svg" alt="아이콘" class="fx on">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <li class="none_li"><span>등록된 게시글이 없습니다.</span></li>
+                            <?php endif; ?>
+                        </ul>
+                    </div>
+
+                    <div class="number_list_con">
+                        <div class="contents_con">
+                            <div class="btn_con">
+                                <a href="?page=<?= $prev_page ?><?= $qs_search ?>">
+                                    <img src="/img/sub/number_list_con_prev_btn.svg" alt="번호목록 이전 버튼" class="fx">
+                                </a>
+                            </div>
+                            <div class="list_con">
+                                <?php
+                                $start_page = max(1, $current_page - 2);
+                                $end_page   = min($total_page, $start_page + 4);
+                                for ($i = $start_page; $i <= $end_page; $i++):
+                                ?>
+                                    <a href="?page=<?= $i ?><?= $qs_search ?>" class="<?= $current_page == $i ? 'on' : '' ?>"><?= $i ?></a>
+                                <?php endfor; ?>
+                            </div>
+                            <div class="btn_con">
+                                <a href="?page=<?= $next_page ?><?= $qs_search ?>">
+                                    <img src="/img/sub/number_list_con_next_btn.svg" alt="번호목록 다음 버튼" class="fx">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+    $('#searchBtn').on('click', function(e){
+        e.preventDefault();
+        var val = $('#searchInput').val().trim();
+        var url = location.pathname + '?page=1';
+        if(val) url += '&search=' + encodeURIComponent(val);
+        location.href = url;
+    });
+    $('#searchInput').on('keydown', function(e){
+        if(e.keyCode === 13){
+            e.preventDefault();
+            $('#searchBtn').click();
+        }
+    });
+});
+
+gsap.registerPlugin(ScrollTrigger);
+
+function clearAllAnimations() {
+	// 모든 ScrollTrigger 제거
+	ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+	// 모든 li의 스타일 초기화 (transform, opacity 등 제거)
+	const liItems = document.querySelectorAll(".performance_sub02_con > .contents_con > .gallery_list_con > ul > li");
+	liItems.forEach(el => {
+		gsap.set(el, { clearProps: "all" });
+	});
+}
+
+function pc_ani() {
+	const liItems = document.querySelectorAll(".performance_sub02_con > .contents_con > .gallery_list_con > ul > li");
+	const itemsPerRow = 3; 
+	const rowCount = Math.ceil(liItems.length / itemsPerRow);
+
+	for (let i = 0; i < rowCount; i++) {
+		const rowItems = Array.from(liItems).slice(i * itemsPerRow, (i + 1) * itemsPerRow);
+		const centerIndex = Math.floor(rowItems.length / 2);
+		const ordered = [];
+
+		// 가운데부터 양쪽으로 퍼지는 순서
+		for (let offset = 0; offset < rowItems.length; offset++) {
+			const left = centerIndex - offset;
+			const right = centerIndex + offset;
+			if (left >= 0) ordered.push(rowItems[left]);
+			if (right < rowItems.length && right !== left) ordered.push(rowItems[right]);
+		}
+
+		gsap.set(ordered, { y: 200, opacity: 0 });
+		gsap.to(ordered, {
+			y: 0,
+			opacity: 1,
+			duration: 1.2,
+			stagger: 0.15,
+			ease: 'power3.out',
+			scrollTrigger: {
+				trigger: rowItems[0],
+				start: "top 90%",
+				end: "bottom 90%",
+				// markers: true,
+			}
+		});
+	}
+}
+
+function mo_ani() {
+	const list_con = document.querySelectorAll(".performance_sub02_con > .contents_con > .gallery_list_con > ul > li");
+
+	list_con.forEach((item) => {
+		gsap.from(item, {
+			autoAlpha: 0,
+			y: 50,
+			duration: 0.8,
+			ease: "power2.out",
+			scrollTrigger: {
+				trigger: item,
+				start: "top 70%",
+				end: "bottom 70%",
+				// markers: true,
+			}
+		});
+	});
+}
+
+ScrollTrigger.matchMedia({
+	// PC
+	"(min-width: 1025px)": function () {
+		clearAllAnimations();
+		pc_ani();
+
+		return () => {
+			clearAllAnimations(); // 뷰포트 전환 시에도 제거
+		};
+	},
+
+	// Mobile
+	"(max-width: 1024px)": function () {
+		clearAllAnimations();
+		mo_ani();
+
+		return () => {
+			clearAllAnimations();
+		};
+	},
+
+	// 공통
+	"all": function () {
+		// 필요 시 공통 초기화 또는 설정
+	}
+});
+</script>
+
+<?php include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>

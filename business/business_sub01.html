@@ -1,0 +1,126 @@
+<?
+$sMenu = "02-1";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+?>
+
+	<div id="container">
+		
+		<div id="sub_con">
+			<? include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="business_sub01_con">
+					<div class="contents_con">
+						<div class="txt_con">
+							<div class="text01_con">
+								<span>
+									CONSTRUCTION INDUSTRY
+								</span>
+							</div>
+							
+							<div class="text02_con">
+								<span>
+									건축공사업
+								</span>
+							</div>
+						</div>
+
+						<div class="info_con">
+							<div class="text_con">
+								<span>
+									다양한 공사 경험을 바탕으로 최신 건축공법과 공간창출의 <br class="m_br">개념을 넘어 <br class="w_br">
+									항상 고객의 감동을 최우선으로 하는 미래의 건축 <br class="m_br">문화를 이끌어가겠습니다.
+								</span>
+							</div>
+
+							<div class="list_con">
+								<ul>
+									<li>
+										<div class="list_div">
+											<div class="img_con">
+												<img src="/img/business/business_sub01_info_list_con_icon01.svg" alt="아이콘" class="fx">
+											</div>
+
+											<div class="text_con">
+												<span>
+													관급공사
+												</span>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="list_div">
+											<div class="img_con">
+												<img src="/img/business/business_sub01_info_list_con_icon02.svg" alt="아이콘" class="fx">
+											</div>
+
+											<div class="text_con">
+												<span>
+													업무·근생시설
+												</span>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="list_div">
+											<div class="img_con">
+												<img src="/img/business/business_sub01_info_list_con_icon03.svg" alt="아이콘" class="fx">
+											</div>
+
+											<div class="text_con">
+												<span>
+													물류시설
+												</span>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="list_div">
+											<div class="img_con">
+												<img src="/img/business/business_sub01_info_list_con_icon04.svg" alt="아이콘" class="fx">
+											</div>
+
+											<div class="text_con">
+												<span>
+													주거시설
+												</span>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="list_div">
+											<div class="img_con">
+												<img src="/img/business/business_sub01_info_list_con_icon05.svg" alt="아이콘" class="fx">
+											</div>
+
+											<div class="text_con">
+												<span>
+													리모델링
+												</span>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		ScrollTrigger.create({
+			trigger: ".business_sub01_con > .contents_con",
+			start: "top 55%",
+			onEnter: () => {
+				document.querySelector(".business_sub01_con > .contents_con").classList.add("on");
+			},
+		//	markers:true,
+		});
+	</script>
+
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

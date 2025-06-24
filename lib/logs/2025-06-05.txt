@@ -1,0 +1,14 @@
+Time : 11:36:04
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'keyword' in 'field list'
+Raw SQL : INSERT INTO df_site_sihang SET f_thumbnail='f_thumbnail_1749090964.jpg', keyword='', f_type='1', f_name='2', f_url='http://1.201.18.106/Madmin/business/sihang_input.php?page=1&keyword=', wdate=NOW()
+
+Time : 11:12:27
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_sihang' doesn't exist
+Raw SQL : 
+    SELECT COUNT(*)
+    FROM df_site_sihang s
+    WHERE 1 = 1 
+
+Time : 10:16:10
+SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: '' for column `kci9874`.`df_site_bbs`.`count` at row 1
+Raw SQL : Insert into df_site_bbs 	Set		code			= 'notice' 	, 		parno			= 0 	, 		prino			= '1' 	, 		depno			= 0 	, 		notice			= 'N' 	, 		memid			= 'admin' 	, 		name			= '최고관리자' 	, 		email			= '' 	, 		subject			= '123' 	, 		content			= '123' 	, 		ctype			= 'H' 	, 		privacy			= 'N' 	, 		passwd			= '' 	, 		count			= '' 	, 		ip				= '112.220.18.234' 	, 		wdate			= '2025-06-05 10:15:16' 	,		media_url		= ''

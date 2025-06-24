@@ -1,0 +1,229 @@
+<?php
+if ($_REQUEST['code'] === 'notice') {
+	$sMenu = "05-1";
+	$ssMenu = "05-1-1";
+} else if ($_REQUEST['code'] === 'story') {
+	$sMenu = "05-1";
+	$ssMenu = "05-1-2";
+} else if ($_REQUEST['code'] === 'data') {
+	$sMenu = "05-3";
+}
+include $_SERVER['DOCUMENT_ROOT'] . '/include/header.html';
+
+// 1) 파라미터 처리
+$idx = isset($_GET['idx']) ? intval($_GET['idx']) : 0;
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$filter = isset($_GET['filter']) ? trim($_GET['filter']) : '';
+$search_keyword = isset($_GET['search_keyword']) ? trim($_GET['search_keyword']) : '';
+
+// 2) 게시글 조회
+$sql = "SELECT * FROM df_site_bbs WHERE idx = :idx";
+$bbs_row = $db->row($sql, ['idx' => $idx]);
+if (!$bbs_row) {
+    echo "<script>alert('존재하지 않는 게시글입니다.');location.href='/';</script>";
+    exit;
+}
+$code = $bbs_row['code'];
+
+// 3) 뒤로가기 리스트 페이지 결정
+$list_html = '';
+if ($code === 'notice') {
+    $list_html = 'center_sub01.html';
+} else if ($code === 'story') {
+    $list_html = 'center_sub01_02.html';
+} else if ($code === 'data') {
+    $list_html = 'center_sub03.html';
+}
+
+// 4) 쿼리스트링 구성
+$qs = '&page=' . $page;
+if ($filter !== '' && $filter !== 'ALL') {
+    $qs .= '&filter=' . urlencode($filter);
+}
+if ($search_keyword !== '') {
+    $qs .= '&search_keyword=' . urlencode($search_keyword);
+}
+
+// 5) 이전글/다음글 조회
+$prev = $db->row(
+    "SELECT idx 
+       FROM df_site_bbs 
+      WHERE code = :code AND idx < :idx 
+   ORDER BY idx DESC 
+      LIMIT 1",
+    ['code' => $code, 'idx' => $idx]
+);
+$next = $db->row(
+    "SELECT idx 
+       FROM df_site_bbs 
+      WHERE code = :code AND idx > :idx 
+   ORDER BY idx ASC 
+      LIMIT 1",
+    ['code' => $code, 'idx' => $idx]
+);
+
+// 6) 첨부파일 조회
+$sql = " SELECT idx, upfile_name FROM df_site_bbs_files WHERE bbsidx=:idx ORDER BY idx ASC ";
+$db->bind("idx", $idx);
+$f_rows = $db->query($sql);
+
+$sql = "UPDATE df_site_bbs SET count = count + 1 WHERE idx = :idx";
+$db->bind('idx', $idx);
+$db->query($sql);
+?>
+<div id="container">
+    <div id="sub_con">
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/include/sub_banner.html'; ?>
+        <div class="contents_con">
+            <div class="center_view_con">
+                <div class="contents_con">
+                    <div class="normal_view_con">
+                        <div class="contents_con">
+                            <!-- 제목 -->
+                            <div class="txt_con">
+                                <div class="title_con">
+                                    <span><?= htmlspecialchars($bbs_row['subject']) ?></span>
+                                </div>
+                                <!-- 상세 정보 -->
+                                <div class="info_con">
+                                    <ul>
+                                        <li>
+                                            <div class="list_div">
+                                                <!-- 작성자 -->
+                                                <div class="text01_con">
+                                                    <span><?= htmlspecialchars($bbs_row['name']) ?></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="list_div">
+                                                <div class="text02_con">
+													<span>
+														작성일
+													</span>
+												</div>
+							
+												<div class="text03_con">
+													<span>
+														<?= date("Y. m. d", strtotime($bbs_row['wdate'])) ?>
+													</span>
+												</div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="list_div">
+                                                <!-- 조회수 -->
+                                                <div class="text02_con"><span>조회수</span></div>
+                                                <div class="text03_con"><span><?= intval($bbs_row['count']) ?></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+							<?php if (count($f_rows) > 0) { ?>
+							<div class="file_con">
+								<div class="title_con">
+									<span>
+										첨부파일
+									</span>
+								</div>
+
+								<ul>
+									<?php foreach ($f_rows As $f_row) { ?>
+									<li>
+										<a href="/controller/file_process.php?code=<?= $code ?>&idx=<?= $f_row['idx'] ?>">
+											<img src="/img/sub/view_con_file_icon.svg" alt="아이콘" class="fx">
+											<span>
+												<?= $f_row['upfile_name'] ?>
+											</span>
+										</a>
+									</li>
+									<?php } ?>
+								</ul>
+							</div>
+							<?php } ?>
+
+                            <!-- 본문 -->
+                            <div class="posts_con">
+                                <?= $bbs_row['content'] ?>
+                            </div>
+                            <!-- 네비게이션: 목록 / 이전 / 다음 -->
+                            <div class="article_con">
+                                <div class="back_con">
+                                    <a href="/center/<?= $list_html ?>?<?= ltrim($qs, '&') ?>">
+                                        <span>LIST</span>
+                                        <img src="/img/sub/view_con_back_btn_icon.svg" alt="아이콘" class="fx">
+                                    </a>
+                                </div>
+                                <div class="list_con">
+                                    <ul>
+                                        <li>
+                                            <?php if ($prev): ?>
+                                                <a href="/center/center_view.html?idx=<?= $prev['idx'] . $qs ?>">
+                                                    <span>PREV</span>
+                                                    <img src="/img/sub/view_con_article_con_prev_btn.svg" alt="이전글"
+                                                        class="fx">
+                                                </a>
+                                            <?php endif; ?>
+                                        </li>
+                                        <li>
+                                            <?php if ($next): ?>
+                                                <a href="/center/center_view.html?idx=<?= $next['idx'] . $qs ?>">
+                                                    <img src="/img/sub/view_con_article_con_next_btn.svg" alt="다음글"
+                                                        class="fx">
+                                                    <span>NEXT</span>
+                                                </a>
+                                            <?php endif; ?>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 복사 함수: Clipboard API 지원하면 그것 사용, 아니면 execCommand 폴백
+    function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text)
+                .then(function () {
+                    alert('현재 페이지 URL이 복사되었습니다.');
+                })
+                .catch(function (err) {
+                    alert('복사에 실패했습니다: ' + err);
+                });
+        } else {
+            // 폴백: textarea + execCommand
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            // 화면에 보이지 않게 설정
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+                document.execCommand('copy');
+                alert('현재 페이지 URL이 복사되었습니다.');
+            } catch (err) {
+                alert('복사에 실패했습니다: ' + err);
+            }
+            document.body.removeChild(ta);
+        }
+    }
+
+    // 링크 복사하기 버튼 이벤트 연결
+    document.getElementById('copyLink').addEventListener('click', function (e) {
+        e.preventDefault();
+        copyToClipboard(window.location.href);
+    });
+</script>
+
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/include/footer.html'; ?>

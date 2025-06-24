@@ -1,0 +1,130 @@
+<?
+$sMenu = "01-5";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+?>
+	
+	<div id="container">
+		<div id="sub_con">
+			<? include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="company_sub05_con">
+					<div class="contents_con">
+						<div class="list_con">
+							<ul>
+								<li>
+									<div class="list_div">
+										<div class="img_con">
+											<img src="/img/company/company_sub05_list_con_img01.png" alt="컨텐츠 이미지" class="fx">
+										</div>
+
+										<div class="text_con">
+											<span>
+												사업자등록증
+											</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="img_con">
+											<img src="/img/company/company_sub05_list_con_img02.png" alt="컨텐츠 이미지" class="fx">
+										</div>
+
+										<div class="text_con">
+											<span>
+												건설업등록증
+											</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="img_con">
+											<img src="/img/company/company_sub05_list_con_img03.png" alt="컨텐츠 이미지" class="fx">
+										</div>
+
+										<div class="text_con">
+											<span>
+												건설업등록수첩
+											</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="img_con">
+											<img src="/img/company/company_sub05_list_con_img04.png" alt="컨텐츠 이미지" class="fx">
+										</div>
+
+										<div class="text_con">
+											<span>
+												부동산개발업등록증
+											</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="img_con">
+											<img src="/img/company/company_sub05_list_con_img05.png" alt="컨텐츠 이미지" class="fx">
+										</div>
+
+										<div class="text_con">
+											<span>
+												대한건설협회 회원증
+											</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="img_con">
+											<img src="/img/company/company_sub05_list_con_img06.png" alt="컨텐츠 이미지" class="fx">
+										</div>
+
+										<div class="text_con">
+											<span>
+												(주)한국건설산업 <br>
+												기업은행패밀리기업인증서
+											</span>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// 인증현황 애니메이션
+		const tl = gsap.timeline();
+		const section = document.querySelector(".company_sub05_con > .contents_con")
+		const img_con = document.querySelector(".company_sub05_con > .contents_con > .img_con")
+		const list_con = document.querySelectorAll(".company_sub05_con > .contents_con > .list_con > ul > li")
+
+		tl.from(list_con, {
+			y:100,
+			autoAlpha:0,
+			delay:0.6,
+			stagger:0.15,
+			ease:"power1.out",
+		})
+
+		ScrollTrigger.create({
+			trigger:list_con,
+			start: "top 80%",
+			end: "bottom 80%",
+		//	markers:true,
+			animation:tl,
+		//	toggleActions:"play reverse play reset"
+		})
+	</script>
+
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

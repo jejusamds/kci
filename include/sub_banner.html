@@ -1,0 +1,46 @@
+			<div class="banner_con <?php if($Menu=='01'){?>vision<?php }else if($Menu=='02'){?>field<?php }else if($Menu=='03'){?>member<?php }else if($Menu=='04'){?>news<?php }else if($Menu=='05'){?>location<?php }?><?php if( $Menu=='02' && ($sMenu=='02-1'||$sMenu=='02-2'||$sMenu=='02-3'||$sMenu=='02-4'||$sMenu=='02-5'||$sMenu=='02-6'||$sMenu=='02-7'||$sMenu=='02-8'||$sMenu=='02-9'||$sMenu=='02-10'||$sMenu=='02-11') ){?> field_sub<?php } ?>">
+				<div class="contents_con">
+					<div class="title_con">
+						<div class="route_con">
+							<ul>
+								<li>
+									<img src="/img/sub/title_route_home_icon.svg" alt="아이콘" class="fx icon">
+								</li>
+								<li>
+									<img src="/img/sub/title_route_arrow_icon.svg" alt="아이콘" class="fx arrow">
+								</li>
+								<li>
+									<span>
+										<?=$route_text01?>
+									</span>
+								</li>
+								<li>
+									<img src="/img/sub/title_route_arrow_icon.svg" alt="아이콘" class="fx arrow">
+								</li>
+								<li>
+									<span>
+										<?=$route_text02?>
+									</span>
+								</li>
+								
+								<?php if( $ssMenu == "05-1-2" || $ssMenu == "05-1-3" || $ssMenu == "05-2-1" || $ssMenu == "05-2-2" ){ ?>
+								<li>
+									<img src="/img/sub/title_route_arrow_icon.svg" alt="아이콘" class="fx arrow">
+								</li>
+								<li>
+									<span>
+										<?=$route_text03?>
+									</span>
+								</li>
+								<?php } ?>
+							</ul>
+						</div>
+						
+						<div class="title_con">
+							<span>
+								<?=$title_text?>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>

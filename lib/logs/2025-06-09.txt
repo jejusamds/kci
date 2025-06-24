@@ -1,0 +1,7 @@
+Time : 14:43:03
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'grp_2' in 'field list'
+Raw SQL : Insert into df_site_bbs 	Set		code			= 'job' 	, 		grp				= '전문계약직' 	, 		grp_2			= '마감' 	, 		grp_3			= '신입 및 경력' 	, 		parno			= 0 	, 		prino			= '1' 	, 		depno			= 0 	, 		notice			= 'N' 	, 		memid			= 'admin' 	, 		name			= '최고관리자' 	, 		email			= '' 	, 		subject			= '111' 	, 		content			= '3333' 	, 		ctype			= 'H' 	, 		privacy			= 'N' 	, 		passwd			= '' 	, 		count			= '0' 	, 		ip				= '112.220.18.234' 	, 		wdate			= '2025-06-09 14:42:56' 	,		media_url		= ''
+
+Time : 14:23:22
+SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: '' for column `kci9874`.`df_site_bbs`.`count` at row 1
+Raw SQL : Update	df_site_bbs 	Set		notice		= 'N' 	, 		grp				= 'NEWS' 	, 		memid		= 'admin' 	, 		name		= '최고관리자' 	, 		email		= '' 	, 		subject		= '22' 	, 		content		= '222' 	, 		ctype		= 'H' 	, 		privacy		= 'N' 	,		media_url	= '' 	,		count		= '' 	Where	idx			= '92'

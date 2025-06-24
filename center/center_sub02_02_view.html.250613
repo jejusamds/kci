@@ -1,0 +1,119 @@
+<?
+$sMenu = "05-2";
+$ssMenu = "05-2-2";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+?>
+
+	<div id="container">
+		
+		<div id="sub_con">
+			<? include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="center_sub02_02_view_con">
+					<div class="contents_con">
+						<div class="normal_view_con center_sub02_02">
+							<div class="contents_con">
+								<div class="txt_con">
+									<div class="state_con">
+										<ul>
+											<li>
+												<span class="ing">
+													진행중
+												</span>
+											</li>
+											<li>
+												<span class="career">
+													경력
+												</span>
+											</li>
+											<!--
+											<li>
+												<span class="end">
+													마감
+												</span>
+											</li>
+											<li>
+												<span class="new">
+													신입 및 경력
+												</span>
+											</li>
+											-->
+										</ul>
+									</div>
+
+									<div class="title_con">
+										<span>
+											채용공고에 대한 제목영역입니다 내용을 입력해주세요
+										</span>
+									</div>
+								
+									<div class="info_con">
+										<ul>
+											<li>
+												<div class="list_div">
+													<div class="text01">
+														<span>
+															기간
+														</span>
+													</div>
+								
+													<div class="text02">
+														<span>
+															2024. 04. 01 ~ 2024. 12. 31
+														</span>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+								
+								<div class="posts_con">
+									내용이 들어갑니다. 내용이 들어갑니다. 내용이 들어갑니다. 
+									내용이 들어갑니다. 내용이 들어갑니다. 
+								</div>
+								
+								<div class="article_con">
+									<div class="back_con">
+										<a href="#">
+											<span>
+												LIST
+											</span>
+											<img src="/img/sub/view_con_back_btn_icon.svg" alt="아이콘" class="fx">
+										</a>
+									</div>
+								
+									<div class="list_con">
+										<ul>
+											<li>
+												<a href="#">
+													<span>
+														PREV
+													</span>
+													<img src="/img/sub/view_con_article_con_prev_btn.svg" alt="이전글" class="fx">
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<img src="/img/sub/view_con_article_con_next_btn.svg" alt="다음글" class="fx">
+													<span>
+														NEXT
+													</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

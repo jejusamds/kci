@@ -1,0 +1,90 @@
+<?
+$sMenu = "02-2";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+?>
+
+	<div id="container">
+		
+		<div id="sub_con">
+			<? include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="business_sub02_con">
+					<div class="contents_con">
+						<div class="txt_con">
+							<div class="text01_con">
+								<span>
+									DEVELOPMENT / IMPLEMENTATION PROJECT
+								</span>
+							</div>
+							
+							<div class="text02_con">
+								<span>
+									개발 / 시행사업
+								</span>
+							</div>
+						</div>
+
+						<div class="info_con">
+							<div class="text_con">
+								<span>
+									개발기회, 타당성검토, 개발, 마케팅 등에 이르기까지 <br class="m_br">복합적이고 다양한 <br class="w_br">
+									사업역량을 발휘하며, 경험과 노하우로 <br class="m_br">최적의 부동산개발을 제시하여 <br class="w_br">
+									고객이 기대하는 결과물과 <br class="m_br">이익을 구현합니다.
+								</span>
+							</div>
+
+							<div class="list_con">
+								<ul>
+									<li>
+										<div class="list_div">
+											<div class="img_con">
+												<img src="/img/business/business_sub02_info_list_con_icon01.svg" alt="아이콘" class="fx">
+											</div>
+
+											<div class="text_con">
+												<span>
+													부동산 개발업 <br>
+													시행업무
+												</span>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="list_div">
+											<div class="img_con">
+												<img src="/img/business/business_sub02_info_list_con_icon02.svg" alt="아이콘" class="fx">
+											</div>
+
+											<div class="text_con">
+												<span>
+													건축설계, <br>
+													대관인허가
+												</span>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		ScrollTrigger.create({
+			trigger: ".business_sub02_con > .contents_con",
+			start: "top 55%",
+			onEnter: () => {
+				document.querySelector(".business_sub02_con > .contents_con").classList.add("on");
+			},
+		//	markers:true,
+		});
+	</script>
+
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

@@ -1,0 +1,580 @@
+<?php
+$sMenu = "03-1";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+
+// 파라미터 처리
+$usage = isset($_GET['usage']) ? $_GET['usage'] : '';
+$region = isset($_GET['region']) ? $_GET['region'] : '';
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$page_type = 'sigong';
+$current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+
+$qs_str = '&page=' . $current_page
+        . '&usage=' . urlencode($usage)
+        . '&region=' . urlencode($region)
+        . '&search=' . urlencode($search);
+
+// WHERE 조건 만들기
+$where = [];
+$params = [];
+if ($usage && $usage !== '전체') {
+    $where[] = "f_usage = :usage";
+    $params['usage'] = $usage;
+}
+if ($region && $region !== '전체') {
+    $where[] = "f_region = :region";
+    $params['region'] = $region;
+}
+if ($search) {
+    $where[] = "(f_project_name LIKE :search OR f_address LIKE :search2 OR f_scale LIKE :search3)";
+    $params['search'] = '%' . $search . '%';
+    $params['search2'] = '%' . $search . '%';
+	$params['search3'] = '%' . $search . '%';
+}
+
+$page_size = 8;
+
+$offset = ($current_page-1) * $page_size;
+
+// 총 게시글 수
+$count_sql = "SELECT COUNT(*) cnt FROM df_site_sigong";
+if ($where) $count_sql .= " WHERE " . implode(" AND ", $where);
+$total_count = $db->row($count_sql, $params);
+$total_count = $total_count['cnt'];
+
+// 실제 데이터 조회
+$sql = "SELECT * FROM df_site_sigong";
+if ($where) $sql .= " WHERE " . implode(" AND ", $where);
+$sql .= " ORDER BY idx DESC LIMIT $offset, $page_size";
+
+$rows = $db->query($sql, $params, PDO::FETCH_OBJ);
+
+// 페이징 계산
+$total_page = ceil($total_count / $page_size);
+$prev_page = max(1, $current_page-1);
+$next_page = min($total_page, $current_page+1);
+?>
+	
+	<div id="container">
+		<div id="sub_con">
+			<?php include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="performance_sub01_con">
+					<div class="contents_con">
+						<div class="ss_con">
+							<div class="category_con">
+								<ul>
+									<li>
+										<div class="list_div">
+											<div class="title_con">
+												<span class="common_split">
+													용도별
+												</span>
+											</div>
+
+											<div class="list_con">
+												<ul>
+													<li>
+														<a href="?" class="<?=empty($usage) ? 'on' : ''?> common_split">
+															전체
+														</a>
+													</li>
+                                                    <?php
+                                                    foreach ($g_usage as $g_row) {
+                                                        $on = ($usage == $g_row) ? 'on' : '';
+                                                        echo "<li><a href=\"?usage={$g_row}&region={$region}&search={$search}\" class=\"{$on} common_split\">{$g_row}</a></li>";
+                                                    }
+                                                    ?>
+												</ul>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="list_div">
+											<div class="title_con">
+												<span class="common_split">
+													지역별
+												</span>
+											</div>
+
+											<div class="list_con">
+												<ul>
+                                                    <?php
+                                                    $regions = ['전체', '서울', '경기', '기타'];
+                                                    foreach ($regions as $item) {
+                                                        $on = ($region == $item || (!$region && $item == '전체')) ? 'on' : '';
+                                                        echo "<li><a href=\"?usage={$usage}&region={$item}&search={$search}\" class=\"{$on} common_split\">{$item}</a></li>";
+                                                    }
+                                                    ?>
+												</ul>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+
+							<div class="st_con">
+                                <div class="search_con">
+                                    <div class="input_con">
+                                        <input type="text" id="searchInput" placeholder="검색어를 입력해주세요" value="<?= htmlspecialchars($search) ?>">
+                                    </div>
+                                    <a href="#" id="searchBtn">
+                                        <img src="/img/sub/search_icon_bk.svg" alt="검색하기" class="fx">
+                                    </a>
+                                </div>
+                                <div class="tab_list">
+                                    <ul>
+                                        <li class="on" val="gallery_list_tab">
+                                            <img src="/img/sub/gallery_list_icon.svg" alt="갤러리형 게시판" class="fx">
+                                        </li>
+                                        <li val="normal_list_tab">
+                                            <img src="/img/sub/normal_list_icon.svg" alt="일반형 게시판" class="fx">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+						</div>
+
+						<div class="tab_contents">
+							<!--gallery_list_tab-->
+							<div class="list_con gallery_list_tab">
+								<div class="contents_con">
+									<!--li 보여지는 갯수 pc 12개, mobile 8개-->
+                                        <div class="list_con">
+                                            <ul>
+                                            <?php if ($rows && count($rows) > 0): ?>
+                                                <?php 
+                                                    foreach ($rows as $row): 
+                                                        $thumbnail = "/img/performance/performance_sub01_gallery_noimage_img.png";
+                                                        if ($row->f_thumbnail && is_file($_SERVER["DOCUMENT_ROOT"] . '/userfiles/' . $page_type . '/' . $row->f_thumbnail)) {
+                                                            $thumbnail = '/userfiles/' . $page_type . '/' . $row->f_thumbnail;
+                                                        }
+                                                ?>
+                                                    <li>
+                                                        <a href="/performance/performance_view.html?idx=<?= $row->idx ?><?= $qs_str ?>">
+                                                            <div class="list_div">
+                                                                <div class="img_con" style="background-image:url('<?= $thumbnail ?>');">
+                                                                    <img src="/img/performance/performance_sub01_gallery_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+                                                                </div>
+                                                                <div class="txt_con">
+                                                                    <div class="text01_con"><span><?= htmlspecialchars($row->f_region) ?></span></div>
+                                                                    <div class="text02_con"><span><?= htmlspecialchars($row->f_project_name) ?></span></div>
+                                                                    <div class="text03_con">
+                                                                        <span><?= htmlspecialchars($row->f_usage) ?></span>
+                                                                        <div class="over_con w_con">
+                                                                            <div class="bar"></div>
+                                                                            <span>VIEW MORE</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="text04_con">
+                                                                        <span>공정률 <span class="color_text counter"><?= (int)$row->f_progress ?></span> %</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <li class="none_li"><span>등록된 게시글이 없습니다.</span></li>
+                                            <?php endif; ?>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<!--normal_list_tab-->
+							<div class="list_con normal_list_tab" style="display:none;">
+                                <div class="scroll_con">
+                                    <div class="title_con">
+                                        <table cellpadding="0" cellspacing="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="center" class="num_td"><span>번호</span></td>
+                                                    <td align="center" class="location_td"><span>위치</span></td>
+                                                    <td align="center" class="type_td"><span>용도</span></td>
+                                                    <td align="center" class="date_td"><span>공사기간</span></td>
+                                                    <td align="center" class="scale_td"><span>규모</span></td>
+                                                    <td align="center" class="process_td"><span>공정률</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="list_con">
+                                        <ul>
+                                            <?php if ($rows && count($rows) > 0): ?>
+                                                <?php foreach ($rows as $idx => $row): ?>
+                                                    <li>
+                                                        <a href="/performance/performance_view.html?idx=<?= $row->idx ?><?= $qs_str ?>">
+                                                            <div class="list_div">
+                                                                <table cellpadding="0" cellspacing="0">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td align="center" class="num_td">
+                                                                                <span>
+                                                                                    <?= $total_count - ($current_page-1)*$page_size - $idx ?>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td align="left" class="location_td">
+                                                                                <div class="text_con">
+                                                                                    <span><?= htmlspecialchars($row->f_address) ?></span>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td align="center" class="type_td">
+                                                                                <span><?= htmlspecialchars($row->f_usage) ?></span>
+                                                                            </td>
+                                                                            <td align="center" class="date_td">
+                                                                                <span><?= htmlspecialchars($row->f_period) ?></span>
+                                                                            </td>
+                                                                            <td align="center" class="scale_td">
+                                                                                <span><?= htmlspecialchars($row->f_scale) ?></span>
+                                                                            </td>
+                                                                            <td align="center" class="process_td">
+                                                                                <span class="normal_list_counter"><?= (int)$row->f_progress ?></span>
+																				<span>
+																					%
+																				</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <li class="none_li">
+                                                    <span>등록된 게시글이 없습니다.</span>
+                                                </li>
+                                            <?php endif; ?>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+
+						<div class="number_list_con">
+                            <div class="contents_con">
+                                <div class="btn_con">
+                                    <a href="?page=<?= $prev_page ?>&usage=<?= urlencode($usage) ?>&region=<?= urlencode($region) ?>&search=<?= urlencode($search) ?>">
+                                        <img src="/img/sub/number_list_con_prev_btn.svg" alt="번호목록 이전 버튼" class="fx">
+                                    </a>
+                                </div>
+                                <div class="list_con">
+                                    <?php
+                                    $start_page = max(1, $current_page-2);
+                                    $end_page = min($total_page, $start_page+4);
+                                    for($i=$start_page; $i<=$end_page; $i++):
+                                    ?>
+                                        <a href="?page=<?= $i ?>&usage=<?= urlencode($usage) ?>&region=<?= urlencode($region) ?>&search=<?= urlencode($search) ?>"
+                                        class="<?= $current_page == $i ? 'on' : '' ?>">
+                                            <?= $i ?>
+                                        </a>
+                                    <?php endfor; ?>
+                                </div>
+                                <div class="btn_con">
+                                    <a href="?page=<?= $next_page ?>&usage=<?= urlencode($usage) ?>&region=<?= urlencode($region) ?>&search=<?= urlencode($search) ?>">
+                                        <img src="/img/sub/number_list_con_next_btn.svg" alt="번호목록 다음 버튼" class="fx">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<script>
+
+        $(document).ready(function(){
+            $('#searchBtn').on('click', function(e){
+                e.preventDefault();
+
+                // 기존 URL 파라미터 유지(usage, region 등)
+                let url = location.pathname + '?';
+                let params = [];
+                let usage = "<?= htmlspecialchars($usage) ?>";
+                let region = "<?= htmlspecialchars($region) ?>";
+                let search = $('#searchInput').val();
+
+                if (usage) params.push('usage=' + encodeURIComponent(usage));
+                if (region) params.push('region=' + encodeURIComponent(region));
+                if (search) params.push('search=' + encodeURIComponent(search));
+
+                url += params.join('&');
+                location.href = url;
+            });
+
+            // 엔터키로도 검색 (form이 없으니 직접 처리)
+            $('#searchInput').on('keydown', function(e){
+                if(e.keyCode === 13){
+                    e.preventDefault();
+                    $('#searchBtn').click();
+                }
+            });
+        });
+
+		$(document).ready(function(){
+			// 게시판 형식 선택
+			$(".performance_sub01_con > .contents_con > .ss_con > .st_con > .tab_list > ul > li").bind("click",function(){
+				$(".performance_sub01_con > .contents_con > .ss_con > .st_con > .tab_list > ul > li").each(function(){
+					$(this).removeClass("on");
+				});
+				$(this).addClass("on");
+				$(".performance_sub01_con > .contents_con > .tab_contents > .list_con").hide();
+				$("."+$(this).attr("val")).show();
+			});
+		});
+
+		gsap.registerPlugin(ScrollTrigger);
+
+		// 갤러리 애니메이션만 정리하는 함수
+		function clearGalleryAnimations() {
+			ScrollTrigger.getAll().forEach(trigger => {
+				try {
+					// 카운터가 아닌 ScrollTrigger만 제거
+					if (trigger.vars && trigger.vars.trigger && 
+						!trigger.vars.trigger.classList.contains('counter')) {
+						trigger.kill();
+					}
+				} catch (e) {
+					trigger.kill();
+				}
+			});
+			
+			// 갤러리 li 스타일만 초기화
+			const liItems = document.querySelectorAll('.gallery_list_tab .list_con > ul > li');
+			liItems.forEach(el => {
+				gsap.set(el, { clearProps: "all" });
+			});
+		}
+
+		// 카운터 관련 정리 함수
+		function clearCounterAnimations() {
+			ScrollTrigger.getAll().forEach(trigger => {
+				try {
+					if (trigger.vars && trigger.vars.trigger && 
+						trigger.vars.trigger.classList.contains('counter')) {
+						trigger.kill();
+					}
+				} catch (e) {
+					// 에러 발생 시 무시
+				}
+			});
+			
+			// 카운터 텍스트 초기화
+			document.querySelectorAll('.counter').forEach(counter => {
+				const endValue = parseInt(counter.dataset.count || counter.textContent) || 0;
+				counter.textContent = '0';
+				counter.dataset.endValue = endValue; // 나중에 사용할 값 저장
+			});
+		}
+
+		// 카운터 애니메이션 함수
+		function initCounter() {
+			document.querySelectorAll('.counter').forEach(function(counter) {
+				const endValue = parseInt(counter.dataset.endValue || counter.textContent) || 0;
+				counter.textContent = '0';
+				
+				gsap.to(counter, {
+					textContent: endValue,
+					duration: 3,
+					ease: "power2.out",
+					snap: { textContent: 1 },
+					scrollTrigger: {
+						trigger: counter,
+						start: "top +=120%",
+						once: true,
+					},
+					onUpdate: function() {
+						counter.textContent = Math.floor(this.targets()[0].textContent);
+					}
+				});
+			});
+		}
+
+		// PC 애니메이션
+		function pc_ani() {
+			const liItems = document.querySelectorAll('.gallery_list_tab .list_con > ul > li');
+			
+			if (liItems.length === 0) return;
+			
+			const itemsPerRow = 4;
+			const rowCount = Math.ceil(liItems.length / itemsPerRow);
+
+			for (let i = 0; i < rowCount; i++) {
+				const rowItems = Array.from(liItems).slice(i * itemsPerRow, (i + 1) * itemsPerRow);
+				const shuffled = gsap.utils.shuffle([...rowItems]);
+				
+				gsap.set(shuffled, { y: 200, opacity: 0 });
+				gsap.to(shuffled, {
+					y: 0,
+					opacity: 1,
+					duration: 1.2,
+					stagger: 0.15,
+					ease: 'power3.out',
+					scrollTrigger: {
+						trigger: shuffled[0],
+						start: "top 90%",
+						end: "bottom 90%",
+					}
+				});
+			}
+
+			// 마우스 오버 효과
+			liItems.forEach((li) => {
+				li.addEventListener("mouseenter", () => {
+					gsap.to(li, { scale: 1.05, duration: 0.3, ease: "power1.out" });
+				});
+				li.addEventListener("mouseleave", () => {
+					gsap.to(li, { scale: 1, duration: 0.3, ease: "power1.out" });
+				});
+			});
+
+			// PC에서 카운터 초기화
+			clearCounterAnimations();
+			setTimeout(() => {
+				initCounter();
+			}, 100);
+		}
+
+		// Mobile 애니메이션
+		function mo_ani() {
+			const liItems = document.querySelectorAll('.gallery_list_tab .list_con > ul > li');
+			
+			if (liItems.length === 0) return;
+			
+			liItems.forEach((item) => {
+				gsap.from(item, {
+					autoAlpha: 0,
+					y: 50,
+					duration: 0.8,
+					ease: "power2.out",
+					scrollTrigger: {
+						trigger: item,
+						start: "top 70%",
+						end: "bottom 70%",
+					}
+				});
+			});
+
+			// Mobile에서 카운터 초기화
+			clearCounterAnimations();
+			setTimeout(() => {
+				initCounter();
+			}, 100);
+		}
+
+		// 반응형 분기
+		ScrollTrigger.matchMedia({
+			"(min-width: 1025px)": function () {
+				clearGalleryAnimations();
+				setTimeout(() => {
+					pc_ani();
+				}, 50);
+				
+				return () => {
+					clearGalleryAnimations();
+				};
+			},
+
+			"(max-width: 1024px)": function () {
+				clearGalleryAnimations();
+				setTimeout(() => {
+					mo_ani();
+				}, 50);
+				
+				return () => {
+					clearGalleryAnimations();
+				};
+			},
+
+			"all": function () {
+				// 공통
+			}
+		});
+		
+		// 카운터 - counterUp 라이브러리 대신 직접 구현 (한 번만 실행)
+		$(document).ready(function () {
+			let counterExecuted = false; // 전역 플래그
+			
+			// 직접 구현한 카운터 애니메이션 (waypoints 사용 안함)
+			function animateCounter(element, start, end, duration) {
+				const startTime = performance.now();
+				const startValue = start;
+				const endValue = end;
+				
+				function updateCounter(currentTime) {
+					const elapsed = currentTime - startTime;
+					const progress = Math.min(elapsed / duration, 1);
+					
+					// easeOut 효과
+					const easeProgress = 1 - Math.pow(1 - progress, 3);
+					const currentValue = Math.floor(startValue + (endValue - startValue) * easeProgress);
+					
+					element.text(currentValue);
+					
+					if (progress < 1) {
+						requestAnimationFrame(updateCounter);
+					} else {
+						element.text(endValue); // 최종값 보장
+					}
+				}
+				
+				requestAnimationFrame(updateCounter);
+			}
+			
+			function executeCounterOnce() {
+				// 이미 실행되었으면 더 이상 실행하지 않음
+				if (counterExecuted) return;
+				
+				const targetElement = $('.performance_sub01_con > .contents_con > .tab_contents > .list_con.normal_list_tab');
+				
+				// 해당 요소가 display:block인지 확인
+				if (targetElement.css('display') === 'block') {
+					const counters = $(".normal_list_counter");
+					
+					if (counters.length > 0) {
+						counters.each(function() {
+							const $this = $(this);
+							const endValue = parseInt($this.text()) || 0;
+							
+							// 0부터 목표값까지 1200ms 동안 애니메이션
+							animateCounter($this, 0, endValue, 1200);
+						});
+						
+						counterExecuted = true; // 실행 완료 표시
+						console.log('Custom counter executed once - no waypoints involved');
+					}
+				}
+			}
+			
+			// 초기 체크
+			executeCounterOnce();
+			
+			// MutationObserver로 탭 변경 감지 (한 번만)
+			const observer = new MutationObserver(function() {
+				if (!counterExecuted) {
+					executeCounterOnce();
+				} else {
+					// 이미 실행됐으면 observer 즉시 해제
+					observer.disconnect();
+				}
+			});
+			
+			const targetNode = document.querySelector('.performance_sub01_con');
+			if (targetNode) {
+				observer.observe(targetNode, {
+					attributes: true,
+					attributeFilter: ['style', 'class'],
+					subtree: true
+				});
+			}
+		});
+	</script>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

@@ -1,0 +1,874 @@
+<?
+$Main = "Y";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+
+// 1) 시공사업
+$sql = " SELECT idx, f_thumbnail, f_region, f_address, f_usage, f_progress FROM df_site_sigong ORDER BY idx DESC LIMIT " . ($detect->isMobile() || $detect->isTablet() ? "3" : "4");
+$sigong_rows = $db->query($sql);
+
+// 2) 시행사업 / LIMIT 필요하면 추가
+$sql = " SELECT idx, f_type, f_name, f_url, f_thumbnail FROM df_site_sihang ORDER BY idx DESC ";
+$sihang_rows = $db->query($sql);
+
+// 3) NOTICE
+$sql = " SELECT idx, grp, subject, wdate, upfile FROM df_site_bbs WHERE code='notice' ORDER BY wdate DESC LIMIT 3 ";
+$notice_rows = $db->query($sql);
+
+include $_SERVER['DOCUMENT_ROOT'].'/inc/popup.inc'; 
+?>
+
+	<div id="container">
+		<div id="main_con">
+			<div class="info01_con">
+				<div class="contents_con">
+					<div class="slide_con">
+						<div class="swiper main_info01_txt_slide">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide main_info01_txt_slide_div">
+									<div class="contents_con">
+										<div class="txt_con">
+											<div class="text01_con">
+												<span>
+													믿음을 기반으로, <br>
+													혁신을 더하다
+												</span>
+											</div>
+
+											<div class="text02_con">
+												<span>
+													세심한 기술력으로 꿈의 공간을 구현합니다.
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="swiper-slide main_info01_txt_slide_div">
+									<div class="contents_con">
+										<div class="txt_con">
+											<div class="text01_con">
+												<span>
+													믿음을 기반으로, <br>
+													혁신을 더하다
+												</span>
+											</div>
+
+											<div class="text02_con">
+												<span>
+													세심한 기술력으로 꿈의 공간을 구현합니다.
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="swiper-slide main_info01_txt_slide_div">
+									<div class="contents_con">
+										<div class="txt_con">
+											<div class="text01_con">
+												<span>
+													믿음을 기반으로, <br>
+													혁신을 더하다
+												</span>
+											</div>
+
+											<div class="text02_con">
+												<span>
+													세심한 기술력으로 꿈의 공간을 구현합니다.
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="swiper main_info01_img_slide">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide main_info01_img_slide_div">
+									<div class="img_con" style="background-image:url('/img/main/info01_slide_img01.png');">
+										<img src="/img/main/info01_slide_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+									</div>
+								</div>
+								<div class="swiper-slide main_info01_img_slide_div">
+									<div class="img_con" style="background-image:url('/img/main/info01_slide_img02.png');">
+										<img src="/img/main/info01_slide_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+									</div>
+								</div>
+								<div class="swiper-slide main_info01_img_slide_div">
+									<div class="img_con" style="background-image:url('/img/main/info01_slide_img03.png');">
+										<img src="/img/main/info01_slide_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+									</div>
+								</div>
+							</div>
+
+							<div class="control_con">
+								<div class="contents_con">
+									<div class="swiper-pagination main_info01_slide_swiper-pagination"></div>
+
+									<div class="ps_btn_con">
+										<div class="stop_btn">
+											<img src="/img/main/main_slide_stop_btn.svg" alt="슬라이드 정지 버튼" class="fx"/>
+										</div>
+
+										<div class="play_btn">
+											<img src="/img/main/main_slide_play_btn.svg" alt="슬라이드 재생 버튼" class="fx"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="info02_con">
+				<div class="contents_con">
+					<div class="list_con">
+						<ul>
+							<li>
+								<a href="/performance/performance_sub01.html?usage=업무/근생">
+									<div class="list_div">
+										<div class="img_con">
+											<img src="/img/main/info01_con_list_con_img01.png" alt="컨텐츠 이미지" class="fx w_img">
+											<img src="/img/main/m_info01_con_list_con_img01.png" alt="컨텐츠 이미지" class="fx m_img">
+										</div>
+									
+										<div class="text_con">
+											<span>
+												업무/근생
+											</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="/performance/performance_sub01.html?usage=주거시설">
+									<div class="list_div">
+										<div class="img_con">
+											<img src="/img/main/info01_con_list_con_img03.png" alt="컨텐츠 이미지" class="fx w_img">
+											<img src="/img/main/m_info01_con_list_con_img03.png" alt="컨텐츠 이미지" class="fx m_img">
+										</div>
+
+										<div class="text_con">
+											<span>
+												주거시설
+											</span>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+						<ul>
+							<li>
+								<a href="/performance/performance_sub01.html?usage=물류시설">
+									<div class="list_div">
+										<div class="img_con">
+											<img src="/img/main/info01_con_list_con_img02.png" alt="컨텐츠 이미지" class="fx w_img">
+											<img src="/img/main/m_info01_con_list_con_img02.png" alt="컨텐츠 이미지" class="fx m_img">
+										</div>
+
+										<div class="text_con">
+											<span>
+												물류시설
+											</span>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="/performance/performance_sub01.html?usage=리모델링">
+									<div class="list_div">
+										<div class="img_con">
+											<img src="/img/main/info01_con_list_con_img04.png" alt="컨텐츠 이미지" class="fx w_img">
+											<img src="/img/main/m_info01_con_list_con_img04.png" alt="컨텐츠 이미지" class="fx m_img">
+										</div>
+
+										<div class="text_con">
+											<span>
+												리모델링 
+											</span>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="txt_con">
+						<div class="contents_con">
+							<div class="title_con">
+								<span class="common_split">
+									<span class="color_text">사람</span>과 <span class="color_text">공간</span>을 <br>
+									연결하는 <br>
+									건설의 가치를 <br>
+									만듭니다 <br>
+								</span>
+							</div>
+							
+							<div class="text_con">
+								<span class="common_split">
+									당신의 꿈이 멋진 현실로 실현될 그 날까지 <br>
+									한국건설산업은 끝까지 함께 합니다
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="info03_con">
+				<div class="contents_con">
+					<div class="txt_con">
+						<div class="title_con">
+							<span>
+								시공사업
+							</span>
+						</div>
+
+						<div class="btn_con">
+							<a href="/performance/performance_sub01.html">
+								<div class="img_con">
+									<img src="/img/main/info03_con_txt_con_btn_con_icon_off.svg" alt="아이콘" class="fx off">
+									<img src="/img/main/info03_con_txt_con_btn_con_icon_on.svg" alt="아이콘" class="fx on">
+								</div>
+								
+								<div class="text_con">
+									<span>
+										VIEW MORE
+									</span>
+								</div>
+							</a>
+						</div>
+					</div>
+					
+					<div class="list_con">
+						<ul>
+							<?php
+							foreach ($sigong_rows As $row) {
+								$thumbnail = "/img/performance/performance_sub01_gallery_noimage_img.png";
+								if ($row['f_thumbnail'] && is_file($_SERVER["DOCUMENT_ROOT"] . '/userfiles/sigong/' . $row['f_thumbnail'])) {
+									$thumbnail = '/userfiles/sigong/' . $row['f_thumbnail'];
+								}
+							?>
+							<li>
+								<a href="/performance/performance_view.html?idx=<?= $row['idx'] ?>">
+									<div class="list_div">
+										<div class="img_con" style="background-image:url('<?= $thumbnail ?>');">
+											<img src="/img/main/info03_con_list_con_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+										</div>
+									
+										<div class="txt_con">
+											<div class="text01_con">
+												<span>
+													<?= htmlspecialchars($row['f_region']) ?>
+												</span>
+											</div>
+									
+											<div class="text02_con">
+												<span>
+													<?= htmlspecialchars($row['f_address']) ?>
+												</span>
+											</div>
+									
+											<div class="text03_con">
+												<span>
+													<?= htmlspecialchars($row['f_usage']) ?>
+												</span>
+
+												<div class="over_con w_con">
+													<div class="bar"></div>
+
+													<span>
+														VIEW MORE
+													</span>
+												</div>
+											</div>
+									
+											<div class="text04_con">
+												<span>
+													공정률 <span class="color_text counter"><?= (int)$row['f_progress'] ?></span>%
+												</span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</li>
+							<?php } ?>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="info04_con">
+				<div class="contents_con">
+					<div class="slide_con">
+						<div class="title_con">
+							<div class="text_con">
+								<span class="common_split">
+									시행사업
+								</span>
+							</div>
+
+							<div class="btn_con">
+								<div class="slide_btn main_info04_slide_btn prev">
+									<img src="/img/sub/slide_prev_btn_off.svg" alt="이전 버튼" class="fx off">
+									<img src="/img/sub/slide_prev_btn_on.svg" alt="이전 버튼" class="fx on">
+								</div>
+								<div class="slide_btn main_info04_slide_btn next">
+									<img src="/img/sub/slide_next_btn_off.svg" alt="다음 버튼" class="fx off">
+									<img src="/img/sub/slide_next_btn_on.svg" alt="다음 버튼" class="fx on">
+								</div>
+							</div>
+						</div>
+
+						<div class="swiper main_info04_slide">
+							<div class="swiper-wrapper">
+								<?php
+								foreach ($sihang_rows As $row) {
+								?>
+								<div class="swiper-slide main_info04_slide_div">
+									<div class="contents_con">
+										<a href="<?= htmlspecialchars($row['f_url']) ?>" target="_blank">
+											<div class="img_con" style="background-image:url('/userfiles/sihang/<?= htmlspecialchars($row['f_thumbnail']) ?>');">
+												<img src="/img/main/info04_con_slide_con_img_con_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx">
+											</div>
+											
+											<div class="txt_con">
+												<div class="text01_con">
+													<span>
+														<?= htmlspecialchars($row['f_type']) ?>
+													</span>
+												</div>
+
+												<div class="text02_con">
+													<span>
+														<?= htmlspecialchars($row['f_name']) ?>
+													</span>
+
+													<div class="img_con">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_off.svg" alt="아이콘" class="fx off">
+														<img src="/img/main/info04_con_slide_txt_con_img_con_link_icon_on.svg" alt="아이콘" class="fx on">
+													</div>
+												</div>
+											</div>
+										</a>
+									</div>
+								</div>
+								<?php } ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="info05_con">
+				<div class="contents_con">
+					<div class="txt_con">
+						<div class="title_con">
+							<span>
+								NOTICE
+							</span>
+						</div>
+
+						<div class="btn_con">
+							<a href="/center/center_sub01.html">
+								<div class="img_con">
+									<img src="/img/main/info03_con_txt_con_btn_con_icon_off.svg" alt="아이콘" class="fx off">
+									<img src="/img/main/info03_con_txt_con_btn_con_icon_on.svg" alt="아이콘" class="fx on">
+								</div>
+								
+								<div class="text_con">
+									<span>
+										VIEW MORE
+									</span>
+								</div>
+							</a>
+						</div>
+					</div>
+
+					<div class="list_con">
+						<ul>
+							<?php foreach ($notice_rows As $row) { ?>
+							<li>
+								<a href="/center/center_view.html?code=notice&idx=<?= $row['idx'] ?>">
+									<div class="list_div">
+										<table cellpadding="0" cellspacing="0">
+											<tbody>
+												<tr>
+													<td align="left" class="date_td w_con">
+														<span>
+															<?= date('y.m.d', strtotime($row['wdate'])) ?>
+														</span>
+													</td>
+													<td align="center" class="txt_td">
+														<div class="txt_con">
+															<div class="text01_con">
+																<span>
+																	<?= htmlspecialchars($row['grp']) ?>
+																</span>
+															</div>
+									
+															<div class="text02_con">
+																<span>
+																	<?= htmlspecialchars($row['subject']) ?>
+																</span>
+															</div>
+
+															<div class="date_con m_con">
+																<span>
+																	<?= date('y.m.d', strtotime($row['wdate'])) ?>
+																</span>
+															</div>
+														</div>
+													</td>
+													<td align="right" class="img_td w_con">
+														<div class="img_con" style="background-image:url('/userfiles/notice/<?= htmlspecialchars($row['upfile']) ?>');">
+															<img src="/img/main/info05_con_list_con_img_con_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx w_img">
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</a>
+							</li>
+							<?php } ?>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="info06_con">
+				<div class="contents_con">
+					<div class="txt_con">
+						<div class="title_con">
+							<span class="common_split">
+								Contact Us
+							</span>
+						</div>
+
+						<div class="text_con">
+							<span class="common_split">
+								항상 고객의 감동을 최우선으로 하는 <br>
+								미래의 건축 문화를 이끌어가겠습니다.
+							</span>
+						</div>
+					</div>
+
+					<div class="btn_con">
+						<a href="/partnership/partnership_sub01.html">
+							문의하기
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="right_quick_con">
+		<div class="contents_con">
+			<ul>
+				<li>
+					<a href="javascript:;">
+						<div class="img_con">
+							<img src="/img/main/right_quick_con_icon01.svg" alt="아이콘" class="fx">
+						</div>
+
+						<div class="text_con">
+							<span>
+								지명원
+							</span>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:alert('준비 중입니다.');">
+						<div class="img_con">
+							<img src="/img/main/right_quick_con_icon02.svg" alt="아이콘" class="fx">
+						</div>
+
+						<div class="text_con">
+							<span>
+								협업시스템
+							</span>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<script type="text/javascript" language="javascript">
+		// 카운터
+		$(document).ready(function () {
+			$(".counter").counterUp({
+				time: 1200,
+			});
+		});
+
+		document.addEventListener("DOMContentLoaded", function () {
+			const textSwiper = new Swiper(".main_info01_txt_slide", {
+				loop: false,
+				speed: 1500,
+				effect: "fade",
+			});
+			
+			const imgSwiper = new Swiper(".main_info01_img_slide", {
+				loop: false,
+				speed: 2000,
+				pagination: {
+					el: ".main_info01_slide_swiper-pagination",
+					clickable: true,
+					bulletClass: "swiper-pagination-bullet",
+					bulletActiveClass: "swiper-pagination-bullet-active"
+				}
+			});
+			
+			// 두 슬라이더 연동
+			textSwiper.controller.control = imgSwiper;
+			imgSwiper.controller.control = textSwiper;
+			
+			let currentDirection = "forward";
+			const delay = 6000;
+			let interval = null;
+			let isPlaying = true; // 재생 상태 추적
+			
+			// 재생/정지 버튼 요소
+			const playBtn = document.querySelector(".play_btn");
+			const stopBtn = document.querySelector(".stop_btn");
+			
+			// 초기 버튼 상태 설정 (재생 중이므로 정지버튼 표시)
+			playBtn.style.display = "none";
+			stopBtn.style.display = "block";
+			
+			// SplitType 적용
+			document.querySelectorAll("#main_con > .info01_con .text01_con > span, #main_con > .info01_con .text02_con > span").forEach(span => {
+				new SplitType(span, { types: "chars" });
+			});
+			
+			function animateOutChars(slide) {
+				const chars = slide.querySelectorAll(".text01_con .char, .text02_con .char");
+				gsap.to(chars, {
+					x: -50,
+					opacity: 0,
+					stagger: 0.01,
+					duration: 0.5,
+					ease: "power1.inOut"
+				});
+			}
+			
+			function animateInChars(slide) {
+				const text01Chars = slide.querySelectorAll(".text01_con .char");
+				const text02Chars = slide.querySelectorAll(".text02_con .char");
+				
+				// 먼저 모든 char 위치 초기화
+				gsap.set([text01Chars, text02Chars], { x: 100, opacity: 0 });
+				
+				// 등장 애니메이션
+				gsap.to(text01Chars, {
+					x: 0,
+					opacity: 1,
+					stagger: 0.05,
+					duration: 0.6,
+					ease: "power2.out",
+				});
+				
+				gsap.to(text02Chars, {
+					x: 0,
+					opacity: 1,
+					stagger: 0.03,
+					duration: 0.6,
+					ease: "power2.out",
+					delay: 0.4
+				});
+			}
+			
+			// 초기 애니메이션 수동 실행
+			window.addEventListener("load", () => {
+				const firstSlide = document.querySelector(".main_info01_txt_slide .swiper-slide-active");
+				animateInChars(firstSlide);
+			});
+			
+			// 슬라이드 변경 시
+			let previousSlide = null;
+			textSwiper.on("slideChangeTransitionStart", () => {
+				previousSlide = document.querySelector(".main_info01_txt_slide .swiper-slide-prev, .main_info01_txt_slide .swiper-slide-next");
+				if (previousSlide) animateOutChars(previousSlide);
+			});
+			
+			textSwiper.on("slideChangeTransitionEnd", () => {
+				const activeSlide = document.querySelector(".main_info01_txt_slide .swiper-slide-active");
+				animateInChars(activeSlide);
+			});
+			
+			// 자동 슬라이드 전환
+			function startAutoReverseSlider() {
+				if (interval) clearInterval(interval);
+				interval = setInterval(() => {
+					if (currentDirection === "forward") {
+						if (textSwiper.isEnd) {
+							currentDirection = "backward";
+							textSwiper.slidePrev();
+						} else {
+							textSwiper.slideNext();
+						}
+					} else {
+						if (textSwiper.isBeginning) {
+							currentDirection = "forward";
+							textSwiper.slideNext();
+						} else {
+							textSwiper.slidePrev();
+						}
+					}
+				}, delay);
+			}
+			
+			// 슬라이드 정지
+			function stopAutoSlider() {
+				if (interval) {
+					clearInterval(interval);
+					interval = null;
+				}
+			}
+			
+			// 재생 버튼 클릭 이벤트 (슬라이드 재생)
+			playBtn.addEventListener("click", function() {
+				startAutoReverseSlider();
+				isPlaying = true;
+				playBtn.style.display = "none";
+				stopBtn.style.display = "block";
+			});
+			
+			// 정지 버튼 클릭 이벤트 (슬라이드 정지)
+			stopBtn.addEventListener("click", function() {
+				stopAutoSlider();
+				isPlaying = false;
+				stopBtn.style.display = "none";
+				playBtn.style.display = "block";
+			});
+			
+			// 페이지네이션 클릭 시 자동 슬라이드 일시 정지 후 재시작
+			const paginationBullets = document.querySelectorAll(".main_info01_slide_swiper-pagination .swiper-pagination-bullet");
+			
+			// 페이지네이션 클릭 이벤트 (동적으로 생성되는 요소를 위해 이벤트 위임 사용)
+			document.addEventListener("click", function(e) {
+				if (e.target.classList.contains("swiper-pagination-bullet")) {
+					if (isPlaying) {
+						stopAutoSlider();
+						// 3초 후 자동 슬라이드 재시작
+						setTimeout(() => {
+							if (isPlaying) {
+								startAutoReverseSlider();
+							}
+						}, 3000);
+					}
+				}
+			});
+			
+			// 초기 자동 슬라이드 시작
+			startAutoReverseSlider();
+		});
+
+		// info04 슬라이드
+		if ($(".main_info04_slide_div").length > 2) {
+			var main_info04_slide = new Swiper(".main_info04_slide", {
+				slidesPerView: "auto",
+				autoplay: {
+					delay: 3000,
+					disableOnInteraction: false,
+				},
+				loop: true,
+				speed: 1500,
+				navigation: {
+					prevEl: ".main_info04_slide_btn.prev",
+					nextEl: ".main_info04_slide_btn.next",
+				},
+			});
+
+			$("#main_con > .info04_con > .contents_con > .slide_con > .title_con > .btn_con").show();
+		} else {
+			var main_info04_slide = new Swiper(".main_info04_slide", {
+				slidesPerView: "auto",
+				loop: false,
+				simulateTouch: false,
+				allowTouchMove: false,
+			});
+
+			$("#main_con > .info04_con > .contents_con > .slide_con > .title_con > .btn_con").hide();
+		}
+
+	/********* 메인 모션 *********/
+		// info02 애니메이션
+		function info02_ani() {
+			const tl = gsap.timeline();
+			const section = document.querySelector("#main_con > .info02_con > .contents_con > .list_con")
+			const list01 = document.querySelectorAll("#main_con > .info02_con > .contents_con > .list_con > ul:first-child > li")
+			const list02 = document.querySelectorAll("#main_con > .info02_con > .contents_con > .list_con > ul:nth-child(2) > li")
+
+			tl.from(list01, {
+				autoAlpha:0,
+				y:120,
+				duration:0.8,
+				stagger:0.4,
+				ease:"power2.out",
+			})
+			.from(list02, {
+				autoAlpha:0,
+				y:120,
+				duration:0.8,
+				stagger:0.4,
+				ease:"power2.out",
+			},"-=1")
+
+			ScrollTrigger.create({
+				trigger:section,
+				start: "top 50%",
+				end: "bottom 50%",
+				animation:tl,
+			//	markers:true,
+			//	toggleActions:"play reverse play reset"
+			})
+		}
+
+		// info03 애니메이션
+		function info03_ani() {
+			const tl = gsap.timeline();
+			const section = document.querySelector("#main_con > .info03_con > .contents_con")
+			const txt_title = document.querySelector("#main_con > .info03_con > .contents_con > .txt_con > .title_con")
+			const txt_btn = document.querySelector("#main_con > .info03_con > .contents_con > .txt_con > .btn_con")
+			const list_con = document.querySelectorAll("#main_con > .info03_con > .contents_con > .list_con > ul > li")
+
+			tl.from(txt_title, {
+				autoAlpha:0,
+				y:50,
+				duration:0.6,
+				ease:"circ.out",
+			})
+			.from(txt_btn, {
+				autoAlpha:0,
+				y:50,
+				duration:0.6,
+				ease:"circ.out",
+			},"<")
+			.from(list_con, {
+				autoAlpha:0,
+				y:100,
+				stagger:0.2,
+				ease:"linear"
+			},"-=0.2")
+
+			ScrollTrigger.create({
+				trigger:section,
+				start: "top 60%",
+				end: "bottom 60%",
+				animation:tl,
+			//	markers:true,
+			//	toggleActions:"play reverse play reset"
+			})
+			
+			// li 마우스 오버시
+			list_con.forEach((li) => {
+				li.addEventListener("mouseenter", () => {
+					gsap.to(li, {
+						scale:1.05,
+						duration:0.3,
+						ease:"power1.out"
+					});
+				});
+				li.addEventListener("mouseleave", () => {
+					gsap.to(li, {
+						scale:1,
+						duration:0.3,
+						ease:"power1.out"
+					});
+				});
+			});
+		}
+
+		// info04 애니메이션
+		function info04_ani() {
+			const tl = gsap.timeline();
+			const section = document.querySelector("#main_con > .info04_con > .contents_con")
+			const slide = document.querySelector("#main_con > .info04_con > .contents_con > .slide_con > .swiper")
+
+			tl.from(slide, {
+				autoAlpha:0,
+				delay:0.4,
+				duration:1.2,
+				ease:"power1.out",
+			})
+
+			ScrollTrigger.create({
+				trigger:section,
+				start: "top 60%",
+				end: "bottom 60%",
+				animation:tl,
+			//	markers:true,
+			//	toggleActions:"play reverse play reset"
+			})		
+		}
+
+		// info05 애니메이션
+		function info05_ani() {
+			const tl = gsap.timeline();
+			const section = document.querySelector("#main_con > .info05_con > .contents_con")
+			const txt_title = document.querySelector("#main_con > .info05_con > .contents_con > .txt_con > .title_con")
+			const txt_btn = document.querySelector("#main_con > .info05_con > .contents_con > .txt_con > .btn_con")
+			const list_con = document.querySelectorAll("#main_con > .info05_con > .contents_con > .list_con > ul > li")
+
+			tl.from(txt_title, {
+				autoAlpha:0,
+				y:50,
+				duration:0.6,
+				ease:"circ.out",
+			})
+			.from(txt_btn, {
+				autoAlpha:0,
+				y:50,
+				duration:0.6,
+				ease:"circ.out",
+			},"<")
+			.from(list_con, {
+				autoAlpha:0,
+				y:50,
+				duration:0.6,
+				stagger:0.2,
+				ease:"power2.out",
+			})
+
+			ScrollTrigger.create({
+				trigger:section,
+				start: "top 60%",
+				end: "bottom 60%",
+				animation:tl,
+			//	markers:true,
+			//	toggleActions:"play reverse play reset"
+			})
+			
+		}
+
+		gsap.registerPlugin(ScrollTrigger, CustomEase)
+
+		ScrollTrigger.matchMedia({
+			// pc
+			"(min-width: 1025px)": function () {	
+
+			},
+
+			// mobile
+			"(max-width: 1024px)": function () {	
+
+			},
+			
+			// all
+			"all": function () {
+				info02_ani();
+				info03_ani();
+				info04_ani();
+				info05_ani();
+			}  
+		});
+
+	</script>
+
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

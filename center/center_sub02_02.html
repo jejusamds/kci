@@ -1,0 +1,433 @@
+<?php
+$sMenu = "05-2";
+$ssMenu = "05-2-2";
+include $_SERVER['DOCUMENT_ROOT'] . '/include/header.html';
+
+$code = 'job';
+$grp = isset($_GET['grp']) && $_GET['grp'] !== '' ? $_GET['grp'] : '';
+$current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$page_size = 10;
+$offset = ($current_page - 1) * $page_size;
+
+$where = ['code = :code'];
+$params = ['code' => $code];
+if ($grp !== '') {
+    $where[] = 'grp = :grp';
+    $params['grp'] = $grp;
+}
+$where_sql = 'WHERE ' . implode(' AND ', $where);
+
+$count_row = $db->row(
+    "SELECT COUNT(*) AS cnt FROM df_site_bbs {$where_sql}",
+    $params
+);
+$total_count = $count_row['cnt'];
+$total_page = ceil($total_count / $page_size);
+
+$prev_page = max(1, $current_page - 1);
+$next_page = min($total_page, $current_page + 1);
+
+$params['offset'] = $offset;
+$params['limit'] = $page_size;
+$rows = $db->query(
+    "SELECT * FROM df_site_bbs {$where_sql} ORDER BY wdate DESC LIMIT :offset, :limit",
+    $params,
+    PDO::FETCH_ASSOC
+);
+
+$tabs = [
+    '' => '전체',
+    '정규직' => '정규직',
+    '전문계약직' => '전문계약직',
+    '현장계약직' => '현장계약직',
+];
+
+$qs_base = '&page=' . $current_page;
+if ($grp !== '') {
+    $qs_base .= '&grp=' . urlencode($grp);
+}
+
+$start_page = max(1, $current_page - 2);
+$end_page = min($total_page, $start_page + 4);
+?>
+
+<div id="container">
+    <div id="sub_con">
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/include/sub_banner.html'; ?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/center/include/nav.html'; ?>
+        <div class="contents_con">
+            <div class="center_sub02_02_con">
+                <div class="contents_con">
+                    <div class="tab_list">
+                        <ul>
+                            <?php foreach ($tabs as $key => $label): ?>
+                                <li class="<?= ($grp === $key ? 'on' : '') ?>" val="center_sub02_02_tab01">
+                                    <a
+                                        href="/center/center_sub02_02.html<?= $key !== '' ? '?grp=' . urlencode($key) : '' ?>">
+                                        <?= htmlspecialchars($label) ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+
+                    <div class="info_con">
+                        <div class="list_con center_sub02_02_tab01">
+                            <ul>
+                                <?php if ($rows && count($rows) > 0): ?>
+                                    <?php foreach ($rows as $row): ?>
+                                        <?php
+                                        $period = '-';
+                                        if (!empty($row['event_sdate']) && !empty($row['event_edate'])) {
+                                            $period = date('Y. m. d', strtotime($row['event_sdate']))
+                                                . ' ~ '
+                                                . date('Y. m. d', strtotime($row['event_edate']));
+                                        }
+                                        ?>
+                                        <li class="<?= htmlspecialchars($row['grp_2']) == '진행중' ? 'ing' : 'end' ?>">
+                                            <a href="/center/center_sub02_02_view.html?idx=<?= $row['idx'] . $qs_base ?>">
+                                                <div class="list_div">
+                                                    <div class="state_con">
+                                                        <ul>
+                                                            <li>
+                                                                <span class="<?= htmlspecialchars($row['grp_2']) == '진행중' ? 'ing' : 'end' ?>">
+                                                                    <?= htmlspecialchars($row['grp_2']) ?>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="<?= htmlspecialchars($row['grp_3']) == '경력' ? 'career' : 'new' ?>">
+                                                                    <?= htmlspecialchars($row['grp_3']) ?>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="title_con">
+                                                        <span><?= htmlspecialchars($row['subject']) ?></span>
+                                                    </div>
+                                                    <div class="date_con">
+                                                        <div class="text01_con"><span>기간</span></div>
+                                                        <div class="text02_con"><span><?= $period ?></span></div>
+                                                    </div>
+                                                    <div class="img_con">
+                                                        <img src="/img/center/center_sub02_02_list_icon_off.svg" alt="아이콘"
+                                                            class="fx off">
+                                                        <img src="/img/center/center_sub02_02_list_icon_on.svg" alt="아이콘"
+                                                            class="fx on">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <li class="none_li">
+                                        <div class="img_con">
+                                            <img src="/img/center/list_con_none_li_icon.svg" alt="아이콘" class="fx">
+                                        </div>
+                                        <div class="text_con">
+                                            <span>현재 공고가 없습니다.</span>
+                                        </div>
+                                    </li>
+                                <?php endif; ?>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="number_list_con">
+                        <div class="contents_con">
+                            <div class="btn_con">
+                                <a href="?page=<?= $prev_page . ($grp !== '' ? '&grp=' . urlencode($grp) : '') ?>">
+                                    <img src="/img/sub/number_list_con_prev_btn.svg" alt="이전" class="fx">
+                                </a>
+                            </div>
+                            <div class="list_con">
+                                <?php for ($i = $start_page; $i <= $end_page; $i++): ?>
+                                    <a href="?page=<?= $i . ($grp !== '' ? '&grp=' . urlencode($grp) : '') ?>"
+                                        class="<?= ($i === $current_page ? 'on' : '') ?>"><?= $i ?></a>
+                                <?php endfor; ?>
+                            </div>
+                            <div class="btn_con">
+                                <a href="?page=<?= $next_page . ($grp !== '' ? '&grp=' . urlencode($grp) : '') ?>">
+                                    <img src="/img/sub/number_list_con_next_btn.svg" alt="다음" class="fx">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        $(document).ready(function(){
+            // 애니메이션 함수들을 전역으로 선언
+            window.clearAllAnimations = function() {
+                // 특정 ScrollTrigger만 제거 (center_sub02_02_con 관련만)
+                ScrollTrigger.getAll().forEach(trigger => {
+                    // 트리거의 엘리먼트가 채용공고 리스트 관련인 경우만 제거
+                    if (trigger.trigger && trigger.trigger.closest('.center_sub02_02_con')) {
+                        trigger.kill();
+                    }
+                });
+
+                // 채용공고 리스트의 li만 스타일 완전 초기화
+                const liItems = document.querySelectorAll(".center_sub02_02_con > .contents_con > .info_con > .list_con > ul > li");
+                liItems.forEach(el => {
+                    gsap.set(el, { 
+                        clearProps: "all",
+                        // 명시적으로 초기값 설정
+                        opacity: 1,
+                        y: 0,
+                        x: 0,
+                        scale: 1,
+                        rotation: 0,
+                        autoAlpha: 1
+                    });
+                });
+            }
+
+            window.pc_ani = function(targetContainer = null) {
+                // 특정 컨테이너가 지정되면 해당 컨테이너만, 아니면 모든 컨테이너
+                const selector = targetContainer ? 
+                    `${targetContainer} > ul > li` : 
+                    ".center_sub02_02_con > .contents_con > .info_con > .list_con > ul > li";
+                
+                const liItems = document.querySelectorAll(selector);
+                if (liItems.length === 0) return;
+
+                const itemsPerRow = 4; 
+                const rowCount = Math.ceil(liItems.length / itemsPerRow);
+
+                for (let i = 0; i < rowCount; i++) {
+                    const rowItems = Array.from(liItems).slice(i * itemsPerRow, (i + 1) * itemsPerRow);
+                    const centerIndex = Math.floor(rowItems.length / 2);
+                    const ordered = [];
+
+                    // 가운데부터 양쪽으로 퍼지는 순서
+                    for (let offset = 0; offset < rowItems.length; offset++) {
+                        const left = centerIndex - offset;
+                        const right = centerIndex + offset;
+                        if (left >= 0) ordered.push(rowItems[left]);
+                        if (right < rowItems.length && right !== left) ordered.push(rowItems[right]);
+                    }
+
+                    // 처음에 숨김 상태로 설정
+                    gsap.set(ordered, { y: 200, opacity: 0 });
+                    
+                    // ScrollTrigger를 사용하여 스크롤 시 애니메이션
+                    ScrollTrigger.create({
+                        trigger: rowItems[0],
+                        start: "top 90%",
+                        end: "bottom 90%",
+                        refreshPriority: -1,
+                        onEnter: () => {
+                            gsap.to(ordered, {
+                                y: 0,
+                                opacity: 1,
+                                duration: 1.2,
+                                stagger: 0.15,
+                                ease: 'power3.out'
+                            });
+                        },
+                        onEnterBack: () => {
+                            gsap.to(ordered, {
+                                y: 0,
+                                opacity: 1,
+                                duration: 0.6,
+                                stagger: 0.1,
+                                ease: 'power3.out'
+                            });
+                        }
+                    });
+                }
+            }
+
+            window.mo_ani = function(targetContainer = null) {
+                // 특정 컨테이너가 지정되면 해당 컨테이너만, 아니면 모든 컨테이너
+                const selector = targetContainer ? 
+                    `${targetContainer} > ul > li` : 
+                    ".center_sub02_02_con > .contents_con > .info_con > .list_con > ul > li";
+                
+                const list_con = document.querySelectorAll(selector);
+                if (list_con.length === 0) return;
+
+                // 처음에 숨김 상태로 설정
+                gsap.set(list_con, { autoAlpha: 0, y: 50 });
+                
+                // 각 아이템에 대해 ScrollTrigger 생성
+                list_con.forEach((item, index) => {
+                    ScrollTrigger.create({
+                        trigger: item,
+                        start: "top 70%",
+                        end: "bottom 70%",
+                        refreshPriority: -1,
+                        onEnter: () => {
+                            gsap.to(item, { 
+                                autoAlpha: 1, 
+                                y: 0, 
+                                duration: 0.8, 
+                                ease: "power2.out"
+                            });
+                        },
+                        onEnterBack: () => {
+                            gsap.to(item, { autoAlpha: 1, y: 0, duration: 0.3 });
+                        }
+                    });
+                });
+            }
+
+            // 초기 ScrollTrigger 애니메이션 설정
+            window.initScrollAnimations = function() {
+                // 기존 애니메이션 완전 정리
+                clearAllAnimations();
+                
+                // 약간의 지연 후 새로운 애니메이션 적용
+                setTimeout(() => {
+                    ScrollTrigger.matchMedia({
+                        // PC
+                        "(min-width: 1025px)": function () {
+                            const liItems = document.querySelectorAll(".center_sub02_02_con > .contents_con > .info_con > .list_con > ul > li");
+                            if (liItems.length === 0) return;
+
+                            const itemsPerRow = 4; 
+                            const rowCount = Math.ceil(liItems.length / itemsPerRow);
+
+                            for (let i = 0; i < rowCount; i++) {
+                                const rowItems = Array.from(liItems).slice(i * itemsPerRow, (i + 1) * itemsPerRow);
+                                const centerIndex = Math.floor(rowItems.length / 2);
+                                const ordered = [];
+
+                                for (let offset = 0; offset < rowItems.length; offset++) {
+                                    const left = centerIndex - offset;
+                                    const right = centerIndex + offset;
+                                    if (left >= 0) ordered.push(rowItems[left]);
+                                    if (right < rowItems.length && right !== left) ordered.push(rowItems[right]);
+                                }
+
+                                gsap.set(ordered, { y: 200, opacity: 0 });
+                                gsap.to(ordered, {
+                                    y: 0,
+                                    opacity: 1,
+                                    duration: 1.2,
+                                    stagger: 0.15,
+                                    ease: 'power3.out',
+                                    scrollTrigger: {
+                                        trigger: rowItems[0],
+                                        start: "top 90%",
+                                        end: "bottom 90%",
+                                        refreshPriority: -1
+                                    }
+                                });
+                            }
+
+                            return () => {
+                                clearAllAnimations();
+                            };
+                        },
+
+                        // Mobile
+                        "(max-width: 1024px)": function () {
+                            const list_con = document.querySelectorAll(".center_sub02_02_con > .contents_con > .info_con > .list_con > ul > li");
+                            if (list_con.length === 0) return;
+
+                            // 모바일에서는 처음에 모든 요소를 숨김
+                            gsap.set(list_con, { 
+                                autoAlpha: 0, 
+                                y: 50
+                            });
+
+                            list_con.forEach((item, index) => {
+                                ScrollTrigger.create({
+                                    trigger: item,
+                                    start: "top 70%",
+                                    end: "bottom 70%",
+                                    refreshPriority: -1,
+                                    onEnter: () => {
+                                        gsap.to(item, { 
+                                            autoAlpha: 1, 
+                                            y: 0, 
+                                            duration: 0.8, 
+                                            ease: "power2.out",
+                                            delay: index * 0.1
+                                        });
+                                    },
+                                    onLeave: () => {
+                                        // 나갈 때는 그대로 유지
+                                    },
+                                    onEnterBack: () => {
+                                        gsap.to(item, { autoAlpha: 1, y: 0, duration: 0.3 });
+                                    },
+                                    onLeaveBack: () => {
+                                        // 뒤로 나갈 때도 그대로 유지
+                                    }
+                                });
+                            });
+
+                            return () => {
+                                clearAllAnimations();
+                            };
+                        }
+                    });
+                }, 100);
+            }
+
+            // 게시판 형식 선택 (탭 클릭 이벤트)
+            $(".center_sub02_02_con > .contents_con > .tab_list > ul > li").bind("click", function(){
+                const targetTabClass = $(this).attr("val");
+                
+                // 탭 활성화 상태 변경
+                $(".center_sub02_02_con > .contents_con > .tab_list > ul > li").each(function(){
+                    $(this).removeClass("on");
+                });
+                $(this).addClass("on");
+                
+                // 모든 탭 컨텐츠 숨기기
+                $(".center_sub02_02_con > .contents_con > .info_con > .list_con").hide();
+                
+                // 선택된 탭 컨텐츠 보여주기
+                const $targetTab = $("." + targetTabClass);
+                $targetTab.show();
+                
+                // 기존 ScrollTrigger들 중 해당 컨테이너 관련 것들만 제거
+                ScrollTrigger.getAll().forEach(trigger => {
+                    if (trigger.trigger && trigger.trigger.closest('.center_sub02_02_con')) {
+                        trigger.kill();
+                    }
+                });
+                
+                // 애니메이션 실행
+                setTimeout(() => {
+                    const targetContainer = "." + targetTabClass;
+                    const isPC = window.matchMedia("(min-width: 1025px)").matches;
+                    
+                    if (isPC) {
+                        pc_ani(targetContainer);
+                    } else {
+                        mo_ani(targetContainer);
+                    }
+                    
+                    // ScrollTrigger 새로고침
+                    ScrollTrigger.refresh();
+                }, 50);
+            });
+
+            // 초기 ScrollTrigger 애니메이션 등록
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // 리사이즈 이벤트 핸들러 추가
+            let resizeTimer;
+            $(window).on('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    // 리사이즈 완료 후 애니메이션 재초기화
+                    initScrollAnimations();
+                    ScrollTrigger.refresh();
+                }, 250);
+            });
+            
+            // 페이지 로드 시 초기화
+            initScrollAnimations();
+        });
+    </script>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/include/footer.html'; ?>

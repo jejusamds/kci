@@ -1,0 +1,292 @@
+Time : 18:52:07
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_' doesn't exist
+Raw SQL : SELECT * FROM df_site_ WHERE idx=1
+
+Time : 18:50:52
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.sigong' doesn't exist
+Raw SQL : SELECT df_site_f_thumbnail FROM sigong WHERE idx=1
+
+Time : 18:50:41
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.sigong' doesn't exist
+Raw SQL : SELECT df_site_f_thumbnail FROM sigong WHERE idx=1
+
+Time : 18:50:37
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.sigong' doesn't exist
+Raw SQL : SELECT df_site_f_thumbnail FROM sigong WHERE idx=1
+
+Time : 18:46:01
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dir' in 'field list'
+Raw SQL : UPDATE df_site_sigong SET dir='business', f_usage='업무/근생', f_region='서울', f_address='11', f_period='22', f_scale='33', f_progress='44' WHERE idx=1
+
+Time : 18:44:58
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dir' in 'field list'
+Raw SQL : UPDATE df_site_sigong SET dir='business', f_usage='업무/근생', f_region='서울', f_address='11', f_period='22', f_scale='33', f_progress='44' WHERE idx=1
+
+Time : 18:21:24
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usage = '주거시설'' at line 3
+Raw SQL : 
+    SELECT COUNT(*)
+    FROM df_site_sigong s
+    WHERE 1 = 1  AND usage = '주거시설' 
+
+Time : 18:20:38
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usage = '주거시설'' at line 3
+Raw SQL : 
+    SELECT COUNT(*)
+    FROM df_site_sigong s
+    WHERE 1 = 1  AND usage = '주거시설' 
+
+Time : 18:20:34
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usage = '업무/근생'' at line 3
+Raw SQL : 
+    SELECT COUNT(*)
+    FROM df_site_sigong s
+    WHERE 1 = 1  AND usage = '업무/근생' 
+
+Time : 18:20:22
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usage = '물류시설'  AND region = '경기'' at line 3
+Raw SQL : 
+    SELECT COUNT(*)
+    FROM df_site_sigong s
+    WHERE 1 = 1  AND usage = '물류시설'  AND region = '경기' 
+
+Time : 18:20:08
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'usage = '물류시설'' at line 3
+Raw SQL : 
+    SELECT COUNT(*)
+    FROM df_site_sigong s
+    WHERE 1 = 1  AND usage = '물류시설' 
+
+Time : 18:15:47
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_sigung' doesn't exist
+Raw SQL : 
+    SELECT COUNT(*)
+    FROM df_site_sigung s
+    WHERE 1 = 1 
+
+Time : 18:15:45
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_sigung' doesn't exist
+Raw SQL : 
+    SELECT COUNT(*)
+    FROM df_site_sigung s
+    WHERE 1 = 1 
+
+Time : 17:29:51
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'best'
+
+Time : 17:29:50
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'main'
+
+Time : 17:29:49
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'best'
+
+Time : 17:29:49
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'main'
+
+Time : 17:29:46
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'best'
+
+Time : 17:19:56
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'best'
+
+Time : 17:19:56
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'main'
+
+Time : 17:19:37
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'best'
+
+Time : 17:19:36
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'main'
+
+Time : 17:19:35
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_category' doesn't exist
+Raw SQL : SELECT f_idx AS idx, f_name AS name
+      FROM df_site_category
+      WHERE f_depth = :depth
+     ORDER BY f_order
+
+Time : 17:19:35
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_product' doesn't exist
+Raw SQL : SELECT COUNT(*) 
+                                    FROM df_site_product b
+                                    LEFT JOIN df_site_category AS c3 ON b.f_cat_idx     = c3.f_idx
+                                    LEFT JOIN df_site_category AS c2 ON c3.f_parent_idx = c2.f_idx
+                                    LEFT JOIN df_site_category AS c1 ON c2.f_parent_idx = c1.f_idx
+                                    WHERE 1=1 
+                                
+
+Time : 17:19:19
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_category' doesn't exist
+Raw SQL : SELECT f_idx AS idx, f_name AS name
+      FROM df_site_category
+      WHERE f_depth = :depth
+     ORDER BY f_order
+
+Time : 17:19:19
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_product' doesn't exist
+Raw SQL : SELECT COUNT(*) 
+                                    FROM df_site_product b
+                                    LEFT JOIN df_site_category AS c3 ON b.f_cat_idx     = c3.f_idx
+                                    LEFT JOIN df_site_category AS c2 ON c3.f_parent_idx = c2.f_idx
+                                    LEFT JOIN df_site_category AS c1 ON c2.f_parent_idx = c1.f_idx
+                                    WHERE 1=1 
+                                
+
+Time : 17:19:18
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_category' doesn't exist
+Raw SQL : SELECT f_idx AS idx, f_name AS name
+      FROM df_site_category
+      WHERE f_depth = :depth
+     ORDER BY f_order
+
+Time : 17:19:18
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_product' doesn't exist
+Raw SQL : SELECT COUNT(*) 
+                                    FROM df_site_product b
+                                    LEFT JOIN df_site_category AS c3 ON b.f_cat_idx     = c3.f_idx
+                                    LEFT JOIN df_site_category AS c2 ON c3.f_parent_idx = c2.f_idx
+                                    LEFT JOIN df_site_category AS c1 ON c2.f_parent_idx = c1.f_idx
+                                    WHERE 1=1 
+                                
+
+Time : 17:19:16
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'best'
+
+Time : 17:19:16
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'main'
+
+Time : 17:19:14
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'best'
+
+Time : 17:19:13
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_main_slide' doesn't exist
+Raw SQL : 	Select	COUNT(*) 	From	df_site_main_slide 	Where	1 = 1  AND code = 'main'
+
+Time : 17:12:56
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_product' doesn't exist
+Raw SQL :  SELECT COUNT(*) FROM df_site_product b WHERE 1=1  
+
+Time : 17:12:37
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_product' doesn't exist
+Raw SQL :  SELECT COUNT(*) FROM df_site_product b WHERE 1=1  
+
+Time : 17:11:51
+SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1
+Raw SQL : insert into df_site_page values('privacy','','11','','')
+
+Time : 17:10:56
+SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: '' for column `kci9874`.`df_site_page`.`idx` at row 1
+Raw SQL : insert into df_site_page values('','privacy','','11','','')
+
+Time : 15:09:51
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_siteinfo' doesn't exist
+Raw SQL :  select * from df_site_siteinfo 
+
+Time : 15:09:48
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_siteinfo' doesn't exist
+Raw SQL :  select * from df_site_siteinfo 
+
+Time : 15:09:43
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:54:10
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:54:08
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:54:07
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:54:06
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:53:19
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:52:47
+SQLSTATE[HY000] [1130] Host '127.0.0.1' is not allowed to connect to this MariaDB server
+
+Time : 14:52:31
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:51:50
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:49:54
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:47:06
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:43:29
+SQLSTATE[HY000] [2002] Connection timed out
+
+Time : 14:42:59
+SQLSTATE[HY000] [2002] Connection timed out
+
+Time : 14:40:56
+SQLSTATE[HY000] [1130] Host '127.0.0.1' is not allowed to connect to this MariaDB server
+
+Time : 14:40:42
+SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 127.0.0.1d failed: Name or service not known
+
+Time : 14:40:38
+SQLSTATE[HY000] [1130] Host '127.0.0.1' is not allowed to connect to this MariaDB server
+
+Time : 14:39:57
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:39:01
+SQLSTATE[HY000] [2002] Connection timed out
+
+Time : 14:38:20
+SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for 1.201.18.d106 failed: Name or service not known
+
+Time : 14:38:11
+SQLSTATE[HY000] [2002] Connection timed out
+
+Time : 14:37:22
+SQLSTATE[HY000] [2002] Connection timed out
+
+Time : 14:36:50
+SQLSTATE[HY000] [2002] Connection timed out
+
+Time : 14:16:24
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:16:21
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:16:20
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:16:12
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:16:07
+SQLSTATE[HY000] [1130] Host '127.0.0.1' is not allowed to connect to this MariaDB server
+
+Time : 14:14:06
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:13:48
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:13:19
+SQLSTATE[HY000] [2002] No such file or directory
+
+Time : 14:13:02
+SQLSTATE[HY000] [2002] No such file or directory

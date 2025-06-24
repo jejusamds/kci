@@ -1,0 +1,15 @@
+Time : 18:28:56
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT COUNT(*) cnt FROM df_site_sigong WHERE (f_address LIKE :search OR f_scale LIKE :search)
+
+Time : 18:28:45
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT COUNT(*) cnt FROM df_site_sigong WHERE (f_address LIKE :search OR f_scale LIKE :search)
+
+Time : 18:28:35
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT COUNT(*) cnt FROM df_site_sigong WHERE (f_address LIKE :search OR f_scale LIKE :search)
+
+Time : 18:26:20
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT COUNT(*) FROM df_site_sigong WHERE (f_address LIKE :search OR f_scale LIKE :search)

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>문의하기</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <form id="asForm" enctype="multipart/form-data">
+        <h3>AS 관련 문의</h3>
+        <p>
+            <label>제목: <input type="text" name="f_subject" required></label>
+        </p>
+        <p>
+            <label>이름/회사명: <input type="text" name="f_name_company" required></label>
+        </p>
+        <p>
+            <label>연락처: <input type="text" name="f_phone" required></label>
+        </p>
+        <p>
+            <label>이메일: <input type="email" name="f_email" required></label>
+        </p>
+        <p>
+            <label>계약공사명: <input type="text" name="f_contract_project"></label>
+        </p>
+        <p>
+            <label>첨부파일: <input type="file" name="f_attachment"></label>
+        </p>
+        <p>
+            <label>문의사항:<br>
+                <textarea name="f_message" rows="5" cols="40" required></textarea>
+            </label>
+        </p>
+        <button type="button" id="submitBtn">전송</button>
+    </form>
+
+    <script>
+        $(function () {
+            $('#submitBtn').on('click', function () {
+                var formData = new FormData($('#asForm')[0]);
+                $.ajax({
+                    url: '/controller/form_handler.php',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    success: function (res) {
+                        //console.log(res);
+                        if (res.status === 'ok') {
+                            alert(res.message);
+                            //location.href = '/';
+                        } else {
+                            alert('에러가 발생했습니다: ' + res.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        //console.log(error);
+                        alert('서버 통신 오류: ' + error);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+Time : 23:23:00
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_sihang_files' doesn't exist
+Raw SQL : SELECT upfile, upfile_name FROM df_site_sihang_files WHERE idx = 57
+
+Time : 23:22:33
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'kci9874.df_site_sihang_files' doesn't exist
+Raw SQL : SELECT upfile, upfile_name FROM df_site_sihang_files WHERE idx = 57
+
+Time : 22:27:47
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-15, 15' at line 5
+Raw SQL : SELECT *
+        FROM df_site_sigong s
+        WHERE 1 = 1 
+        ORDER BY s.idx DESC
+        LIMIT -15, 15

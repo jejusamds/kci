@@ -1,0 +1,258 @@
+<?php
+$sMenu = "05-1";
+$ssMenu = "05-1-1";
+
+include $_SERVER['DOCUMENT_ROOT'] . '/include/header.html'; // header에서 DB 포함됨
+
+// 파라미터 처리
+$code = 'notice';
+$current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$filter = isset($_GET['filter']) ? trim($_GET['filter']) : 'ALL';
+$search_keyword = isset($_GET['search_keyword']) ? trim($_GET['search_keyword']) : '';
+$page_size = 10;
+$offset = ($current_page - 1) * $page_size;
+
+// WHERE 조건
+$where = ['code = :code'];
+$params = ['code' => $code];
+
+if ($filter !== 'ALL') {
+    $where[] = 'grp = :filter';
+    $params['filter'] = $filter;
+}
+
+if ($search_keyword !== '') {
+    $where[] = '(subject LIKE :kw OR content LIKE :kw2)';
+    $params['kw'] = "%{$search_keyword}%";
+    $params['kw2'] = "%{$search_keyword}%";
+}
+
+$where_sql = 'WHERE ' . implode(' AND ', $where);
+
+// 전체 개수 조회
+$count_sql = "SELECT COUNT(*) AS cnt FROM df_site_bbs {$where_sql}";
+$count_row = $db->row($count_sql, $params);
+$total_count = $count_row['cnt'];
+$total_page = max(1, ceil($total_count / $page_size));
+
+// 이전/다음 페이지 계산
+$prev_page = max(1, $current_page - 1);
+$next_page = min($total_page, $current_page + 1);
+
+// 리스트 데이터 조회
+$list_sql = "SELECT * FROM df_site_bbs {$where_sql} ORDER BY wdate DESC LIMIT :offset, :limit";
+$params['offset'] = $offset;
+$params['limit'] = $page_size;
+$rows = $db->query($list_sql, $params, PDO::FETCH_ASSOC);
+
+// 필터 라벨
+$filter_label = $filter === 'ALL' ? '전체' : $filter;
+?>
+
+<div id="container">
+    <div id="sub_con">
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/include/sub_banner.html'; ?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/center/include/nav.html'; ?>
+        <div class="contents_con">
+            <div class="center_sub01_con">
+                <div class="contents_con">
+                    <div class="ts_con">
+                        <div class="total_con">
+                            <div class="text_con">
+                                <span>
+                                    Total <span class="color_text"><?= $total_count ?></span>
+                                    (<span class="color_text"><?= $current_page ?></span>/<?= $total_page ?> Page)
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- 검색 영역 -->
+                        <div class="search_con">
+                            <div class="select_box">
+                                <div class="select on" id="filterSelect">
+                                    <span><?= htmlspecialchars($filter_label) ?></span>
+                                    <div class="img_con">
+                                        <img src="/img/sub/select_arrow_icon.svg" alt="아이콘" class="fx">
+                                    </div>
+                                </div>
+                                <div class="option_list">
+                                    <ul>
+                                        <li data-val="ALL">전체</li>
+                                        <li data-val="NEWS">NEWS</li>
+                                        <li data-val="수주현황">수주현황</li>
+                                    </ul>
+                                </div>
+                                <input type="hidden" id="filterValue" value="<?= htmlspecialchars($filter) ?>">
+                            </div>
+
+                            <div class="search_con">
+                                <div class="input_con">
+                                    <input type="text" id="searchInput" value="<?= htmlspecialchars($search_keyword) ?>"
+                                        placeholder="검색어를 입력해주세요">
+                                </div>
+                                <a href="#" id="searchBtn">
+                                    <img src="/img/sub/search_icon_bk.svg" alt="아이콘" class="fx">
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="normal_list_con">
+                        <ul>
+                            <?php if ($rows): ?>
+                                <?php foreach ($rows as $row):
+                                    
+                                    ?>
+                                    <li>
+                                        <a
+                                            href="/center/center_view.html?code=<?= $code ?>&idx=<?= $row['idx'] ?>&page=<?= $current_page ?>&filter=<?= urlencode($filter) ?>&search_keyword=<?= urlencode($search_keyword) ?>">
+                                            <div class="list_div">
+                                                <table cellpadding="0" cellspacing="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="left" class="date_td w_con">
+                                                                <span><?= date('y.m.d', strtotime($row['wdate'])) ?></span>
+                                                            </td>
+                                                            <td align="center" class="txt_td">
+                                                                <div class="txt_con">
+                                                                    <div class="text01_con">
+                                                                        <span><?= htmlspecialchars($row['grp']) ?></span>
+                                                                    </div>
+                                                                    <div class="text02_con">
+                                                                        <span><?= htmlspecialchars($row['subject']) ?></span>
+                                                                    </div>
+																	<div class="date_con m_con">
+																		<span><?= date('y.m.d', strtotime($row['wdate'])) ?></span>
+																	</div>
+                                                                </div>
+                                                            </td>
+                                                            <td align="right" class="img_td w_con">
+                                                                <div class="img_con"
+                                                                    style="background-image:url('/userfiles/notice/<?= htmlspecialchars($row['upfile']) ?>');">
+                                                                    <img src="/img/main/info05_con_list_con_img_con_blank_img.png"
+                                                                        alt="컨텐츠 블랭크 이미지" class="fx w_img">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <li class="none_li"><span>등록된 게시글이 없습니다.</span></li>
+                            <?php endif; ?>
+                        </ul>
+                    </div>
+
+                    <div class="number_list_con">
+                        <div class="contents_con">
+                            <div class="btn_con">
+                                <a
+                                    href="?page=<?= $prev_page ?>&filter=<?= urlencode($filter) ?>&search_keyword=<?= urlencode($search_keyword) ?>">
+                                    <img src="/img/sub/number_list_con_prev_btn.svg" alt="번호목록 이전 버튼" class="fx">
+                                </a>
+                            </div>
+                            <div class="list_con">
+                                <?php
+                                $start_page = max(1, $current_page - 2);
+                                $end_page = min($total_page, $start_page + 4);
+                                for ($i = $start_page; $i <= $end_page; $i++):
+                                    ?>
+                                    <a href="?page=<?= $i ?>&filter=<?= urlencode($filter) ?>&search_keyword=<?= urlencode($search_keyword) ?>"
+                                        class="<?= $current_page == $i ? 'on' : '' ?>"><?= $i ?></a>
+                                <?php endfor; ?>
+                            </div>
+                            <div class="btn_con">
+                                <a
+                                    href="?page=<?= $next_page ?>&filter=<?= urlencode($filter) ?>&search_keyword=<?= urlencode($search_keyword) ?>">
+                                    <img src="/img/sub/number_list_con_next_btn.svg" alt="번호목록 다음 버튼" class="fx">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 필터 및 검색 버튼 처리
+    $(function () {
+        // 필터 옵션 클릭: UI 변경, hidden 값만 갱신
+        $('.option_list li').on('click', function () {
+            var val = $(this).data('val');
+            $('#filterValue').val(val);
+            $('#filterSelect span').text($(this).text());
+            $('.select').removeClass('active').addClass('on');
+        });
+
+        // select box 열기/닫기
+        $('#filterSelect').on('click', function (e) {
+            e.stopPropagation();
+            $('.select').removeClass('active');
+            $(this).toggleClass('active');
+        });
+        $(document).on('click', function () {
+            $('.select').removeClass('active');
+        });
+
+        // 검색 실행: filter + keyword
+        $('#searchBtn').on('click', function (e) {
+            e.preventDefault();
+            var kw = $('#searchInput').val().trim();
+            var flt = $('#filterValue').val();
+            var url = location.pathname + '?page=1';
+            if (flt && flt !== 'ALL') url += '&filter=' + encodeURIComponent(flt);
+            if (kw) url += '&search_keyword=' + encodeURIComponent(kw);
+            location.href = url;
+        });
+
+        // 엔터 입력 시 검색
+        $('#searchInput').on('keydown', function (e) {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                $('#searchBtn').click();
+            }
+        });
+    });
+
+	//
+	const tl = gsap.timeline();
+	const section = document.querySelector(".center_sub01_con > .contents_con")
+	const total = document.querySelector(".ts_con > .total_con > .text_con")
+	const ss_con = document.querySelectorAll(".ts_con > .search_con > div")
+	const normal_list = document.querySelector(".center_sub01_con > .contents_con > .normal_list_con")
+
+	tl.from(total, {
+		yPercent:100,
+		autoAlpha:0,
+		duration:1.2,
+		ease:"power2.out",
+	})
+	.from(ss_con, {
+		yPercent:100,
+		autoAlpha:0,
+		duration:1.2,
+		ease:"power2.out",
+	},"<")
+	.from(normal_list, {
+		autoAlpha:0,
+		duration:0.8,
+		ease:"power2.out",
+	},"-=0.6")
+
+	ScrollTrigger.create({
+		trigger:section,
+		start: "top bottom",
+		end: "+=400",
+	//	markers:true,
+		animation:tl,
+	//	toggleActions:"play reverse play reset"
+	})
+</script>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/include/footer.html'; ?>

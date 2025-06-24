@@ -1,0 +1,180 @@
+<?
+$sMenu = "05-1";
+$ssMenu = "05-1-1";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+?>
+
+	<div id="container">
+		
+		<div id="sub_con">
+			<? include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<? include $_SERVER['DOCUMENT_ROOT'].'/center/include/nav.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="center_sub01_con">
+					<div class="contents_con">
+						<div class="ts_con">
+							<div class="total_con">
+								<div class="text_con">
+									<span>
+										Total <span class="color_text">37</span> (<span class="color_text">1</span>/1 Page)
+									</span>
+								</div>
+							</div>
+
+                            <!-- 검색 영역 -->
+							<div class="search_con">
+								<div class="select_box">
+									<div class="select">
+										<span>
+											전체
+										</span>
+
+										<div class="img_con">
+											<img src="/img/sub/select_arrow_icon.svg" alt="아이콘" class="fx">
+										</div>
+									</div>
+
+									<div class="option_list">
+										<ul>
+											<li>
+												ALL
+											</li>
+											<li data-val="NEWS">
+												NEWS
+											</li>
+											<li data-val="수주현황">
+												수주현황
+											</li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="search_con">
+									<div class="input_con">
+										<input type="text" name="search_keyword" placeholder="검색어를 입력해주세요">
+									</div>
+									<a href="javascript:void(0);" onclick="get_search_data();">
+										<img src="/img/sub/search_icon_bk.svg" alt="아이콘" class="fx">
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="normal_list_con">
+							<ul>
+								<li>
+									<a href="/center/center_view.html">
+										<div class="list_div">
+											<table cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<td align="left" class="date_td w_con">
+															<span>
+																24.01.10
+															</span>
+														</td>
+														<td align="center" class="txt_td">
+															<div class="txt_con">
+																<div class="text01_con">
+																	<span>NEWS</span>
+																</div>
+										
+																<div class="text02_con">
+																	<span>2024년 연말 '시흥시1%복지재단' 기부 동참</span>
+																</div>
+
+																<div class="date_con m_con">
+																	<span>24.01.10</span>
+																</div>
+															</div>
+														</td>
+														<td align="right" class="img_td w_con">
+															<div class="img_con" style="background-image:url('/img/main/info05_con_list_con_img_con_test_img.png');">
+																<img src="/img/main/info05_con_list_con_img_con_blank_img.png" alt="컨텐츠 블랭크 이미지" class="fx w_img">
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</a>
+								</li>
+								<!--li class="none_li">
+									<span>
+										등록된 게시글이 없습니다.
+									</span>
+								</li-->
+							</ul>
+						</div>
+
+						<div class="number_list_con">
+							<div class="contents_con">
+								<div class="btn_con">
+									<a href="#">
+										<img src="/img/sub/number_list_con_prev_btn.svg" alt="번호목록 이전 버튼" class="fx">
+									</a>
+								</div>
+
+								<div class="list_con">
+									<a href="#" class="on">
+										1
+									</a>
+									<a href="#">
+										2
+									</a>
+									<a href="#">
+										3
+									</a>
+								</div>
+
+								<div class="btn_con">
+									<a href="#">
+										<img src="/img/sub/number_list_con_next_btn.svg" alt="번호목록 다음 버튼" class="fx">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// 셀렉박스 스크립트
+		document.querySelectorAll(".select_box").forEach(selectBox => {
+			const select = selectBox.querySelector(".select");
+			const label = select.querySelector("span");
+			const options = selectBox.querySelectorAll(".option_list > ul > li");
+
+			// 옵션 클릭 시: 해당 span 텍스트만 변경
+			options.forEach(option => {
+				option.addEventListener("click", () => {
+					label.textContent = option.textContent;
+					select.classList.remove("active");
+					select.classList.add("on");
+				});
+			});
+
+			// 셀렉트 박스 클릭 시 열림/닫힘
+			select.addEventListener("click", () => {
+				// 다른 셀렉트 닫기
+				document.querySelectorAll(".select").forEach(s => s.classList.remove("active"));
+				select.classList.toggle("active");
+			});
+		});
+
+		// 바깥 영역 클릭 시 전체 닫기
+		document.addEventListener("click", e => {
+			if (!e.target.closest(".select_box")) {
+				document.querySelectorAll(".select").forEach(s => s.classList.remove("active"));
+			}
+		});
+	</script>
+
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

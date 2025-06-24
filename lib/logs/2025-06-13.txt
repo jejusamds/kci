@@ -1,0 +1,15 @@
+Time : 14:46:53
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT COUNT(*) AS cnt FROM df_site_bbs WHERE code = :code AND grp = :filter AND (subject LIKE :kw OR content LIKE :kw)
+
+Time : 14:46:42
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT COUNT(*) AS cnt FROM df_site_bbs WHERE code = :code AND (subject LIKE :kw OR content LIKE :kw)
+
+Time : 14:44:05
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT COUNT(*) AS cnt FROM df_site_bbs WHERE code = :code AND grp = :filter AND (subject LIKE :kw OR content LIKE :kw)
+
+Time : 14:39:50
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT COUNT(*) AS cnt FROM df_site_bbs WHERE code = :code AND (subject LIKE :kw OR content LIKE :kw)

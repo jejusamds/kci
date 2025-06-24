@@ -1,0 +1,507 @@
+<!--
+	회사소개 - 01
+	사업분야 - 02
+	사업실적 - 03
+	파트너쉽 - 04
+	고객센터 - 05
+-->
+
+<?php 
+// 현재 페이지 url
+
+include_once $_SERVER['DOCUMENT_ROOT'] . '/include/common.php';
+
+$http_host = $_SERVER['HTTP_HOST'];
+$request_uri = $_SERVER['REQUEST_URI'];
+$url = 'https://' . $http_host . $request_uri;
+
+
+if( $sMenu == "01-1" ){
+	$route_text01 = "회사소개";
+	$route_text02 = "인사말";
+	$title_text = "인사말";
+}else if( $sMenu == "01-2" ){
+	$route_text01 = "회사소개";
+	$route_text02 = "회사개요";
+	$title_text = "회사개요";
+}else if( $sMenu == "01-3" ){
+	$route_text01 = "회사소개";
+	$route_text02 = "회사연혁";
+	$title_text = "회사연혁";
+}else if( $sMenu == "01-4" ){
+	$route_text01 = "회사소개";
+	$route_text02 = "조직도";
+	$title_text = "조직도";
+}else if( $sMenu == "01-5" ){
+	$route_text01 = "회사소개";
+	$route_text02 = "인증현황";
+	$title_text = "인증현황";
+}else if( $sMenu == "01-6" ){
+	$route_text01 = "회사소개";
+	$route_text02 = "오시는 길";
+	$title_text = "오시는 길";
+}else if( $sMenu == "02-1" ){
+	$route_text01 = "사업분야";
+	$route_text02 = "건축공사업";
+	$title_text = "건축공사업";
+}else if( $sMenu == "02-2" ){
+	$route_text01 = "사업분야";
+	$route_text02 = "개발 / 시행사업";
+	$title_text = "개발 / 시행사업";
+}else if( $sMenu == "03-1" ){
+	$route_text01 = "사업실적";
+	$route_text02 = "시공사업";
+	$title_text = "시공사업";
+}else if( $sMenu == "03-2" ){
+	$route_text01 = "사업실적";
+	$route_text02 = "시행사업";
+	$title_text = "시행사업";
+}else if( $sMenu == "04-1" ){
+	$route_text01 = "파트너쉽";
+	$route_text02 = "견적문의";
+	$title_text = "견적문의";
+}else if( $sMenu == "04-2" ){
+	$route_text01 = "파트너쉽";
+	$route_text02 = "A/S 관련";
+	$title_text = "A/S 관련";
+}else if( $sMenu == "04-3" ){
+	$route_text01 = "파트너쉽";
+	$route_text02 = "협업시스템";
+	$title_text = "협업시스템";
+}else if( $sMenu == "05-1" ){
+	$route_text01 = "고객센터";
+	$route_text02 = "공지사항 및 소식";
+	$title_text = "공지사항 및 소식";
+
+	if( $ssMenu == "05-1-1" ){
+		$route_text01 = "고객센터";
+		$route_text02 = "공지사항 및 소식";
+		$title_text = "공지사항 및 소식";
+	}else if( $ssMenu == "05-1-2" ){
+		$route_text01 = "고객센터";
+		$route_text02 = "공지사항 및 소식";
+		$route_text03 = "KCI STORY";
+		$title_text = "KCI STORY";
+	}else if( $ssMenu == "05-1-3" ){
+		$route_text01 = "고객센터";
+		$route_text02 = "공지사항 및 소식";
+		$route_text03 = "KCI AWARD";
+		$title_text = "KCI AWARD";
+	}
+}else if( $sMenu == "05-2" ){
+	$route_text01 = "고객센터";
+	$route_text02 = "인재채용";
+	$title_text = "인재채용";
+
+	if( $ssMenu == "05-2-1" ){
+		$route_text01 = "고객센터";
+		$route_text02 = "인재채용";
+		$route_text03 = "채용안내";
+		$title_text = "채용안내";
+	}else if( $ssMenu == "05-2-2" ){
+		$route_text01 = "고객센터";
+		$route_text02 = "인재채용";
+		$route_text03 = "채용공고";
+		$title_text = "채용공고";
+	}
+}else if( $sMenu == "05-3" ){
+	$route_text01 = "고객센터";
+	$route_text02 = "자료실";
+	$title_text = "자료실";
+}else{
+	$route_text01 = "경로 텍스트01";
+	$route_text02 = "경로 텍스트02";
+	$title_text = "배너 타이틀 텍스트";
+}
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<title>한국건설산업</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=3, user-scalable=yes">
+<meta name="format-detection" content="telephone=no" />
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+
+<!--url 전송시-->
+<meta property="og:url" content="<?=$url?>" />
+<meta property="og:title" content="한국건설산업" />
+<meta property="og:site_name" content="한국건설산업" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="/img/url_img.png" />
+<meta property="og:description" content="사람과 공간을 연결하는 건설의 가치를 만듭니다." />
+<meta name="description" content="사람과 공간을 연결하는 건설의 가치를 만듭니다." />
+<meta name="keywords" content="사람과 공간을 연결하는 건설의 가치를 만듭니다." />
+
+<link rel="canonical" href="<?=$url?>" />
+<!--url 전송시-->
+
+
+<link rel="stylesheet" type="text/css" href="/css/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/swiper-bundle.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/animate.css" />
+<link rel="stylesheet" type="text/css" href="/css/colorbox.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/common_all.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/jquery.colorbox.js"></script>
+<script type="text/javascript" src="/js/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+<script type="text/javascript" src="/js/wow.js"></script>
+<script type="text/javascript" src="/js/jquery.rwdImageMaps.js"></script>
+
+<script src="https://unpkg.com/split-type"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
+
+<script type="text/javascript" language="javascript">
+	$(document).ready(function(){
+		$('img[usemap]').rwdImageMaps();
+	});
+</script>
+
+</head>
+<body>
+
+<div id="wrap" class="go_wrap">
+
+	<div id="header">
+		<div class="contents_con">
+			<div class="logo_con">
+				<a href="/">
+					<img src="/img/main/main_con_logo_img.svg" alt="법무법인 에스엘파트너스 로고" class="fx">
+				</a>
+			</div>
+
+			<div class="list_con w_con">
+				<ul>
+					<li>
+						<a href="/company/company_sub01.html">
+							회사소개
+						</a>
+
+						<div class="sub_menu">
+							<ul>
+								<li>
+									<a href="/company/company_sub01.html" class="<?if($sMenu=='01-1'){?>on<?}else{?><?}?>">
+										인사말
+									</a>
+								</li>
+								<li>
+									<a href="/company/company_sub02.html" class="<?if($sMenu=='01-2'){?>on<?}else{?><?}?>">
+										회사개요
+									</a>
+								</li>
+								<li>
+									<a href="/company/company_sub03.html" class="<?if($sMenu=='01-3'){?>on<?}else{?><?}?>">
+										회사연혁
+									</a>
+								</li>
+								<li>
+									<a href="/company/company_sub04.html" class="<?if($sMenu=='01-4'){?>on<?}else{?><?}?>">
+										조직도
+									</a>
+								</li>
+								<li>
+									<a href="/company/company_sub05.html" class="<?if($sMenu=='01-5'){?>on<?}else{?><?}?>">
+										인증현황
+									</a>
+								</li>
+								<li>
+									<a href="/company/company_sub06.html" class="<?if($sMenu=='01-6'){?>on<?}else{?><?}?>">
+										오시는 길
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="/business/business_sub01.html">
+							사업분야
+						</a>
+
+						<div class="sub_menu">
+							<ul>
+								<li>
+									<a href="/business/business_sub01.html" class="<?if($sMenu=='02-1'){?>on<?}else{?><?}?>">
+										건축공사업
+									</a>
+								</li>
+								<li>
+									<a href="/business/business_sub02.html" class="<?if($sMenu=='02-2'){?>on<?}else{?><?}?>">
+										개발 / 시행사업
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="/performance/performance_sub01.html">
+							사업실적
+						</a>
+
+						<div class="sub_menu">
+							<ul>
+								<li>
+									<a href="/performance/performance_sub01.html" class="<?if($sMenu=='03-1'){?>on<?}else{?><?}?>">
+										시공사업
+									</a>
+								</li>
+								<li>
+									<a href="/performance/performance_sub02.html" class="<?if($sMenu=='03-2'){?>on<?}else{?><?}?>">
+										시행사업
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="/partnership/partnership_sub01.html">
+							파트너쉽
+						</a>
+
+						<div class="sub_menu">
+							<ul>
+								<li>
+									<a href="/partnership/partnership_sub01.html" class="<?if($sMenu=='04-1'){?>on<?}else{?><?}?>">
+										견적문의
+									</a>
+								</li>
+								<li>
+									<a href="/partnership/partnership_sub02.html" class="<?if($sMenu=='04-2'){?>on<?}else{?><?}?>">
+										A/S 관련
+									</a>
+								</li>
+								<li>
+									<a href="javascript:alert('준비 중입니다.');" class="<?if($sMenu=='04-3'){?>on<?}else{?><?}?>">
+										협업시스템
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="/center/center_sub01.html">
+							고객센터
+						</a>
+
+						<div class="sub_menu">
+							<ul>
+								<li>
+									<a href="/center/center_sub01.html" class="<?if($sMenu=='05-1'){?>on<?}else{?><?}?>">
+										공지사항 및 소식
+									</a>
+								</li>
+								<li>
+									<a href="/center/center_sub02.html" class="<?if($sMenu=='05-2'){?>on<?}else{?><?}?>">
+										인재채용
+									</a>
+								</li>
+								<li>
+									<a href="/center/center_sub03.html" class="<?if($sMenu=='05-3'){?>on<?}else{?><?}?>">
+										자료실
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="menu_btn">
+				<div class="link_con">
+					<a href="javascript:alert('준비 중입니다.');">
+						<img src="/img/main/header_menu_btn_link_icon.svg" alt="아이콘" class="fx">
+						<span>
+							인트라넷
+						</span>
+					</a>
+				</div>
+
+				<a href="javascript:sitemap_popup();">
+					<img src="/img/main/sitemap_btn_icon.svg" alt="사이트맵 열기" class="fx">
+					<img src="/img/main/sitemap_closed_btn_icon_bk.svg" alt="메뉴 닫기" class="fx m_img closed_btn">
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="sitemap_popup_con">
+		<div class="contents_con">
+			<div class="top_con w_con">
+				<div class="title_con">
+					<span>
+						SITE MAP
+					</span>
+				</div>
+
+				<div class="btn_con">
+					<a href="javascript:sitemap_popup();">
+						<img src="/img/main/sitemap_closed_btn_icon.svg" alt="메뉴 닫기" class="fx">
+					</a>
+				</div>
+			</div>
+
+			<div class="list_con">
+				<ul>
+					<li>
+						<div class="list_div">
+							<div class="title_con">
+								<span>
+									회사소개
+								</span>
+							</div>
+
+							<div class="sub_menu_list">
+								<ul>
+									<li>
+										<a href="/company/company_sub01.html" class="<?if($sMenu=='01-1'){?>on<?}else{?><?}?>">
+											인사말
+										</a>
+									</li>
+									<li>
+										<a href="/company/company_sub02.html" class="<?if($sMenu=='01-2'){?>on<?}else{?><?}?>">
+											회사개요
+										</a>
+									</li>
+									<li>
+										<a href="/company/company_sub03.html" class="<?if($sMenu=='01-3'){?>on<?}else{?><?}?>">
+											회사연혁
+										</a>
+									</li>
+									<li>
+										<a href="/company/company_sub04.html" class="<?if($sMenu=='01-4'){?>on<?}else{?><?}?>">
+											조직도
+										</a>
+									</li>
+									<li>
+										<a href="/company/company_sub05.html" class="<?if($sMenu=='01-5'){?>on<?}else{?><?}?>">
+											인증현황
+										</a>
+									</li>
+									<li>
+										<a href="/company/company_sub06.html" class="<?if($sMenu=='01-6'){?>on<?}else{?><?}?>">
+											오시는 길
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="list_div">
+							<div class="title_con">
+								<span>
+									사업분야
+								</span>
+							</div>
+
+							<div class="sub_menu_list">
+								<ul>
+									<li>
+										<a href="/business/business_sub01.html" class="<?if($sMenu=='02-1'){?>on<?}else{?><?}?>">
+											건축공사업
+										</a>
+									</li>
+									<li>
+										<a href="/business/business_sub02.html" class="<?if($sMenu=='02-2'){?>on<?}else{?><?}?>">
+											개발 / 시행사업
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="list_div">
+							<div class="title_con">
+								<span>
+									사업실적
+								</span>
+							</div>
+
+							<div class="sub_menu_list">
+								<ul>
+									<li>
+										<a href="/performance/performance_sub01.html" class="<?if($sMenu=='03-1'){?>on<?}else{?><?}?>">
+											시공사업
+										</a>
+									</li>
+									<li>
+										<a href="/performance/performance_sub02.html" class="<?if($sMenu=='03-2'){?>on<?}else{?><?}?>">
+											시행사업
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="list_div">
+							<div class="title_con">
+								<span>
+									파트너쉽
+								</span>
+							</div>
+
+							<div class="sub_menu_list">
+								<ul>
+									<li>
+										<a href="/partnership/partnership_sub01.html" class="<?if($sMenu=='04-1'){?>on<?}else{?><?}?>">
+											견적문의
+										</a>
+									</li>
+									<li>
+										<a href="/partnership/partnership_sub02.html" class="<?if($sMenu=='04-2'){?>on<?}else{?><?}?>">
+											A/S 관련
+										</a>
+									</li>
+									<li>
+										<a href="javascript:alert('준비 중입니다.');" class="<?if($sMenu=='04-3'){?>on<?}else{?><?}?>">
+											협업시스템
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="list_div">
+							<div class="title_con">
+								<span>
+									고객센터
+								</span>
+							</div>
+
+							<div class="sub_menu_list">
+								<ul>
+									<li>
+										<a href="/center/center_sub01.html" class="<?if($sMenu=='05-1'){?>on<?}else{?><?}?>">
+											공지사항 및 소식
+										</a>
+									</li>
+									<li>
+										<a href="/center/center_sub02.html" class="<?if($sMenu=='05-2'){?>on<?}else{?><?}?>">
+											인재채용
+										</a>
+									</li>
+									<li>
+										<a href="/center/center_sub03.html" class="<?if($sMenu=='05-3'){?>on<?}else{?><?}?>">
+											자료실
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>		
+		</div>
+	</div>

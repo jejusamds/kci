@@ -1,0 +1,238 @@
+<?php
+$sMenu = "05-1";
+$ssMenu = "05-1-3";
+include $_SERVER['DOCUMENT_ROOT'] . '/include/header.html';
+
+// code = 'award' 조건으로 데이터 조회
+$code = 'award';
+$rows = $db->query(
+    "SELECT * 
+       FROM df_site_bbs 
+      WHERE code = :code 
+   ORDER BY wdate DESC",
+    ['code' => $code],
+    PDO::FETCH_ASSOC
+);
+?>
+<div id="container">
+    <div id="sub_con">
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/include/sub_banner.html'; ?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/center/include/nav.html'; ?>
+        <div class="contents_con">
+            <div class="center_sub01_03_con">
+                <div class="contents_con">
+                    <!-- 타이틀 (필요시 그대로 유지하거나 동적 subject 사용할 수 있음) -->
+                    <div class="title_con">
+                        <span>
+                            함께 성장하는 <span class="color_text">우수협력업체</span> 및 <span class="color_text">우수사원</span>
+                        </span>
+                    </div>
+
+                    <div class="slide_con">
+                        <div class="slide_wrap">
+                            <div class="swiper center_sub01_03_slide">
+                                <div class="swiper-wrapper">
+                                    <?php if ($rows && count($rows) > 0): ?>
+                                        <?php foreach ($rows as $row): ?>
+                                            <div class="swiper-slide center_sub01_03_slide_div">
+                                                <div class="contents_con">
+                                                    <div class="txt_con">
+                                                        <div class="text01_con">
+															<span>
+																<span class="color_text"><?= htmlspecialchars($row['subject']) ?></span>
+																<?php if ($row['media_url']) { ?><br><?= htmlspecialchars($row['media_url']) ?><?php } ?>
+															</span>
+                                                        </div>
+                                                        <div class="text02_con">
+                                                            <span><?= $row['content']?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="img_con"
+                                                        style="background-image:url('/userfiles/award/<?= htmlspecialchars($row['upfile']) ?>');">
+                                                        <img src="/img/center/center_sub01_03_slide_blank_img.png"
+                                                            alt="컨텐츠 블랭크 이미지" class="fx">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <!-- 데이터 없을 때 플레이스홀더 -->
+                                        <div class="swiper-slide center_sub01_03_slide_div">
+                                            <div class="contents_con">
+                                                <div class="txt_con">
+                                                    <div class="text01_con">
+                                                        <span>등록된 수상이 없습니다.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="img_con"
+                                                    style="background-image:url('/img/center/center_sub01_03_slide_blank_img.png');">
+                                                    <img src="/img/center/center_sub01_03_slide_blank_img.png"
+                                                        alt="컨텐츠 블랭크 이미지" class="fx">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <div class="btn_con">
+                                <div class="slide_btn center_sub01_03_slide_btn prev">
+                                    <img src="/img/sub/slide_prev_btn_wh_off.svg" alt="이전 버튼" class="fx off">
+                                    <img src="/img/sub/slide_prev_btn_on.svg" alt="이전 버튼" class="fx on">
+                                </div>
+                                <div class="slide_btn center_sub01_03_slide_btn next">
+                                    <img src="/img/sub/slide_next_btn_wh_off.svg" alt="다음 버튼" class="fx off">
+                                    <img src="/img/sub/slide_next_btn_on.svg" alt="다음 버튼" class="fx on">
+                                </div>
+                            </div>
+                        </div>
+
+						<div class="bg_con">
+							<img src="/img/center/center_sub01_03_slide_con_bg.svg" alt="컨텐츠 이미지" class="fx">
+						</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // 슬라이드 초기화
+    if ($(".center_sub01_03_slide_div").length > 1) {
+        new Swiper(".center_sub01_03_slide", {
+            slidesPerView: "auto",
+            loop: true,
+            speed: 1500,
+            navigation: {
+                prevEl: ".center_sub01_03_slide_btn.prev",
+                nextEl: ".center_sub01_03_slide_btn.next",
+            },
+        });
+        $(".center_sub01_03_con .btn_con").show();
+    } else {
+        new Swiper(".center_sub01_03_slide", {
+            slidesPerView: "auto",
+            loop: false,
+            simulateTouch: false,
+            allowTouchMove: false,
+        });
+        $(".center_sub01_03_con .btn_con").hide();
+    }
+
+	//
+	function clearAllAnimations() {
+		// 모든 ScrollTrigger 제거
+		ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+		// 모든 li의 스타일 초기화 (transform, opacity 등 제거)
+		const liItems = document.querySelectorAll(".center_sub01_con > .contents_con > .gallery_list_con > ul > li");
+		liItems.forEach(el => {
+			gsap.set(el, { clearProps: "all" });
+		});
+	}
+
+	function pc_ani() {
+		const tl = gsap.timeline();
+		const section = document.querySelector(".center_sub01_03_con > .contents_con")
+		const title = document.querySelector(".center_sub01_03_con > .contents_con > .title_con")
+		const txt = document.querySelector(".center_sub01_03_con > .contents_con > .slide_con > .slide_wrap > .swiper .swiper-wrapper .swiper-slide > .contents_con > .txt_con")
+		const img_con = document.querySelector(".center_sub01_03_con > .contents_con > .slide_con > .slide_wrap > .swiper .swiper-wrapper .swiper-slide > .contents_con > .img_con")
+		const bg_con = document.querySelector(".center_sub01_03_con > .contents_con > .slide_con > .bg_con")
+
+		tl.from(title, {
+			y:100,
+			autoAlpha:0,
+			duration:0.8,
+			ease:"power2.out",
+		})
+		.from(txt, {
+			y:100,
+			autoAlpha:0,
+			duration:0.8,
+			ease:"power2.out",
+		},"<")
+		.from(img_con, {
+			x:150,
+			autoAlpha:0,
+			duration:0.8,
+			ease:"power2.out",
+		},"<")
+		.from(bg_con, {
+			y:-450,
+			autoAlpha:0,
+			duration:0.8,
+			ease:"power2.out",
+		},"<")
+
+		ScrollTrigger.create({
+			trigger:section,
+			start: "top 60%",
+			end: "end 60%",
+		//	markers:true,
+			animation:tl,
+		//	toggleActions:"play reverse play reset"
+		})
+	}
+
+	function mo_ani() {
+		const tl = gsap.timeline();
+		const section = document.querySelector(".center_sub01_03_con > .contents_con")
+		const title = document.querySelector(".center_sub01_03_con > .contents_con > .title_con")
+		const txt = document.querySelector(".center_sub01_03_con > .contents_con > .slide_con > .slide_wrap > .swiper .swiper-wrapper .swiper-slide > .contents_con > .txt_con")
+
+		tl.from(title, {
+			y:100,
+			autoAlpha:0,
+			duration:0.6,
+			ease:"power2.out",
+		})
+		.from(txt, {
+			xPercent:-100,
+			autoAlpha:0,
+			duration:0.6,
+			ease:"power2.out",
+		},"-=0.2")
+
+		ScrollTrigger.create({
+			trigger:section,
+			start: "top 50%",
+			end: "end 50%",
+		//	markers:true,
+			animation:tl,
+		//	toggleActions:"play reverse play reset"
+		})
+	}
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	ScrollTrigger.matchMedia({
+		// PC
+		"(min-width: 1025px)": function () {
+			clearAllAnimations();
+			pc_ani();
+
+			return () => {
+				clearAllAnimations(); // 뷰포트 전환 시에도 제거
+			};
+		},
+
+		// Mobile
+		"(max-width: 1024px)": function () {
+			clearAllAnimations();
+			mo_ani();
+
+			return () => {
+				clearAllAnimations();
+			};
+		},
+
+		// 공통
+		"all": function () {
+			// 필요 시 공통 초기화 또는 설정
+		}
+	});
+</script>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/include/footer.html'; ?>

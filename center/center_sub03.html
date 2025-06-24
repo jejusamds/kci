@@ -1,0 +1,221 @@
+<?php
+$sMenu = "05-3";
+include $_SERVER['DOCUMENT_ROOT'] . '/include/header.html';
+
+// 파라미터 처리
+$code = 'data';
+$current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$page_size = 10;
+$offset = ($current_page - 1) * $page_size;
+
+// WHERE 조건 및 바인드
+$where = ['code = :code'];
+$params = ['code' => $code];
+if ($search !== '') {
+    $where[] = '(subject LIKE :kw OR content LIKE :kw2)';
+    $params['kw'] = "%{$search}%";
+    $params['kw2'] = "%{$search}%";
+}
+$where_sql = 'WHERE ' . implode(' AND ', $where);
+
+// 전체 개수 조회
+$count_row = $db->row(
+    "SELECT COUNT(*) AS cnt FROM df_site_bbs {$where_sql}",
+    $params
+);
+$total_count = $count_row['cnt'];
+$total_page = max(1, ceil($total_count / $page_size));
+
+// 이전/다음 페이지 계산
+$prev_page = max(1, $current_page - 1);
+$next_page = min($total_page, $current_page + 1);
+
+// 데이터 조회
+$params['offset'] = $offset;
+$params['limit'] = $page_size;
+$rows = $db->query(
+    "SELECT idx, subject, name, wdate, count FROM df_site_bbs {$where_sql} ORDER BY wdate DESC LIMIT :offset, :limit",
+    $params,
+    PDO::FETCH_ASSOC
+);
+?>
+
+<div id="container">
+    <div id="sub_con">
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/include/sub_banner.html'; ?>
+
+        <div class="contents_con">
+            <div class="center_sub03_con">
+                <div class="contents_con">
+                    <div class="ts_con">
+                        <div class="total_con">
+                            <div class="text_con">
+                                <span>Total <span class="color_text"><?= $total_count ?></span> (<span
+                                        class="color_text"><?= $current_page ?></span>/<?= $total_page ?> Page)</span>
+                            </div>
+                        </div>
+                        <div class="search_con">
+                            <div class="search_con">
+                                <div class="input_con">
+                                    <input type="text" id="searchInput" placeholder="검색어를 입력해주세요"
+                                        value="<?= htmlspecialchars($search) ?>">
+                                </div>
+                                <a href="#" id="searchBtn">
+                                    <img src="/img/sub/search_icon_bk.svg" alt="아이콘" class="fx">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="normal_list_con">
+                        <div class="title_con w_con">
+                            <table cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="num_td"><span>번호</span></td>
+                                        <td class="title_td"><span>제목</span></td>
+                                        <td class="write_td w_con"><span>작성자</span></td>
+                                        <td class="date_td w_con"><span>작성일</span></td>
+                                        <td class="view_td w_con"><span>조회수</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="list_con">
+                            <ul>
+                                <?php if ($rows && count($rows) > 0): ?>
+                                    <?php foreach ($rows as $i => $row): ?>
+                                        <li>
+                                            <a
+                                                href="/center/center_view.html?code=<?= $code ?>&idx=<?= $row['idx'] ?>&page=<?= $current_page ?>&search=<?= urlencode($search) ?>">
+                                                <div class="list_div">
+                                                    <table cellpadding="0" cellspacing="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="num_td">
+                                                                    <div class="title_con">
+                                                                        <div class="num_con">
+                                                                            <span><?= $offset + $i + 1 ?></span></div>
+                                                                        <div class="title_con m_con">
+                                                                            <span><?= htmlspecialchars(mb_strimwidth($row['subject'], 0, 60, '...')) ?></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info_con m_con">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <div class="text01_con">
+                                                                                    <span><?= htmlspecialchars($row['name']) ?></span>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="text02_con">
+                                                                                    <span><?= date('Y. m. d', strtotime($row['wdate'])) ?></span>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="text02_con"><span>조회수
+                                                                                        <?= intval($row['count']) ?></span>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="title_td w_con">
+                                                                    <span><?= htmlspecialchars($row['subject']) ?></span></td>
+                                                                <td class="write_td w_con">
+                                                                    <span><?= htmlspecialchars($row['name']) ?></span></td>
+                                                                <td class="date_td w_con">
+                                                                    <span><?= date('Y. m. d', strtotime($row['wdate'])) ?></span>
+                                                                </td>
+                                                                <td class="view_td w_con">
+                                                                    <span><?= intval($row['count']) ?></span></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <li class="none_li"><span>등록된 게시글이 없습니다.</span></li>
+                                <?php endif; ?>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="number_list_con">
+                        <div class="contents_con">
+                            <div class="btn_con">
+                                <a href="?page=<?= max(1, $current_page - 1) ?>&search=<?= urlencode($search) ?>">
+                                    <img src="/img/sub/number_list_con_prev_btn.svg" alt="이전" class="fx">
+                                </a>
+                            </div>
+                            <div class="list_con">
+                                <?php for ($i = max(1, $current_page - 2); $i <= min($total_page, $current_page + 2); $i++): ?>
+                                    <a href="?page=<?= $i ?>&search=<?= urlencode($search) ?>"
+                                        class="<?= $i == $current_page ? 'on' : '' ?>"><?= $i ?></a>
+                                <?php endfor; ?>
+                            </div>
+                            <div class="btn_con">
+                                <a
+                                    href="?page=<?= min($total_page, $current_page + 1) ?>&search=<?= urlencode($search) ?>">
+                                    <img src="/img/sub/number_list_con_next_btn.svg" alt="다음" class="fx">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#searchBtn').click(function (e) {
+            e.preventDefault();
+            var val = $('#searchInput').val().trim();
+            window.location.href = location.pathname + '?page=1' + (val ? '&search=' + encodeURIComponent(val) : '');
+        });
+        $('#searchInput').keydown(function (e) { if (e.keyCode == 13) { e.preventDefault(); $('#searchBtn').click(); } });
+    });
+
+	// 모션
+	const tl = gsap.timeline();
+	const section = document.querySelector(".center_sub03_con > .contents_con")
+	const total = document.querySelector(".ts_con > .total_con > .text_con")
+	const ss_con = document.querySelectorAll(".ts_con > .search_con > div")
+	const normal_list = document.querySelector(".center_sub03_con > .contents_con > .normal_list_con")
+
+	tl.from(total, {
+		yPercent:100,
+		autoAlpha:0,
+		duration:1.2,
+		ease:"power2.out",
+	})
+	.from(ss_con, {
+		yPercent:100,
+		autoAlpha:0,
+		duration:1.2,
+		ease:"power2.out",
+	},"<")
+	.from(normal_list, {
+		y:100,
+		autoAlpha:0,
+		duration:0.8,
+		ease:"power2.out",
+	},"-=0.6")
+
+	ScrollTrigger.create({
+		trigger:section,
+		start: "top bottom",
+		end: "+=400",
+	//	markers:true,
+		animation:tl,
+	//	toggleActions:"play reverse play reset"
+	})
+</script>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/include/footer.html'; ?>

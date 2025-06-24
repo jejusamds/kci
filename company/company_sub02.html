@@ -1,0 +1,168 @@
+<?
+$sMenu = "01-2";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+?>
+	
+	<div id="container">
+		<div id="sub_con">
+			<? include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="company_sub02_con">
+					<div class="contents_con">
+						<div class="img_con">
+							<img src="/img/company/company_sub02_img_con_img01.png" alt="컨텐츠 이미지" class="fx w_img">
+							<img src="/img/company/m_company_sub02_img_con_img01.png" alt="컨텐츠 이미지" class="fx m_img">
+						</div>
+
+						<div class="info_con">
+							<ul>
+								<li>
+									<div class="list_div">
+										<div class="title_con">
+											<span class="company_split">
+												상호명
+											</span>
+										</div>
+
+										<div class="text_con">
+											<span class="company_split">
+												(주)한국건설산업
+											</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="title_con">
+											<span class="company_split">
+												대표이사
+											</span>
+										</div>
+
+										<div class="text_con">
+											<span class="company_split">
+												전민규
+											</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="title_con">
+											<span class="company_split">
+												소재지
+											</span>
+										</div>
+
+										<div class="text_con">
+											<span class="company_split">
+												경기도 시흥시 은계남길 55, 2층 203~206호 (은행동, 시티넘버k)
+											</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="title_con">
+											<span class="company_split">
+												대표전화
+											</span>
+										</div>
+
+										<div class="text_con">
+											<span class="company_split">
+												031-317-9874
+											</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="title_con">
+											<span class="company_split">
+												설립일
+											</span>
+										</div>
+
+										<div class="text_con">
+											<span class="company_split">
+												2020년 02월 20일
+											</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="list_div">
+										<div class="title_con">
+											<span class="company_split">
+												사업자등록번호
+											</span>
+										</div>
+
+										<div class="text_con">
+											<span class="company_split">
+												616-88-01383
+											</span>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const infoCon = document.querySelector(".company_sub02_con .info_con");
+		const liTargets = infoCon.querySelectorAll("li > .list_div");
+
+		// 모든 company_split 텍스트를 먼저 split
+		liTargets.forEach(li => {
+			li.querySelectorAll(".company_split").forEach(target => {
+				new SplitType(target, {type:"words, chars"});
+			});
+		});
+
+		// ScrollTrigger를 info_con 기준으로 걸고, li들을 stagger로 처리
+		gsap.from(liTargets, {
+			y: 50,
+			autoAlpha: 0,
+			duration: 1,
+			stagger: 0.2,
+			ease: "power2.out",
+			scrollTrigger: {
+				trigger: infoCon,
+				start: "top 80%",
+				end: "bottom bottom",
+			//	markers: true,
+			}
+		});
+
+		// 각 li 안의 .company_split > words 애니메이션
+		liTargets.forEach(li => {
+			const words = li.querySelectorAll(".company_split .word");
+
+			gsap.from(words, {
+				yPercent: 100,
+				autoAlpha: 0,
+				duration: 0.6,
+				ease: "circ.out",
+				stagger: 0.15,
+				delay:0.3,
+				scrollTrigger: {
+					trigger: infoCon,
+					start: "top 80%",
+					end: "bottom bottom",
+				//	markers: true,
+				}
+			});
+		});
+	</script>
+
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	

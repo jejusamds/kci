@@ -1,0 +1,171 @@
+<?
+$sMenu = "01-6";
+
+include $_SERVER['DOCUMENT_ROOT'].'/include/header.html'; 
+?>
+	
+	<div id="container">
+		<div id="sub_con">
+			<? include $_SERVER['DOCUMENT_ROOT'].'/include/sub_banner.html'; ?>	
+
+			<div class="contents_con">
+				
+				<div class="company_sub06_con">
+					<div class="contents_con">
+						<div class="map_con">
+							<div id="daumRoughmapContainer1749012388598" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+							<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+							<script charset="UTF-8">
+								new daum.roughmap.Lander({
+									"timestamp" : "1749012388598",
+									"key" : "2y552c6nfir",
+								}).render();
+							</script>
+						</div>
+
+						<div class="txt_con">
+							<div class="text01_con">
+								<div class="text01">
+									<span class="split_line">
+										<span class="color_text01">K</span>orea <br>
+										<span class="color_text02">C</span>onstruction <br>
+										<span class="color_text03">I</span>ndustry
+									</span>
+								</div>
+
+								<div class="text02">
+									<span class="split_line">
+										(주)한국건설산업
+									</span>
+								</div>
+							</div>
+
+							<div class="list_con">
+								<ul>
+									<li>
+										<div class="list_div">
+											<div class="text01_con">
+												<div class="img_con">
+													<img src="/img/company/company_sub06_list_con_icon01.svg" alt="아이콘" class="fx">
+												</div>
+
+												<div class="text_con">
+													<span class="split_line">
+														Address
+													</span>
+												</div>
+											</div>
+
+											<div class="text02_con">
+												<span class="split_line">
+													경기도 시흥시 은계남길 55, 2층 203~206호(은행동, 시티넘버k)
+												</span>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="list_div">
+											<div class="text01_con">
+												<div class="img_con">
+													<img src="/img/company/company_sub06_list_con_icon02.svg" alt="아이콘" class="fx">
+												</div>
+
+												<div class="text_con">
+													<span class="split_line">
+														E-mail
+													</span>
+												</div>
+											</div>
+
+											<div class="text02_con">
+												<span class="split_line">
+													kci9874@kci9874.co.kr
+												</span>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="list_div">
+											<div class="text01_con">
+												<div class="img_con">
+													<img src="/img/company/company_sub06_list_con_icon03.svg" alt="아이콘" class="fx">
+												</div>
+
+												<div class="text_con">
+													<span class="split_line">
+														Tel
+													</span>
+												</div>
+											</div>
+
+											<div class="text02_con">
+												<span class="split_line">
+													031-317-9874
+												</span>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="list_div">
+											<div class="text01_con">
+												<div class="img_con">
+													<img src="/img/company/company_sub06_list_con_icon04.svg" alt="아이콘" class="fx">
+												</div>
+
+												<div class="text_con">
+													<span class="split_line">
+														Fax
+													</span>
+												</div>
+											</div>
+
+											<div class="text02_con">
+												<span class="split_line">
+													031-317-9875
+												</span>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const tl = gsap.timeline();
+
+		let typeSplit = new SplitType(".split_line", {
+			types: "lines, words, chars",
+			tagName: "span",
+		});
+
+		tl.from(".company_sub06_con > .contents_con > .txt_con > .text01_con .split_line .char", {
+			y: "100%",
+			autoAlpha: 0,
+			duration: 0.6,
+			ease: "circ.out",
+			stagger: 0.02,
+		})
+		.from(".company_sub06_con > .contents_con > .txt_con > .list_con > ul > li .split_line .word", {
+			y: "100%",
+			autoAlpha: 0,
+			ease: "circ.out",
+			stagger: 0.06,
+		},"<");
+
+		ScrollTrigger.create({
+			trigger:".company_sub06_con > .contents_con > .txt_con",
+			start:"top 80%",
+			end:"bottom 80%",
+		//	markers:true,
+			animation:tl,
+		})
+	</script>
+
+<? include $_SERVER['DOCUMENT_ROOT'].'/include/footer.html'; ?>	
