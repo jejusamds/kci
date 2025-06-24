@@ -79,6 +79,9 @@ switch ($mode) {
                 continue;
             $fields[] = "{$key}='" . addslashes($val) . "'";
         }
+        if ($table === 'sigong' || $table === 'sihang') {
+            $fields[] = "prior='" . date('ymdHis') . "'";
+        }
         $fields[] = "wdate=NOW()";
         $sql = "INSERT INTO df_site_{$table} SET " . implode(", ", $fields);
         $db->query($sql);
@@ -237,6 +240,61 @@ switch ($mode) {
         complete(
             "삭제되었습니다.",
             "/Madmin/{$dir}/{$table}_list.php?page={$page}&usage={$usage}&region={$region}"
+        );
+        break;
+
+    case 'prior':
+        $idx  = isset($_GET['idx']) ? (int) $_GET['idx'] : 0;
+        $prior = isset($_GET['prior']) ? $_GET['prior'] : '';
+        $posi  = isset($_GET['posi']) ? $_GET['posi'] : '';
+        if ($idx <= 0) {
+            error("잘못된 IDX입니다.");
+            exit;
+        }
+
+        $sql  = "Select wp.* From df_site_{$table} wp Where 1 = 1";
+
+        if ($posi == 'up') {
+            $sql .= " And wp.prior >= '{$prior}' And wp.idx != '{$idx}' Order by wp.prior Asc Limit 1 ";
+            if ($row = $db->row($sql)) {
+                $prior = $row['prior'];
+                $db->query("Update df_site_{$table} Set prior='{$prior}' Where idx='{$idx}'");
+                $db->query("Update df_site_{$table} Set prior=prior-1 Where prior<='{$prior}' And idx!='{$idx}'");
+            }
+        } elseif ($posi == 'upup') {
+            $sql .= " And wp.prior >= '{$prior}' And wp.idx != '{$idx}' Order by wp.prior Asc Limit 10 ";
+            $row  = $db->query($sql);
+            $total = count($row);
+            for ($i = 0; $i < count($row); $i++) {
+                $prior = $row[$i]['prior'];
+            }
+            if ($total > 0) {
+                $db->query("Update df_site_{$table} Set prior='{$prior}' Where idx='{$idx}'");
+                $db->query("Update df_site_{$table} Set prior=prior-1 Where prior<='{$prior}' And idx!='{$idx}'");
+            }
+        } elseif ($posi == 'down') {
+            $sql .= " And wp.prior <= '{$prior}' And wp.idx != '{$idx}' Order by wp.prior Desc Limit 1 ";
+            if ($row = $db->row($sql)) {
+                $prior = $row['prior'];
+                $db->query("Update df_site_{$table} Set prior='{$prior}' Where idx='{$idx}'");
+                $db->query("Update df_site_{$table} Set prior=prior+1 Where prior>='{$prior}' And idx!='{$idx}'");
+            }
+        } elseif ($posi == 'downdown') {
+            $sql .= " And wp.prior <= '{$prior}' And wp.idx != '{$idx}' Order by wp.prior Desc Limit 10 ";
+            $row  = $db->query($sql);
+            $total = count($row);
+            for ($i = 0; $i < count($row); $i++) {
+                $prior = $row[$i]['prior'];
+            }
+            if ($total > 0) {
+                $db->query("Update df_site_{$table} Set prior='{$prior}' Where idx='{$idx}'");
+                $db->query("Update df_site_{$table} Set prior=prior+1 Where prior>='{$prior}' And idx!='{$idx}'");
+            }
+        }
+
+        complete(
+            "진열순서를 변경하였습니다.",
+            "/Madmin/{$dir}/{$table}_list.php?page={$page}"
         );
         break;
 

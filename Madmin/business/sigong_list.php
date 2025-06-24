@@ -42,7 +42,7 @@ if ($total > 0) {
         SELECT *
         FROM {$this_table} s
         WHERE 1 = 1 " . $addSql . "
-        ORDER BY s.idx DESC
+        ORDER BY s.prior DESC, s.idx DESC
         LIMIT " . $offset . ", " . $page_set;
     $list = $db->query($sql);
 }
@@ -162,6 +162,7 @@ if ($total > 0) {
                 <col width="100" />
                 <col width="120" />
                 <col width="60" />
+                <col width="60" />
                 <col width="120" />
                 <thead>
                     <tr>
@@ -174,6 +175,7 @@ if ($total > 0) {
                         <td>용도</td>
                         <td>공사기간</td>
                         <td>진행률</td>
+                        <td>진열순서</td>
                         <td>작성일</td>
                     </tr>
                 </thead>
@@ -203,13 +205,24 @@ if ($total > 0) {
                                     <td><?= htmlspecialchars($item['f_usage'], ENT_QUOTES) ?></td>
                                     <td><?= htmlspecialchars($item['f_period'], ENT_QUOTES) ?></td>
                                     <td><?= (int) $item['f_progress'] ?>%</td>
+                                    <td style="padding:0;">
+                                        <ul style="width:40px;margin:0 auto;padding:0;list-style:none;">
+                                            <li style="float:left;width:20px;height:12px;text-align:center;"><a href="../exec/exec.php?table=<?= $table ?>&mode=prior&posi=upup&idx=<?= $item['idx'] ?>&prior=<?= $item['prior'] ?>&page=<?= $page ?>"><img src="../img/upup_icon.gif" border="0" alt="10단계 위로"></a></li>
+                                            <li style="float:left;width:20px;height:12px;text-align:center;"></li>
+                                            <li style="float:left;width:20px;height:12px;text-align:center;"><a href="../exec/exec.php?table=<?= $table ?>&mode=prior&posi=up&idx=<?= $item['idx'] ?>&prior=<?= $item['prior'] ?>&page=<?= $page ?>"><img src="../img/up_icon.gif" border="0" alt="1단계 위로"></a></li>
+                                            <li style="float:left;width:20px;height:12px;text-align:center;"><a href="../exec/exec.php?table=<?= $table ?>&mode=prior&posi=down&idx=<?= $item['idx'] ?>&prior=<?= $item['prior'] ?>&page=<?= $page ?>"><img src="../img/down_icon.gif" border="0" alt="1단계 아래로"></a></li>
+                                            <li style="float:left;width:20px;height:12px;text-align:center;"></li>
+                                            <li style="float:left;width:20px;height:12px;text-align:center;"><a href="../exec/exec.php?table=<?= $table ?>&mode=prior&posi=downdown&idx=<?= $item['idx'] ?>&prior=<?= $item['prior'] ?>&page=<?= $page ?>"><img src="../img/downdown_icon.gif" border="0" alt="10단계 아래로"></a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </td>
                                     <td><?= $item['wdate'] ?></td>
                                 </tr>
                             </form>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td height="30" colspan="7" align="center">등록된 데이터가 없습니다.</td>
+                            <td height="30" colspan="8" align="center">등록된 데이터가 없습니다.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
