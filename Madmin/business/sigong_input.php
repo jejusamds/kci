@@ -115,6 +115,7 @@ if ($idx !== '') {
                         return;
                     } else {
                         $this.closest('tr').remove();
+                        refreshPrior();
                     }
                 },
                 error: function (e) {
@@ -124,6 +125,7 @@ if ($idx !== '') {
             });
         } else {
             $this.closest('tr').remove();
+            refreshPrior();
         }
     });
 
@@ -134,11 +136,35 @@ if ($idx !== '') {
         html += '<th><button class="btn btn-warning btn-xs comMLeft15 btnDelFiles" type="button">파일삭제</button></th>\n';
         html += '<td class="comALeft" colspan="3">\n';
         html += '<input type="hidden" name="old_idx[]" value="" />\n';
+        html += '<input type="hidden" name="prior[]" value="" />\n';
         html += '<input name="upfile[]" type="file" class="form-control" style="width:50%; margin-right:15px;">\n';
         html += '</td>\n';
         html += '</tr>\n';
 
-        $('#tableFiles').append(html);
+        $('#tableFiles tbody').append(html);
+        refreshPrior();
+    });
+
+    function refreshPrior() {
+        $('#tableFiles tbody tr').each(function (idx) {
+            var order = idx + 1;
+            var $td = $(this).find('td').first();
+            var $p = $td.find('input[name="prior[]"]');
+            if ($p.length) {
+                $p.val(order);
+            } else {
+                $td.append('<input type="hidden" name="prior[]" value="' + order + '" />');
+            }
+        });
+    }
+
+    $(function () {
+        $('#tableFiles tbody').sortable({
+            update: function () {
+                refreshPrior();
+            }
+        });
+        refreshPrior();
     });
 
 </script>
@@ -261,7 +287,7 @@ if ($idx !== '') {
                     <col width="35%" />
                     <tbody>
                         <?
-                        $sqlF = " Select * From df_site_{$table}_files Where bbsidx='" . $idx . "' Order by idx Asc ";
+                        $sqlF = " Select * From df_site_{$table}_files Where bbsidx='" . $idx . "' Order by prior Asc, idx Asc ";
                         $rsF = $db->query($sqlF);
                         for ($ii = 0; $ii < count($rsF); $ii++) {
                             ?>
@@ -270,6 +296,7 @@ if ($idx !== '') {
                                         type="button">파일삭제</button></th>
                                 <td class="comALeft" colspan="3">
                                     <input type="hidden" name="old_idx[]" value="<?= $rsF[$ii]['idx'] ?>" />
+                                    <input type="hidden" name="prior[]" value="<?= $rsF[$ii]['prior'] ?>" />
                                     <input name="upfile[]" type="file" class="form-control"
                                         style="width:50%; margin-right:15px;">
                                     <? if ($rsF[$ii]['upfile'] != "") { ?>

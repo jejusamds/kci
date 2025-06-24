@@ -152,66 +152,73 @@ switch ($mode) {
                 mkdir($upload_dir, 0707, true);
             }
 
-            $cnt = count($_FILES['upfile']['tmp_name']);
+            $priorArr  = isset($_POST['prior']) && is_array($_POST['prior']) ? $_POST['prior'] : [];
+            $cnt       = max(count($priorArr), count($_FILES['upfile']['tmp_name']));
             $oldIdxArr = isset($_POST['old_idx']) && is_array($_POST['old_idx'])
                 ? $_POST['old_idx']
                 : [];
 
             for ($i = 0; $i < $cnt; $i++) {
-                // 새로 업로드된 파일이 있는 경우에만 처리
-                if (
-                    isset($_FILES['upfile']['tmp_name'][$i])
-                    && $_FILES['upfile']['tmp_name'][$i]
-                    && $_FILES['upfile']['error'][$i] === UPLOAD_ERR_OK
-                ) {
+                $priorVal = isset($priorArr[$i]) ? (int) $priorArr[$i] : ($i + 1);
+                $oldIdx   = isset($oldIdxArr[$i]) ? (int) $oldIdxArr[$i] : 0;
+                $hasUpload = (
+                    isset($_FILES['upfile']['tmp_name'][$i]) &&
+                    $_FILES['upfile']['tmp_name'][$i] &&
+                    $_FILES['upfile']['error'][$i] === UPLOAD_ERR_OK
+                );
+
+                if ($hasUpload) {
                     $orig_name = $_FILES['upfile']['name'][$i];
-                    $ext = strtolower(pathinfo($orig_name, PATHINFO_EXTENSION));
+                    $ext       = strtolower(pathinfo($orig_name, PATHINFO_EXTENSION));
                     $uniq_name = 'upfile_' . $table . '_' . time() . "_{$i}.{$ext}";
                     $save_path = "{$upload_dir}/{$uniq_name}";
 
                     if (move_uploaded_file($_FILES['upfile']['tmp_name'][$i], $save_path)) {
-                        $oldIdx = isset($oldIdxArr[$i]) ? (int) $oldIdxArr[$i] : 0;
-
                         if ($oldIdx > 0) {
-                            // 기존 파일 삭제
                             $oldFile = $db->single(
-                                "SELECT upfile 
-                                       FROM df_site_{$table}_files 
-                                      WHERE idx=:oidx",
+                                "SELECT upfile FROM df_site_{$table}_files WHERE idx=:oidx",
                                 ['oidx' => $oldIdx]
                             );
                             if ($oldFile) {
                                 @unlink("{$upload_dir}/{$oldFile}");
                             }
-                            // UPDATE 기존 레코드
                             $db->query(
                                 "UPDATE df_site_{$table}_files
-                                        SET upfile      = :new,
-                                            upfile_name = :orig
-                                      WHERE idx         = :oidx",
+                                        SET upfile=:new,
+                                            upfile_name=:orig,
+                                            prior=:prior
+                                      WHERE idx=:oidx",
                                 [
-                                    'new' => $uniq_name,
-                                    'orig' => $orig_name,
-                                    'oidx' => $oldIdx
+                                    'new'   => $uniq_name,
+                                    'orig'  => $orig_name,
+                                    'prior' => $priorVal,
+                                    'oidx'  => $oldIdx
                                 ]
                             );
                         } else {
-                            // INSERT 신규 레코드
                             $db->query(
                                 "INSERT INTO df_site_{$table}_files
-                                        SET bbsidx      = :bbs,
-                                            upfile      = :new,
-                                            upfile_name = :orig",
+                                        SET bbsidx=:bbs,
+                                            upfile=:new,
+                                            upfile_name=:orig,
+                                            prior=:prior",
                                 [
-                                    'bbs' => $idx,
-                                    'new' => $uniq_name,
-                                    'orig' => $orig_name
+                                    'bbs'   => $idx,
+                                    'new'   => $uniq_name,
+                                    'orig'  => $orig_name,
+                                    'prior' => $priorVal
                                 ]
                             );
                         }
                     }
+                } else {
+                    if ($oldIdx > 0) {
+                        $db->query(
+                            "UPDATE df_site_{$table}_files SET prior=:prior WHERE idx=:oidx",
+                            ['prior' => $priorVal, 'oidx' => $oldIdx]
+                        );
+                    }
                 }
-                // else: 파일 선택 안 됐으면 기존 old_idx만 유지(삭제 안 함)
             }
         }
 
